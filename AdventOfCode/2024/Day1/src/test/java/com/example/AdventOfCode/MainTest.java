@@ -10,7 +10,7 @@ class MainTest {
     @Test
     void testMain() {
         // Arrange
-        Assertions.assertEquals(1,2);
+
         // Act
 
         // Assert

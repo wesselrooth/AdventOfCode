@@ -11,6 +11,7 @@
 
     <modules>
         <module>2024/Day1</module>
+        <module>2024/Day2</module>
     </modules>
 
 </project>
