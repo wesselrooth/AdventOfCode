@@ -15,6 +15,7 @@
         <module>2024/Day11-StoneMemorization</module>
         <module>2024/Day12-GardenGroups</module>
         <module>2025/Day1-Secret-Entrance</module>
+        <module>2025/Day-2-Gift-Shop</module>
     </modules>
 
     <dependencies>
