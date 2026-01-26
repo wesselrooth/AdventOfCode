@@ -1,6 +1,7 @@
 import com.example.AdventOfCode.BeamManager;
 import com.example.AdventOfCode.InputLoader;
 import com.example.AdventOfCode.Splitter;
+import com.example.AdventOfCode.StarCollector;
 import org.junit.jupiter.api.Test;
 
 import java.io.IOException;
@@ -193,19 +194,12 @@ class BeamManagerTest {
     @Test
     void partOneOfficalTest() throws URISyntaxException, IOException {
         // Arrange
-        InputLoader inputLoader = new InputLoader();
-        List< List<String> > input = inputLoader.loadInput("puzzle-input");
-        BeamManager manager = new BeamManager();
+        StarCollector starCollector = new StarCollector();
         int expected = 1703;
-
         // Act
-        List<Splitter> splitterList = manager.findAllSplitter(input);
-        List<List<String>> updatedInput = manager.createNewBeams(input,splitterList);
-        List<List<String>> extendedBeamInput = manager.extendBeam(updatedInput);
-        int result = manager.countTouchingBeamsToSplitter(extendedBeamInput);
+        int result = starCollector.partOne();
 
         // Assert
-        result++;
         assertEquals(expected,result);
     }
 
