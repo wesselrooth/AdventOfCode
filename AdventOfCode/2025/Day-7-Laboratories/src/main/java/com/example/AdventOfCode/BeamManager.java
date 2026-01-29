@@ -61,19 +61,21 @@ public class BeamManager {
                     continue;
                 }
 
-                try {
-                    Row nextRow = grid.getRow(y + 1);
-                    Icon nextRowIcon = nextRow.getIcon(x);
-
-                    if (nextRowIcon.getIcon().equals("^")){
-                        continue;
-                    }
-
-                    nextRow.setIcon(x,"|");
-
-                } catch (IndexOutOfBoundsException e ){
-                    System.out.println("End of the collection");
+                if (y == grid.getRowSize() -1){
+                    continue;
                 }
+
+
+                Row nextRow = grid.getRow(y + 1);
+                Icon nextRowIcon = nextRow.getIcon(x);
+
+                if (nextRowIcon.getIcon().equals("^")){
+                    continue;
+                }
+
+                nextRow.setIcon(x,"|");
+
+
 
             }
         }
@@ -97,19 +99,19 @@ public class BeamManager {
                     continue;
                 }
 
-                try {
-                    Row nextRow = grid.getRow(y + 1);
-                    Icon nextRowIcon = nextRow.getIcon(x);
-
-                    if (!nextRowIcon.getIcon().equals("^")){
-                        continue;
-                    }
-
-                    beamSplittingCount++;
-
-                }catch (IndexOutOfBoundsException e ){
-                    System.out.println("End of the collection");
+                if (y == grid.getRowSize() -1){
+                    continue;
                 }
+
+                Row nextRow = grid.getRow(y + 1);
+                Icon nextRowIcon = nextRow.getIcon(x);
+
+                if (!nextRowIcon.getIcon().equals("^")){
+                    continue;
+                }
+
+                beamSplittingCount++;
+
 
             }
         }
