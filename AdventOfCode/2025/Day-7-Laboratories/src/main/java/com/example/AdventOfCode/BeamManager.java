@@ -40,8 +40,6 @@ public class BeamManager {
 
             row.setIcon(leftBeam,"|");
             row.setIcon(rightBeam,"|");
-
-
         }
 
         return grid;
@@ -55,16 +53,14 @@ public class BeamManager {
 
             for (int x = 0; x < row.getRowSize(); x++){
 
-                Icon icon = row.getIcon(x);
-
-                if (!icon.getIcon().equals("|")){
-                    continue;
-                }
-
                 if (y == grid.getRowSize() -1){
                     continue;
                 }
 
+                Icon icon = row.getIcon(x);
+                if (!icon.getIcon().equals("|")){
+                    continue;
+                }
 
                 Row nextRow = grid.getRow(y + 1);
                 Icon nextRowIcon = nextRow.getIcon(x);
@@ -72,11 +68,7 @@ public class BeamManager {
                 if (nextRowIcon.getIcon().equals("^")){
                     continue;
                 }
-
                 nextRow.setIcon(x,"|");
-
-
-
             }
         }
 
@@ -93,13 +85,12 @@ public class BeamManager {
 
             for (int x = 0; x < row.getRowSize(); x++){
 
-                Icon icon = row.getIcon(x);
-
-                if (!icon.getIcon().equals("|")){
+                if (y == grid.getRowSize() -1){
                     continue;
                 }
 
-                if (y == grid.getRowSize() -1){
+                Icon icon = row.getIcon(x);
+                if (!icon.getIcon().equals("|")){
                     continue;
                 }
 
