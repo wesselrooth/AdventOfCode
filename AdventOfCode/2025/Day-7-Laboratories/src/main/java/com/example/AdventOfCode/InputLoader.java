@@ -14,7 +14,6 @@ public class InputLoader {
 
     public List<List<String>> loadInput(String filename) throws URISyntaxException, IOException {
 
-
         Path inputFile = Paths.get(
                 InputLoader.class.getClassLoader().getResource(filename).toURI()
         );
@@ -30,5 +29,30 @@ public class InputLoader {
         }
 
         return resultList;
+    }
+
+    public Grid convertRawInputToGrid(List<List<String>> input){
+
+        Grid grid = new Grid();
+
+        for (int y = 0; y < input.size(); y++){
+
+            List<String> inputRow = input.get(y);
+
+            Row row = new Row();
+
+            for (int x = 0; x < inputRow.size(); x++){
+
+                String iconString = inputRow.get(x);
+                Icon icon = new Icon(iconString,x,y);
+
+                row.addIcon(icon);
+
+            }
+
+            grid.addRow(row);
+
+        }
+        return grid;
     }
 }

@@ -8,13 +8,17 @@ public class StarCollector {
 
     public int partOne() throws URISyntaxException, IOException {
         InputLoader inputLoader = new InputLoader();
+
         List<List<String>> input = inputLoader.loadInput("puzzle-input");
         BeamManager manager = new BeamManager();
+        InputLoader loader = new InputLoader();
+        Grid grid = loader.convertRawInputToGrid(input);
+
+        List<Splitter> splitterList = manager.findAllSplitter(grid);
+        Grid updatedInput = manager.createNewBeams(grid,splitterList);
+        Grid extendedBeamInput = manager.extendAllBeams(updatedInput);
 
 
-        List<Splitter> splitterList = manager.findAllSplitter(input);
-        List<List<String>> updatedInput = manager.createNewBeams(input,splitterList);
-        List<List<String>> extendedBeamInput = manager.extendBeam(updatedInput);
         int result = manager.countTouchingBeamsToSplitter(extendedBeamInput);
 
         result++;

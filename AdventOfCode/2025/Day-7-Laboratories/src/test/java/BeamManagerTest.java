@@ -1,4 +1,6 @@
 import com.example.AdventOfCode.BeamManager;
+import com.example.AdventOfCode.Grid;
+import com.example.AdventOfCode.Icon;
 import com.example.AdventOfCode.InputLoader;
 import com.example.AdventOfCode.Splitter;
 import com.example.AdventOfCode.StarCollector;
@@ -8,10 +10,13 @@ import java.io.IOException;
 import java.net.URISyntaxException;
 import java.util.Arrays;
 import java.util.List;
+import java.util.Locale;
 
 import static org.junit.jupiter.api.Assertions.*;
 
 class BeamManagerTest {
+
+    InputLoader loader = new InputLoader();
 
     @Test
     void constructorTest(){
@@ -31,9 +36,11 @@ class BeamManagerTest {
                 List.of("^")
         );
         String expected = "0,1";
+        InputLoader loader = new InputLoader();
+        Grid grid = loader.convertRawInputToGrid(input);
 
         // Act
-        Splitter result = manager.findAllSplitter(input).get(0);
+        Splitter result = manager.findAllSplitter(grid).get(0);
 
         // Assert
         assertEquals(expected,result.toString());
@@ -49,9 +56,11 @@ class BeamManagerTest {
                 List.of("^")
         );
         String expected = "0,2";
+        InputLoader loader = new InputLoader();
+        Grid grid = loader.convertRawInputToGrid(input);
 
         // Act
-        Splitter result = manager.findAllSplitter(input).get(0);
+        Splitter result = manager.findAllSplitter(grid).get(0);
 
         // Assert
         assertEquals(expected,result.toString());
@@ -70,8 +79,10 @@ class BeamManagerTest {
 
         List<Splitter> splittersList = List.of(new Splitter(1,0));
 
+        Grid grid = loader.convertRawInputToGrid(input);
+
         // Act
-        String result = manager.createNewBeams(input,splittersList).get(0).get(0);
+        String result = manager.createNewBeams(grid,splittersList).getRow(0).getIcon(0).getIcon();
 
         // Assert
         assertEquals(expected,result);
@@ -87,18 +98,19 @@ class BeamManagerTest {
                 )
         );
         String expected = "|";
-
+        InputLoader loader = new InputLoader();
+        Grid grid = loader.convertRawInputToGrid(input);
         List<Splitter> splittersList = List.of(new Splitter(1,0));
 
         // Act
-        String result = manager.createNewBeams(input,splittersList).get(0).get(2);
+        String result = manager.createNewBeams(grid,splittersList).getRow(0).getIcon(2).getIcon();
 
         // Assert
         assertEquals(expected,result);
     }
 
     @Test
-    void extendBeamDownwards(){
+    void extendAllBeamsDownwards(){
         // Arrange
         BeamManager manager = new BeamManager();
         List< List<String> > input = List.of(
@@ -107,16 +119,16 @@ class BeamManagerTest {
                 Arrays.asList(".")
         );
         String expected = "|";
-
+        Grid grid = loader.convertRawInputToGrid(input);
         // Act
-        String result = manager.extendBeam(input).get(1).get(0);
+        String result = manager.extendAllBeams(grid).getRow(1).getIcon(0).getIcon();
 
         // Assert
         assertEquals(expected,result);
     }
 
     @Test
-    void extendBeamDownwardsUntilSplitter(){
+    void extendAllBeamsDownwardsUntilSplitter(){
         // Arrange
         BeamManager manager = new BeamManager();
         List< List<String> > input = List.of(
@@ -126,9 +138,10 @@ class BeamManagerTest {
                 Arrays.asList("^")
         );
         String expected = "^";
+        Grid grid = loader.convertRawInputToGrid(input);
 
         // Act
-        String result = manager.extendBeam(input).get(3).get(0);
+        String result = manager.extendAllBeams(grid).getRow(3).getIcon(0).getIcon();
 
         // Assert
         assertEquals(expected,result);
@@ -143,9 +156,9 @@ class BeamManagerTest {
                 Arrays.asList("^")
         );
         int expected = 1;
-
+        Grid grid = loader.convertRawInputToGrid(input);
         // Act
-        int result = manager.countTouchingBeamsToSplitter(input);
+        int result = manager.countTouchingBeamsToSplitter(grid);
 
         // Assert
         assertEquals(expected,result);
@@ -159,11 +172,12 @@ class BeamManagerTest {
 
         BeamManager manager = new BeamManager();
         int expected = 21;
-
+        InputLoader loader = new InputLoader();
+        Grid grid = loader.convertRawInputToGrid(input);
         // Act
-        List<Splitter> splitterList = manager.findAllSplitter(input);
-        List<List<String>> updatedInput = manager.createNewBeams(input,splitterList);
-        List<List<String>> extendedBeamInput = manager.extendBeam(updatedInput);
+        List<Splitter> splitterList = manager.findAllSplitter(grid);
+        Grid updatedInput = manager.createNewBeams(grid,splitterList);
+        Grid extendedBeamInput = manager.extendAllBeams(updatedInput);
         int result = manager.countTouchingBeamsToSplitter(extendedBeamInput);
 
         // Assert
@@ -180,10 +194,12 @@ class BeamManagerTest {
         BeamManager manager = new BeamManager();
         int expected = 21;
 
+        Grid grid = inputLoader.convertRawInputToGrid(input);
+
         // Act
-        List<Splitter> splitterList = manager.findAllSplitter(input);
-        List<List<String>> updatedInput = manager.createNewBeams(input,splitterList);
-        List<List<String>> extendedBeamInput = manager.extendBeam(updatedInput);
+        List<Splitter> splitterList = manager.findAllSplitter(grid);
+        Grid updatedInput = manager.createNewBeams(grid,splitterList);
+        Grid extendedBeamInput = manager.extendAllBeams(updatedInput);
         int result = manager.countTouchingBeamsToSplitter(extendedBeamInput);
 
         // Assert
@@ -202,5 +218,24 @@ class BeamManagerTest {
         // Assert
         assertEquals(expected,result);
     }
+
+    //@Test
+    //void extendOneBeamDownWards(){
+    //    // Arrange
+    //    List< List<String> > input = List.of(
+    //            Arrays.asList(".","|","."),
+    //            Arrays.asList("|","^","|"),
+    //            Arrays.asList("|",".","|")
+    //    );
+    //    BeamManager manager = new BeamManager();
+    //    int expected = 2;
+    //    List<List<Icon>>  iconList = manager.convertToIconList(input);
+    //
+    //    // Act
+    //    int result = manager.calculatePathsDown(iconList);
+    //
+    //    // Assert
+    //    assertEquals(expected,result);
+    //}
 
 }

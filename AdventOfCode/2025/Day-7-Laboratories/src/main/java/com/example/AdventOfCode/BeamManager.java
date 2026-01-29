@@ -1,23 +1,24 @@
 package com.example.AdventOfCode;
 
 import java.util.ArrayList;
+
 import java.util.List;
 
 public class BeamManager {
 
-    public List<Splitter> findAllSplitter(List<List<String>> input){
+    public List<Splitter> findAllSplitter(Grid input){
 
         List<Splitter> resultList = new ArrayList<>();
 
-        for (int y = 0; y < input.size(); y++) {
+        for (int y = 0; y < input.getRowSize(); y++) {
 
-            List<String> row = input.get(y);
+            Row row = input.getRow(y);
 
-            for (int x = 0; x< row.size(); x++){
+            for (int x = 0; x< row.getRowSize(); x++){
 
-                String icon = row.get(x);
+                Icon icon = row.getIcon(x);
 
-                if (!icon.equals("^")){
+                if (!icon.getIcon().equals("^")){
                     continue;
                 }
 
@@ -28,79 +29,79 @@ public class BeamManager {
 
         return resultList;
     }
-
-    public List<List<String>> createNewBeams(List<List<String>> input, List<Splitter> splitterList) {
+    public Grid createNewBeams(Grid grid, List<Splitter> splitterList) {
 
         for (Splitter splitter: splitterList){
 
             int leftBeam = splitter.x() - 1;
             int rightBeam = splitter.x() + 1;
 
-            List<String> row = input.get(splitter.y());
+            Row row = grid.getRow(splitter.y());
 
-            row.set(leftBeam,"|");
-            row.set(rightBeam,"|");
+            row.setIcon(leftBeam,"|");
+            row.setIcon(rightBeam,"|");
+
 
         }
 
-        return input;
+        return grid;
     }
 
-    public List<List<String>> extendBeam(List<List<String>> input){
+    public Grid extendAllBeams(Grid grid){
 
-        for (int y = 0; y < input.size(); y++){
+        for (int y = 0; y < grid.getRowSize(); y++){
 
-            List<String> row = input.get(y);
+            Row row = grid.getRow(y);
 
-            for (int x = 0; x < row.size(); x++){
+            for (int x = 0; x < row.getRowSize(); x++){
 
-                String icon = row.get(x);
+                Icon icon = row.getIcon(x);
 
-                if (!icon.equals("|")){
+                if (!icon.getIcon().equals("|")){
                     continue;
                 }
 
                 try {
-                    List<String> nextRow = input.get(y + 1);
-                    String nextRowIcon = nextRow.get(x);
+                    Row nextRow = grid.getRow(y + 1);
+                    Icon nextRowIcon = nextRow.getIcon(x);
 
-                    if (nextRowIcon.equals("^")){
+                    if (nextRowIcon.getIcon().equals("^")){
                         continue;
                     }
 
-                    nextRow.set(x,"|");
+                    nextRow.setIcon(x,"|");
 
-                }catch (IndexOutOfBoundsException e ){
+                } catch (IndexOutOfBoundsException e ){
                     System.out.println("End of the collection");
                 }
 
             }
         }
 
-        return input;
+        return grid;
     }
 
-    public int countTouchingBeamsToSplitter(List<List<String>> input){
+    public int countTouchingBeamsToSplitter(Grid grid){
 
         int beamSplittingCount = 0;
 
-        for (int y = 0; y < input.size(); y++){
+        for (int y = 0; y < grid.getRowSize(); y++){
 
-            List<String> row = input.get(y);
+            Row row = grid.getRow(y);
 
-            for (int x = 0; x < row.size(); x++){
+            for (int x = 0; x < row.getRowSize(); x++){
 
-                String icon = row.get(x);
+                Icon icon = row.getIcon(x);
 
-                if (!icon.equals("|")){
+                if (!icon.getIcon().equals("|")){
                     continue;
                 }
 
                 try {
-                    List<String> nextRow = input.get(y + 1);
-                    String nextRowIcon = nextRow.get(x);
+                    Row nextRow = grid.getRow(y + 1);
+                    Icon nextRowIcon = nextRow.getIcon(x);
 
-                    if (!nextRowIcon.equals("^")){
+                    if (!nextRowIcon.getIcon().equals("^")){
                         continue;
                     }
 
