@@ -1,28 +1,25 @@
 package com.example.AdventOfCode;
 
 import java.util.ArrayList;
-
 import java.util.List;
 
 public class BeamManager {
 
-    public List<Splitter> findAllSplitter(Grid input){
+    public List<Splitter> findAllSplitter(Grid grid){
 
         List<Splitter> resultList = new ArrayList<>();
 
-        for (int y = 0; y < input.getRowSize(); y++) {
+        for (int y = 0; y < grid.getRowSize(); y++) {
 
-            Row row = input.getRow(y);
+            Row row = grid.getRow(y);
 
             for (int x = 0; x< row.getRowSize(); x++){
 
                 Icon icon = row.getIcon(x);
 
-                if (!icon.getIcon().equals("^")){
-                    continue;
+                if (icon.getIcon().equals("^")){
+                    resultList.add(new Splitter(x,y));
                 }
-
-                resultList.add(new Splitter(x,y));
             }
 
         }
@@ -47,17 +44,14 @@ public class BeamManager {
 
     public Grid extendAllBeams(Grid grid){
 
-        for (int y = 0; y < grid.getRowSize(); y++){
+        for (int y = 0; y < grid.getRowSize() -1; y++){
 
             Row row = grid.getRow(y);
 
             for (int x = 0; x < row.getRowSize(); x++){
 
-                if (y == grid.getRowSize() -1){
-                    continue;
-                }
-
                 Icon icon = row.getIcon(x);
+
                 if (!icon.getIcon().equals("|")){
                     continue;
                 }
@@ -65,10 +59,10 @@ public class BeamManager {
                 Row nextRow = grid.getRow(y + 1);
                 Icon nextRowIcon = nextRow.getIcon(x);
 
-                if (nextRowIcon.getIcon().equals("^")){
-                    continue;
+                if (nextRowIcon.getIcon().equals(".")){
+                    nextRow.setIcon(x,"|");
                 }
-                nextRow.setIcon(x,"|");
+
             }
         }
 
@@ -79,15 +73,11 @@ public class BeamManager {
 
         int beamSplittingCount = 0;
 
-        for (int y = 0; y < grid.getRowSize(); y++){
+        for (int y = 0; y < grid.getRowSize() -1; y++){
 
             Row row = grid.getRow(y);
 
             for (int x = 0; x < row.getRowSize(); x++){
-
-                if (y == grid.getRowSize() -1){
-                    continue;
-                }
 
                 Icon icon = row.getIcon(x);
                 if (!icon.getIcon().equals("|")){
@@ -97,11 +87,11 @@ public class BeamManager {
                 Row nextRow = grid.getRow(y + 1);
                 Icon nextRowIcon = nextRow.getIcon(x);
 
-                if (!nextRowIcon.getIcon().equals("^")){
-                    continue;
+                if (nextRowIcon.getIcon().equals("^")){
+                    beamSplittingCount++;
                 }
 
-                beamSplittingCount++;
+
 
 
             }

@@ -1,16 +1,10 @@
-import com.example.AdventOfCode.BeamManager;
-import com.example.AdventOfCode.Grid;
-import com.example.AdventOfCode.Icon;
-import com.example.AdventOfCode.InputLoader;
-import com.example.AdventOfCode.Splitter;
-import com.example.AdventOfCode.StarCollector;
+import com.example.AdventOfCode.*;
 import org.junit.jupiter.api.Test;
 
 import java.io.IOException;
 import java.net.URISyntaxException;
 import java.util.Arrays;
 import java.util.List;
-import java.util.Locale;
 
 import static org.junit.jupiter.api.Assertions.*;
 
@@ -218,24 +212,4 @@ class BeamManagerTest {
         // Assert
         assertEquals(expected,result);
     }
-
-    //@Test
-    //void extendOneBeamDownWards(){
-    //    // Arrange
-    //    List< List<String> > input = List.of(
-    //            Arrays.asList(".","|","."),
-    //            Arrays.asList("|","^","|"),
-    //            Arrays.asList("|",".","|")
-    //    );
-    //    BeamManager manager = new BeamManager();
-    //    int expected = 2;
-    //    List<List<Icon>>  iconList = manager.convertToIconList(input);
-    //
-    //    // Act
-    //    int result = manager.calculatePathsDown(iconList);
-    //
-    //    // Assert
-    //    assertEquals(expected,result);
-    //}
-
 }
