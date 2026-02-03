@@ -1,7 +1,6 @@
 package com.example.AdventOfCode;
 
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.List;
 
 public class BeamManager {
@@ -126,16 +125,12 @@ public class BeamManager {
     }
 
     public int calculatePathsDown(Icon current,Grid grid){
+
         int result = 0;
-
-
 
         for (int y = current.getY(); y < grid.getRowSize(); y++){
 
-            Row row = grid.getRow(y);
-
             if (current.isChecked()){
-
                 return current.getPathsDown();
             }
 
@@ -143,26 +138,30 @@ public class BeamManager {
                 return 1;
             }
 
-            Icon nextIcon = grid.getRow(y + 1).getIcon(current.getX());
+            Icon nextRowIcon = grid.getRow(y + 1).getIcon(current.getX());
 
-            if (nextIcon.getIcon().equals("|")){
-                int tmpResult = calculatePathsDown(nextIcon,grid);
-                nextIcon.setPathsDown(tmpResult);
-                nextIcon.setChecked(true);
+            if (nextRowIcon.isChecked()){
+                return nextRowIcon.getPathsDown();
+            }
+
+            if (nextRowIcon.getIcon().equals("|")){
+                int tmpResult = calculatePathsDown(nextRowIcon,grid);
+                nextRowIcon.setPathsDown(tmpResult);
+                nextRowIcon.setChecked(true);
                 return tmpResult;
             }
 
-            if (!grid.getRow(y + 1).getIcon(current.getX()).getIcon().equals("^")){
+            if (!nextRowIcon.getIcon().equals("^")){
                 // not a ^ => continue
                 continue;
             }
-
-            if (nextIcon.getY() == grid.getRowSize() -1){
+            // check if its is the last
+            if (nextRowIcon.getY() == grid.getRowSize() -1){
                 current.setChecked(true);
                 current.setPathsDown(2);
 
-                Icon left = grid.getRow(y+1).getIcon(current.getX() -1);
-                Icon right= grid.getRow(y+1).getIcon(current.getX() +1);
+                Icon left = grid.getRow(y + 1).getIcon(current.getX() - 1);
+                Icon right= grid.getRow(y + 1).getIcon(current.getX() + 1);
 
                 left.setChecked(true);
                 right.setChecked(true);
@@ -170,12 +169,8 @@ public class BeamManager {
                 return 2;
             }
 
-            if (nextIcon.isChecked()){
-                return nextIcon.getPathsDown();
-            }
-
-            Icon left = grid.getRow(y+1).getIcon(current.getX() -1);
-            Icon right= grid.getRow(y+1).getIcon(current.getX() +1);
+            Icon left = grid.getRow(y + 1).getIcon(current.getX() - 1);
+            Icon right= grid.getRow(y+1).getIcon(current.getX() + 1);
             List<Icon> toCheck = List.of(left,right);
 
             for (Icon tocheckIcon: toCheck){
@@ -185,8 +180,8 @@ public class BeamManager {
                 result += tmpResult;
             }
 
-            nextIcon.setPathsDown(result);
-            nextIcon.setChecked(true);
+            nextRowIcon.setPathsDown(result);
+            nextRowIcon.setChecked(true);
             current.setChecked(true);
             current.setPathsDown(result);
         }
