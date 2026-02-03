@@ -194,4 +194,24 @@ public class BeamManager {
         return result;
     }
 
+    public Grid locateInitialBeam(Grid grid) {
+
+        for (int y = 0;y < grid.getRowSize(); y++){
+
+            Row row = grid.getRow(y);
+
+            for (int x = 0; x < row.getRowSize(); x++) {
+                Icon icon = row.getIcon(x);
+
+                if (icon.getIcon().equals("S")){
+                    grid.getRow(y+1).getIcon(x).setIcon("|");
+                    return grid;
+                }
+
+            }
+
+        }
+        return grid;
+    }
+
 }
