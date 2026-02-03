@@ -1,6 +1,7 @@
 package com.example.AdventOfCode;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 
 public class BeamManager {
@@ -147,6 +148,7 @@ public class BeamManager {
             if (nextIcon.getIcon().equals("|")){
                 int tmpResult = calculatePathsDown(nextIcon,grid);
                 nextIcon.setPathsDown(tmpResult);
+                nextIcon.setChecked(true);
                 return tmpResult;
             }
 

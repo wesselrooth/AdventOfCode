@@ -26,4 +26,8 @@ public class Row {
 
     }
 
+    public List<Icon> getMembers(){
+        return members;
+    }
+
 }

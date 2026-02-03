@@ -277,4 +277,29 @@ class BeamManagerTest {
         assertEquals(expected,result);
     }
 
+    @Test
+    void countPathsDownWithExtendingMiddlePart(){
+        // Arrange
+        List< List<String> > input = List.of(
+                Arrays.asList("...|...".split("")),
+                Arrays.asList("..|^|..".split("")),
+                Arrays.asList(".|^|^|.".split("")),
+                Arrays.asList(".|.|.|.".split("")),
+                Arrays.asList("|^|||^|".split(""))
+        );
+
+        BeamManager manager = new BeamManager();
+        InputLoader inputLoader = new InputLoader();
+
+        int expected = 6;
+        Grid grid = inputLoader.convertRawInputToGrid(input);
+
+        // Act
+        int result = manager.findPathsDownInGrid(grid);
+
+        // Assert
+        assertEquals(expected,result);
+    }
+
+
 }
