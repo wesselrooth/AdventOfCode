@@ -5,6 +5,7 @@ import java.io.IOException;
 import java.net.URISyntaxException;
 import java.util.Arrays;
 import java.util.List;
+import java.util.Stack;
 
 import static org.junit.jupiter.api.Assertions.*;
 
@@ -182,22 +183,13 @@ class BeamManagerTest {
     @Test
     void partOneIntergrationTest() throws URISyntaxException, IOException {
         // Arrange
-        InputLoader inputLoader = new InputLoader();
-        List< List<String> > input = inputLoader.loadInput("test-input");
-
-        BeamManager manager = new BeamManager();
         int expected = 21;
-
-        Grid grid = inputLoader.convertRawInputToGrid(input);
+        StarCollector starCollector = new StarCollector();
 
         // Act
-        List<Splitter> splitterList = manager.findAllSplitter(grid);
-        Grid updatedInput = manager.createNewBeams(grid,splitterList);
-        Grid extendedBeamInput = manager.extendAllBeams(updatedInput);
-        int result = manager.countTouchingBeamsToSplitter(extendedBeamInput);
+        int result = starCollector.partOne("test-input");
 
         // Assert
-        result++;
         assertEquals(expected,result);
     }
 
@@ -207,7 +199,7 @@ class BeamManagerTest {
         StarCollector starCollector = new StarCollector();
         int expected = 1703;
         // Act
-        int result = starCollector.partOne();
+        int result = starCollector.partOne("puzzle-input");
 
         // Assert
         assertEquals(expected,result);
@@ -301,5 +293,30 @@ class BeamManagerTest {
         assertEquals(expected,result);
     }
 
+    @Test
+    void partTwoPrepTest() throws URISyntaxException, IOException {
+        // Arrange
+        int expected = 40;
+        StarCollector starCollector = new StarCollector();
+
+        // Act
+        int result = starCollector.partTwoPrepTest("test-input");
+
+        // Assert
+        assertEquals(expected,result);
+    }
+
+    @Test
+    void partTwoTest() throws URISyntaxException, IOException {
+        // Arrange
+        int expected = 40;
+        StarCollector starCollector = new StarCollector();
+
+        // Act
+        int result = starCollector.partTwoPrepTest("puzzle-input");
+
+        // Assert
+        assertEquals(expected,result);
+    }
 
 }
