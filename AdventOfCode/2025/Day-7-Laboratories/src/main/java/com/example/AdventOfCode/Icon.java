@@ -20,6 +20,10 @@ public class Icon {
         return icon;
     }
 
+    public void setIcon(String icon){
+        this.icon = icon;
+    }
+
     public int getY(){
         return y;
     }

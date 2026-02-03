@@ -13,7 +13,7 @@ public class StarCollector {
         BeamManager manager = new BeamManager();
         InputLoader loader = new InputLoader();
         Grid grid = loader.convertRawInputToGrid(input);
-
+        grid = manager.locateInitialBeam(grid);
         List<Splitter> splitterList = manager.findAllSplitter(grid);
         Grid updatedInput = manager.createNewBeams(grid,splitterList);
         Grid extendedBeamInput = manager.extendAllBeams(updatedInput);
@@ -21,7 +21,6 @@ public class StarCollector {
 
         int result = manager.countTouchingBeamsToSplitter(extendedBeamInput);
 
-        result++;
         return result;
     }
 
