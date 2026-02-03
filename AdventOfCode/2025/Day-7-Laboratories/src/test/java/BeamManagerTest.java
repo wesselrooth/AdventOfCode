@@ -12,7 +12,6 @@ class BeamManagerTest {
 
     InputLoader loader = new InputLoader();
 
-
     @Test
     void testLocateNextSplitter() {
         // Arrange

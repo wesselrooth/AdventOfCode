@@ -5,7 +5,7 @@ import java.util.List;
 
 public class BeamManager {
 
-    public List<Splitter> findAllSplitter(Grid grid){
+    public List<Splitter> findAllSplitter(Grid grid) {
 
         List<Splitter> resultList = new ArrayList<>();
 
@@ -69,11 +69,11 @@ public class BeamManager {
         return grid;
     }
 
-    public int countTouchingBeamsToSplitter(Grid grid){
+    public int countTouchingBeamsToSplitter(Grid grid) {
 
         int beamSplittingCount = 0;
 
-        for (int y = 0; y < grid.getRowSize() -1; y++){
+        for (int y = 0; y < grid.getRowSize() -1; y++) {
 
             Row row = grid.getRow(y);
 
@@ -87,7 +87,7 @@ public class BeamManager {
                 Row nextRow = grid.getRow(y + 1);
                 Icon nextRowIcon = nextRow.getIcon(x);
 
-                if (nextRowIcon.getIcon().equals("^")){
+                if (nextRowIcon.getIcon().equals("^")) {
                     beamSplittingCount++;
                 }
 
@@ -100,11 +100,11 @@ public class BeamManager {
 
         int result = 0;
 
-        for (int y = 0; y < grid.getRowSize(); y++){
+        for (int y = 0; y < grid.getRowSize(); y++) {
 
             Row row = grid.getRow(y);
 
-            for (int x = 0; x< row.getRowSize(); x++){
+            for (int x = 0; x< row.getRowSize(); x++) {
                 Icon icon = row.getIcon(x);
 
                 if (icon.isChecked()){
@@ -124,11 +124,11 @@ public class BeamManager {
         return result;
     }
 
-    public int calculatePathsDown(Icon current,Grid grid){
+    public int calculatePathsDown(Icon current,Grid grid) {
 
         int result = 0;
 
-        for (int y = current.getY(); y < grid.getRowSize(); y++){
+        for (int y = current.getY(); y < grid.getRowSize(); y++) {
 
             if (current.isChecked()){
                 return current.getPathsDown();
@@ -151,11 +151,12 @@ public class BeamManager {
                 return tmpResult;
             }
 
-            if (!nextRowIcon.getIcon().equals("^")){
-                // not a ^ => continue
+            if (!nextRowIcon.getIcon().equals("^")) {
+                // not a '^' so continue
                 continue;
             }
-            // check if its is the last
+
+            // Check if it is the last "^"
             if (nextRowIcon.getY() == grid.getRowSize() -1){
                 current.setChecked(true);
                 current.setPathsDown(2);
@@ -170,10 +171,11 @@ public class BeamManager {
             }
 
             Icon left = grid.getRow(y + 1).getIcon(current.getX() - 1);
-            Icon right= grid.getRow(y+1).getIcon(current.getX() + 1);
-            List<Icon> toCheck = List.of(left,right);
+            Icon right= grid.getRow(y + 1).getIcon(current.getX() + 1);
 
-            for (Icon tocheckIcon: toCheck){
+            List<Icon> iconsToCheckList = List.of(left,right);
+
+            for (Icon tocheckIcon: iconsToCheckList){
                 int tmpResult = calculatePathsDown(tocheckIcon,grid);
                 tocheckIcon.setPathsDown(tmpResult);
                 tocheckIcon.setChecked(true);
@@ -191,7 +193,7 @@ public class BeamManager {
 
     public Grid locateInitialBeam(Grid grid) {
 
-        for (int y = 0;y < grid.getRowSize(); y++){
+        for (int y = 0; y < grid.getRowSize(); y++) {
 
             Row row = grid.getRow(y);
 
