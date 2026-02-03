@@ -212,4 +212,46 @@ class BeamManagerTest {
         // Assert
         assertEquals(expected,result);
     }
+
+    @Test
+    void extendBeamDownwardsWithOneSplitter(){
+        // Arrange
+        List< List<String> > input = List.of(
+                Arrays.asList(".","|","."),
+                Arrays.asList("|","^","|")
+        );
+        BeamManager manager = new BeamManager();
+        InputLoader inputLoader = new InputLoader();
+
+        int expected = 2;
+        Grid grid = inputLoader.convertRawInputToGrid(input);
+
+        // Act
+        int result = manager.findPathsDownInGrid(grid);
+
+        // Assert
+        assertEquals(expected,result);
+    }
+
+    @Test
+    void extendBeamDownwardsWithTwoSplitter(){
+        // Arrange
+        List< List<String> > input = List.of(
+                Arrays.asList(".",".","|","."),
+                Arrays.asList(".","|","^","|"),
+                Arrays.asList("|","^","|","^","|")
+        );
+        BeamManager manager = new BeamManager();
+        InputLoader inputLoader = new InputLoader();
+
+        int expected = 3;
+        Grid grid = inputLoader.convertRawInputToGrid(input);
+
+        // Act
+        int result = manager.findPathsDownInGrid(grid);
+
+        // Assert
+        assertEquals(expected,result);
+    }
+
 }

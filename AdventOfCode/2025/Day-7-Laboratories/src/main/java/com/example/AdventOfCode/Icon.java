@@ -7,6 +7,8 @@ public class Icon {
     private final int x;
     private boolean isChecked = false;
     private boolean needsToBeChecked = false;
+    private int pathsDown;
+
 
     public Icon(String icon, int x, int y){
         this.icon = icon;
@@ -38,4 +40,11 @@ public class Icon {
         this.icon = newIcon;
     }
 
+    public void setPathsDown(int amount){
+        this.pathsDown = amount;
+    }
+
+    public int getPathsDown(){
+        return pathsDown;
+    }
 }
