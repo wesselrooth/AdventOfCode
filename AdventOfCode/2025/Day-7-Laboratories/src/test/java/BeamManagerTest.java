@@ -5,7 +5,6 @@ import java.io.IOException;
 import java.net.URISyntaxException;
 import java.util.Arrays;
 import java.util.List;
-import java.util.Stack;
 
 import static org.junit.jupiter.api.Assertions.*;
 
@@ -13,14 +12,6 @@ class BeamManagerTest {
 
     InputLoader loader = new InputLoader();
 
-    @Test
-    void constructorTest(){
-        // Arrange
-        BeamManager manager = new BeamManager();
-
-        // Act + Assert
-        assertNotNull(manager);
-    }
 
     @Test
     void testLocateNextSplitter() {
@@ -67,7 +58,7 @@ class BeamManagerTest {
         BeamManager manager = new BeamManager();
         List< List<String> > input = List.of(
                 Arrays.asList(
-                    ".","^","."
+                    ".^.".split("")
                 )
         );
         String expected = "|";
@@ -89,7 +80,7 @@ class BeamManagerTest {
         BeamManager manager = new BeamManager();
         List< List<String> > input = List.of(
                 Arrays.asList(
-                        ".","^","."
+                        ".^.".split("")
                 )
         );
         String expected = "|";
@@ -209,8 +200,8 @@ class BeamManagerTest {
     void extendBeamDownwardsWithOneSplitter(){
         // Arrange
         List< List<String> > input = List.of(
-                Arrays.asList(".","|","."),
-                Arrays.asList("|","^","|")
+                Arrays.asList(".|.".split("")),
+                Arrays.asList("|^|".split(""))
         );
         BeamManager manager = new BeamManager();
         InputLoader inputLoader = new InputLoader();
@@ -229,9 +220,9 @@ class BeamManagerTest {
     void extendBeamDownwardsWithTwoSplitter(){
         // Arrange
         List< List<String> > input = List.of(
-                Arrays.asList(".",".","|","."),
-                Arrays.asList(".","|","^","|"),
-                Arrays.asList("|","^","|","^","|")
+                Arrays.asList("..|.".split("")),
+                Arrays.asList(".|^|".split("")),
+                Arrays.asList("|^|^|".split(""))
         );
         BeamManager manager = new BeamManager();
         InputLoader inputLoader = new InputLoader();
@@ -250,11 +241,12 @@ class BeamManagerTest {
     void extendBeamDownwardsWithThreeSplitter(){
         // Arrange
         List< List<String> > input = List.of(
-                Arrays.asList(".",".",".","|",".","."),
-                Arrays.asList(".",".","|","^","|","."),
-                Arrays.asList(".","|","^","|","^","|"),
-                Arrays.asList(".","|",".","|",".","|"),
-                Arrays.asList("|","^","|","^","|","^","|")
+
+                Arrays.asList("...|..".split("")),
+                Arrays.asList("..|^|.".split("")),
+                Arrays.asList(".|^|^|".split("")),
+                Arrays.asList(".|.|.|".split("")),
+                Arrays.asList("|^|^|^|".split(""))
         );
         BeamManager manager = new BeamManager();
         InputLoader inputLoader = new InputLoader();
@@ -318,5 +310,4 @@ class BeamManagerTest {
         // Assert
         assertEquals(expected,result);
     }
-
 }
