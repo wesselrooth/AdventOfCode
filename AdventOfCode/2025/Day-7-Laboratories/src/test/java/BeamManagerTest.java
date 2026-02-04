@@ -140,10 +140,11 @@ class BeamManagerTest {
                 Arrays.asList("|"),
                 Arrays.asList("^")
         );
-        int expected = 1;
+        long expected = 1;
         Grid grid = loader.convertRawInputToGrid(input);
+
         // Act
-        int result = manager.countTouchingBeamsToSplitter(grid);
+        long result = manager.countTouchingBeamsToSplitter(grid);
 
         // Assert
         assertEquals(expected,result);
@@ -156,14 +157,14 @@ class BeamManagerTest {
         List< List<String> > input = inputLoader.loadInput("test-input");
 
         BeamManager manager = new BeamManager();
-        int expected = 21;
+        long expected = 21;
         InputLoader loader = new InputLoader();
         Grid grid = loader.convertRawInputToGrid(input);
         // Act
         List<Splitter> splitterList = manager.findAllSplitter(grid);
         Grid updatedInput = manager.createNewBeams(grid,splitterList);
         Grid extendedBeamInput = manager.extendAllBeams(updatedInput);
-        int result = manager.countTouchingBeamsToSplitter(extendedBeamInput);
+        long result = manager.countTouchingBeamsToSplitter(extendedBeamInput);
 
         // Assert
         result++;
@@ -173,11 +174,11 @@ class BeamManagerTest {
     @Test
     void partOneIntergrationTest() throws URISyntaxException, IOException {
         // Arrange
-        int expected = 21;
+        long expected = 21;
         StarCollector starCollector = new StarCollector();
 
         // Act
-        int result = starCollector.partOne("test-input");
+        long result = starCollector.partOne("test-input");
 
         // Assert
         assertEquals(expected,result);
@@ -187,9 +188,9 @@ class BeamManagerTest {
     void partOneOfficalTest() throws URISyntaxException, IOException {
         // Arrange
         StarCollector starCollector = new StarCollector();
-        int expected = 1703;
+        long expected = 1703;
         // Act
-        int result = starCollector.partOne("puzzle-input");
+        long result = starCollector.partOne("puzzle-input");
 
         // Assert
         assertEquals(expected,result);
@@ -205,11 +206,11 @@ class BeamManagerTest {
         BeamManager manager = new BeamManager();
         InputLoader inputLoader = new InputLoader();
 
-        int expected = 2;
+        long expected = 2;
         Grid grid = inputLoader.convertRawInputToGrid(input);
 
         // Act
-        int result = manager.findPathsDownInGrid(grid);
+        long result = manager.findPathsDownInGrid(grid);
 
         // Assert
         assertEquals(expected,result);
@@ -226,7 +227,7 @@ class BeamManagerTest {
         BeamManager manager = new BeamManager();
         InputLoader inputLoader = new InputLoader();
 
-        int expected = 4;
+        long expected = 4;
         Grid grid = inputLoader.convertRawInputToGrid(input);
 
         // Act
@@ -241,20 +242,20 @@ class BeamManagerTest {
         // Arrange
         List< List<String> > input = List.of(
 
-                Arrays.asList("...|..".split("")),
-                Arrays.asList("..|^|.".split("")),
-                Arrays.asList(".|^|^|".split("")),
-                Arrays.asList(".|.|.|".split("")),
+                Arrays.asList("...|...".split("")),
+                Arrays.asList("..|^|..".split("")),
+                Arrays.asList(".|^|^|.".split("")),
+                Arrays.asList(".|.|.|.".split("")),
                 Arrays.asList("|^|^|^|".split(""))
         );
         BeamManager manager = new BeamManager();
         InputLoader inputLoader = new InputLoader();
 
-        int expected = 8;
+        long expected = 8;
         Grid grid = inputLoader.convertRawInputToGrid(input);
 
         // Act
-        int result = manager.findPathsDownInGrid(grid);
+        long result = manager.findPathsDownInGrid(grid);
 
         // Assert
         assertEquals(expected,result);
@@ -264,21 +265,22 @@ class BeamManagerTest {
     void countPathsDownWithExtendingMiddlePart(){
         // Arrange
         List< List<String> > input = List.of(
+                Arrays.asList("...S...".split("")),
                 Arrays.asList("...|...".split("")),
-                Arrays.asList("..|^|..".split("")),
-                Arrays.asList(".|^|^|.".split("")),
-                Arrays.asList(".|.|.|.".split("")),
-                Arrays.asList("|^|||^|".split(""))
+                Arrays.asList("..|^|".split("")),
+                Arrays.asList(".|^|^|...".split("")),
+                Arrays.asList(".|.|.|...".split("")),
+                Arrays.asList("|^|||^|..".split(""))
         );
 
         BeamManager manager = new BeamManager();
         InputLoader inputLoader = new InputLoader();
 
-        int expected = 6;
+        long expected = 6;
         Grid grid = inputLoader.convertRawInputToGrid(input);
 
         // Act
-        int result = manager.findPathsDownInGrid(grid);
+        long result = manager.findPathsDownInGrid(grid);
 
         // Assert
         assertEquals(expected,result);
@@ -291,7 +293,7 @@ class BeamManagerTest {
         StarCollector starCollector = new StarCollector();
 
         // Act
-        int result = starCollector.partTwoPrepTest("test-input");
+        long result = starCollector.partTwoPrepTest("test-input");
 
         // Assert
         assertEquals(expected,result);
@@ -304,9 +306,10 @@ class BeamManagerTest {
         StarCollector starCollector = new StarCollector();
 
         // Act
-        int result = starCollector.partTwoPrepTest("puzzle-input");
+        long result = starCollector.partTwoPrepTest("puzzle-input");
 
         // Assert
         assertEquals(expected,result);
     }
+
 }

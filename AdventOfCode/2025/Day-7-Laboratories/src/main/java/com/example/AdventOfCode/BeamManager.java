@@ -69,9 +69,9 @@ public class BeamManager {
         return grid;
     }
 
-    public int countTouchingBeamsToSplitter(Grid grid) {
+    public long countTouchingBeamsToSplitter(Grid grid) {
 
-        int beamSplittingCount = 0;
+        long beamSplittingCount = 0;
 
         for (int y = 0; y < grid.getRowSize() -1; y++) {
 
@@ -111,9 +111,16 @@ public class BeamManager {
                     continue;
                 }
 
-                if (icon.getIcon().equals("|")){
-                    result += calculatePathsDown(icon,grid);
-                    icon.setChecked(true);
+                //if (icon.getIcon().equals("|")){
+                //    result += calculatePathsDown(icon,grid);
+                //    icon.setChecked(true);
+                //}
+
+                if (icon.getIcon().equals("S")){
+
+                    Icon nextIcon = grid.getRow(y + 1).getIcon(x);
+                    result += calculatePathsDown(nextIcon,grid);
+                    nextIcon.setChecked(true);
                 }
 
 
