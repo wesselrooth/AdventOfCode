@@ -15,7 +15,8 @@ public class StarCollector {
 
         Grid grid = inputLoader.convertRawInputToGrid(input);
         grid = manager.locateInitialBeam(grid);
-        List<Splitter> splitterList = manager.findAllSplitter(grid);
+        GridManager gridManager = new GridManager();
+        List<Splitter> splitterList = gridManager.findAllSplitter(grid);
         grid = manager.createNewBeams(grid,splitterList);
         grid = manager.extendAllBeams(grid);
 
@@ -33,7 +34,8 @@ public class StarCollector {
         BeamManager manager = new BeamManager();
         grid = manager.locateInitialBeam(grid);
 
-        List<Splitter> splitterList = manager.findAllSplitter(grid);
+        GridManager gridManager = new GridManager();
+        List<Splitter> splitterList = gridManager.findAllSplitter(grid);
         grid = manager.createNewBeams(grid,splitterList);
         grid = manager.extendAllBeams(grid);
 

@@ -5,27 +5,6 @@ import java.util.List;
 
 public class BeamManager {
 
-    public List<Splitter> findAllSplitter(Grid grid) {
-
-        List<Splitter> resultList = new ArrayList<>();
-
-        for (int y = 0; y < grid.getRowSize(); y++) {
-
-            Row row = grid.getRow(y);
-
-            for (int x = 0; x< row.getRowSize(); x++){
-
-                Icon icon = row.getIcon(x);
-
-                if (icon.getIcon().equals("^")){
-                    resultList.add(new Splitter(x,y));
-                }
-            }
-
-        }
-
-        return resultList;
-    }
     public Grid createNewBeams(Grid grid, List<Splitter> splitterList) {
 
         for (Splitter splitter: splitterList){
@@ -34,6 +13,10 @@ public class BeamManager {
             int rightBeam = splitter.x() + 1;
 
             Row row = grid.getRow(splitter.y());
+
+            if (row.getIcon(rightBeam).getIcon().equals("^")){
+                System.out.print("SPLITTER");
+            }
 
             row.setIcon(leftBeam,"|");
             row.setIcon(rightBeam,"|");
@@ -115,7 +98,6 @@ public class BeamManager {
             }
 
         }
-
         return result;
     }
 
@@ -123,66 +105,39 @@ public class BeamManager {
 
         int result = 0;
 
-        for (int y = current.getY(); y < grid.getRowSize(); y++) {
-
-            if (current.isChecked()){
-                return current.getPathsDown();
-            }
-
-            if ( y == grid.getRowSize() - 1){
-                return 1;
-            }
-
-            Icon nextRowIcon = grid.getRow(y + 1).getIcon(current.getX());
-
-            if (nextRowIcon.isChecked()){
-                return nextRowIcon.getPathsDown();
-            }
-
-            if (nextRowIcon.getIcon().equals("|")){
-                int tmpResult = calculatePathsDown(nextRowIcon,grid);
-                nextRowIcon.setPathsDown(tmpResult);
-                nextRowIcon.setChecked(true);
-                return tmpResult;
-            }
-
-            if (!nextRowIcon.getIcon().equals("^")) {
-                // not a '^' so continue
-                continue;
-            }
-            Icon nextRowLeft = grid.getRow(y + 1).getIcon(current.getX() - 1);
-            Icon nextRowRight = grid.getRow(y + 1).getIcon(current.getX() + 1);
-
-            // Check if it is the last "^"
-            if (nextRowIcon.getY() == grid.getRowSize() -1){
-
-                current.setChecked(true);
-                current.setPathsDown(2);
-
-                nextRowLeft.setChecked(true);
-                nextRowLeft.setPathsDown(1);
-
-                nextRowRight.setChecked(true);
-                nextRowRight.setPathsDown(1);
-
-                return 2;
-            }
-
-            List<Icon> iconsToCheckList = List.of(nextRowLeft, nextRowRight);
-            for (Icon tocheckIcon: iconsToCheckList){
-                int tmpResult = calculatePathsDown(tocheckIcon,grid);
-                tocheckIcon.setPathsDown(tmpResult);
-                tocheckIcon.setChecked(true);
-                result += tmpResult;
-            }
-
-            nextRowIcon.setPathsDown(result);
-            nextRowIcon.setChecked(true);
-            current.setChecked(true);
-            current.setPathsDown(result);
+        if (current.isChecked()){
+            return current.getPathsDown();
         }
 
+        int y = current.getY();
+
+        if (y == grid.getRowSize() -1){
+            current.setChecked(true);
+            current.setPathsDown(1);
+            return 1;
+        }
+
+        Row nextRow = grid.getRow( y + 1);
+        Icon iconBelow = nextRow.getIcon(current.getX());
+
+        if (iconBelow.getIcon().equals("|") ||iconBelow.getIcon().equals(".")){
+
+            result += calculatePathsDown(iconBelow,grid);
+
+        }else if (iconBelow.getIcon().equals("^")){
+
+            Icon left = nextRow.getIcon(Math.max(0, iconBelow.getX() - 1));
+            Icon right = nextRow.getIcon(Math.min(nextRow.getRowSize() - 1, iconBelow.getX() + 1));
+
+            result += calculatePathsDown(left, grid);
+            result += calculatePathsDown(right, grid);
+        }
+
+        current.setChecked(true);
+        current.setPathsDown(result);
+
         return result;
+
     }
 
     public Grid locateInitialBeam(Grid grid) {

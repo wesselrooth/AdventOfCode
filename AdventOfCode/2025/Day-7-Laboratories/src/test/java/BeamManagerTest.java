@@ -23,9 +23,9 @@ class BeamManagerTest {
         String expected = "0,1";
         InputLoader loader = new InputLoader();
         Grid grid = loader.convertRawInputToGrid(input);
-
+        GridManager gridManager = new GridManager();
         // Act
-        Splitter result = manager.findAllSplitter(grid).get(0);
+        Splitter result = gridManager.findAllSplitter(grid).get(0);
 
         // Assert
         assertEquals(expected,result.toString());
@@ -43,9 +43,9 @@ class BeamManagerTest {
         String expected = "0,2";
         InputLoader loader = new InputLoader();
         Grid grid = loader.convertRawInputToGrid(input);
-
+        GridManager gridManager = new GridManager();
         // Act
-        Splitter result = manager.findAllSplitter(grid).get(0);
+        Splitter result = gridManager.findAllSplitter(grid).get(0);
 
         // Assert
         assertEquals(expected,result.toString());
@@ -160,8 +160,10 @@ class BeamManagerTest {
         long expected = 21;
         InputLoader loader = new InputLoader();
         Grid grid = loader.convertRawInputToGrid(input);
+        GridManager gridManager = new GridManager();
         // Act
-        List<Splitter> splitterList = manager.findAllSplitter(grid);
+
+        List<Splitter> splitterList = gridManager.findAllSplitter(grid);
         Grid updatedInput = manager.createNewBeams(grid,splitterList);
         Grid extendedBeamInput = manager.extendAllBeams(updatedInput);
         long result = manager.countTouchingBeamsToSplitter(extendedBeamInput);
