@@ -200,6 +200,7 @@ class BeamManagerTest {
     void extendBeamDownwardsWithOneSplitter(){
         // Arrange
         List< List<String> > input = List.of(
+                Arrays.asList(".S.".split("")),
                 Arrays.asList(".|.".split("")),
                 Arrays.asList("|^|".split(""))
         );
@@ -220,9 +221,12 @@ class BeamManagerTest {
     void extendBeamDownwardsWithTwoSplitter(){
         // Arrange
         List< List<String> > input = List.of(
+                Arrays.asList("..S.".split("")),
                 Arrays.asList("..|.".split("")),
                 Arrays.asList(".|^|".split("")),
-                Arrays.asList("|^|^|".split(""))
+                Arrays.asList(".|.|".split("")),
+                Arrays.asList("|^|^|".split("")),
+                Arrays.asList("|.|.|".split(""))
         );
         BeamManager manager = new BeamManager();
         InputLoader inputLoader = new InputLoader();
@@ -241,7 +245,7 @@ class BeamManagerTest {
     void extendBeamDownwardsWithThreeSplitter(){
         // Arrange
         List< List<String> > input = List.of(
-
+                Arrays.asList("...S...".split("")),
                 Arrays.asList("...|...".split("")),
                 Arrays.asList("..|^|..".split("")),
                 Arrays.asList(".|^|^|.".split("")),
@@ -287,13 +291,37 @@ class BeamManagerTest {
     }
 
     @Test
+    void countPathsdown(){
+        // Arrange
+        List< List<String> > input = List.of(
+                Arrays.asList("...S...".split("")),
+                Arrays.asList("...|..".split("")),
+                Arrays.asList("..|^|".split("")),
+                Arrays.asList(".|^|^|...".split("")),
+                Arrays.asList(".|^|^|...".split(""))
+        );
+
+        BeamManager manager = new BeamManager();
+        InputLoader inputLoader = new InputLoader();
+
+        long expected = 4;
+        Grid grid = inputLoader.convertRawInputToGrid(input);
+
+        // Act
+        long result = manager.findPathsDownInGrid(grid);
+
+        // Assert
+        assertEquals(expected,result);
+    }
+
+    @Test
     void partTwoPrepTest() throws URISyntaxException, IOException {
         // Arrange
         int expected = 40;
         StarCollector starCollector = new StarCollector();
 
         // Act
-        long result = starCollector.partTwoPrepTest("test-input");
+        long result = starCollector.partTwo("test-input");
 
         // Assert
         assertEquals(expected,result);
@@ -306,10 +334,11 @@ class BeamManagerTest {
         StarCollector starCollector = new StarCollector();
 
         // Act
-        long result = starCollector.partTwoPrepTest("puzzle-input");
+        long result = starCollector.partTwo("puzzle-input");
 
         // Assert
         assertEquals(expected,result);
+        //171692855075500
+        //1537417900
     }
-
 }

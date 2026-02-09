@@ -44,7 +44,7 @@ public class BeamManager {
 
     public Grid extendAllBeams(Grid grid){
 
-        for (int y = 0; y < grid.getRowSize() -1; y++){
+        for (int y = 0; y < grid.getRowSize() - 1; y++){
 
             Row row = grid.getRow(y);
 
@@ -100,30 +100,18 @@ public class BeamManager {
 
         int result = 0;
 
-        for (int y = 0; y < grid.getRowSize(); y++) {
+        Row row = grid.getRow(0);
 
-            Row row = grid.getRow(y);
+        for (int x = 0; x< row.getRowSize(); x++){
 
-            for (int x = 0; x< row.getRowSize(); x++) {
-                Icon icon = row.getIcon(x);
+            Icon icon = row.getIcon(x);
 
-                if (icon.isChecked()){
-                    continue;
-                }
+            if (icon.getIcon().equals("S")){
 
-                //if (icon.getIcon().equals("|")){
-                //    result += calculatePathsDown(icon,grid);
-                //    icon.setChecked(true);
-                //}
-
-                if (icon.getIcon().equals("S")){
-
-                    Icon nextIcon = grid.getRow(y + 1).getIcon(x);
-                    result += calculatePathsDown(nextIcon,grid);
-                    nextIcon.setChecked(true);
-                }
-
-
+                Row nextRow = grid.getRow(icon.getY() + 1);
+                Icon nextIcon = nextRow.getIcon(icon.getX());
+                result += calculatePathsDown(nextIcon,grid);
+                nextIcon.setChecked(true);
             }
 
         }
@@ -162,26 +150,25 @@ public class BeamManager {
                 // not a '^' so continue
                 continue;
             }
+            Icon nextRowLeft = grid.getRow(y + 1).getIcon(current.getX() - 1);
+            Icon nextRowRight = grid.getRow(y + 1).getIcon(current.getX() + 1);
 
             // Check if it is the last "^"
             if (nextRowIcon.getY() == grid.getRowSize() -1){
+
                 current.setChecked(true);
                 current.setPathsDown(2);
 
-                Icon left = grid.getRow(y + 1).getIcon(current.getX() - 1);
-                Icon right= grid.getRow(y + 1).getIcon(current.getX() + 1);
+                nextRowLeft.setChecked(true);
+                nextRowLeft.setPathsDown(1);
 
-                left.setChecked(true);
-                right.setChecked(true);
+                nextRowRight.setChecked(true);
+                nextRowRight.setPathsDown(1);
 
                 return 2;
             }
 
-            Icon left = grid.getRow(y + 1).getIcon(current.getX() - 1);
-            Icon right= grid.getRow(y + 1).getIcon(current.getX() + 1);
-
-            List<Icon> iconsToCheckList = List.of(left,right);
-
+            List<Icon> iconsToCheckList = List.of(nextRowLeft, nextRowRight);
             for (Icon tocheckIcon: iconsToCheckList){
                 int tmpResult = calculatePathsDown(tocheckIcon,grid);
                 tocheckIcon.setPathsDown(tmpResult);
