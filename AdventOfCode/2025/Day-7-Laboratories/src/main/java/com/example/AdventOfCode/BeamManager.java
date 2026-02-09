@@ -1,6 +1,5 @@
 package com.example.AdventOfCode;
 
-import java.util.ArrayList;
 import java.util.List;
 
 public class BeamManager {
@@ -13,10 +12,6 @@ public class BeamManager {
             int rightBeam = splitter.x() + 1;
 
             Row row = grid.getRow(splitter.y());
-
-            if (row.getIcon(rightBeam).getIcon().equals("^")){
-                System.out.print("SPLITTER");
-            }
 
             row.setIcon(leftBeam,"|");
             row.setIcon(rightBeam,"|");
@@ -79,9 +74,9 @@ public class BeamManager {
         return beamSplittingCount;
     }
 
-    public int findPathsDownInGrid(Grid grid) {
+    public long findPathsDownInGrid(Grid grid) {
 
-        int result = 0;
+        long result = 0;
 
         Row row = grid.getRow(0);
 
@@ -93,6 +88,7 @@ public class BeamManager {
 
                 Row nextRow = grid.getRow(icon.getY() + 1);
                 Icon nextIcon = nextRow.getIcon(icon.getX());
+
                 result += calculatePathsDown(nextIcon,grid);
                 nextIcon.setChecked(true);
             }
@@ -101,9 +97,9 @@ public class BeamManager {
         return result;
     }
 
-    public int calculatePathsDown(Icon current,Grid grid) {
+    public long calculatePathsDown(Icon current, Grid grid) {
 
-        int result = 0;
+        long result = 0;
 
         if (current.isChecked()){
             return current.getPathsDown();
@@ -117,20 +113,21 @@ public class BeamManager {
             return 1;
         }
 
-        Row nextRow = grid.getRow( y + 1);
+        Row nextRow = grid.getRow(y + 1);
         Icon iconBelow = nextRow.getIcon(current.getX());
 
-        if (iconBelow.getIcon().equals("|") ||iconBelow.getIcon().equals(".")){
+        if (iconBelow.getIcon().equals("|")) {
 
-            result += calculatePathsDown(iconBelow,grid);
+            result += calculatePathsDown(iconBelow, grid);
 
-        }else if (iconBelow.getIcon().equals("^")){
-
-            Icon left = nextRow.getIcon(Math.max(0, iconBelow.getX() - 1));
-            Icon right = nextRow.getIcon(Math.min(nextRow.getRowSize() - 1, iconBelow.getX() + 1));
+        } else if (iconBelow.getIcon().equals("^")){
+            Icon left = nextRow.getIcon(iconBelow.getX() - 1);
+            Icon right = nextRow.getIcon(iconBelow.getX() + 1);
 
             result += calculatePathsDown(left, grid);
             result += calculatePathsDown(right, grid);
+        } else {
+            throw new RuntimeException("Unexpected symbol: " + iconBelow.getIcon());
         }
 
         current.setChecked(true);

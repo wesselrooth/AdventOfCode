@@ -237,7 +237,7 @@ class BeamManagerTest {
         Grid grid = inputLoader.convertRawInputToGrid(input);
 
         // Act
-        int result = manager.findPathsDownInGrid(grid);
+        long result = manager.findPathsDownInGrid(grid);
 
         // Assert
         assertEquals(expected,result);
@@ -332,7 +332,7 @@ class BeamManagerTest {
     @Test
     void partTwoTest() throws URISyntaxException, IOException {
         // Arrange
-        int expected = 40;
+        long expected = 171692855075500L;
         StarCollector starCollector = new StarCollector();
 
         // Act
@@ -340,7 +340,5 @@ class BeamManagerTest {
 
         // Assert
         assertEquals(expected,result);
-        //171692855075500
-        //1537417900
     }
 }
