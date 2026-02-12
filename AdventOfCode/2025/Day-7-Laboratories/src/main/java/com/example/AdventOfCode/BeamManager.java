@@ -74,7 +74,7 @@ public class BeamManager {
         return beamSplittingCount;
     }
 
-    public long findPathsDownInGrid(Grid grid) {
+    public long findPathsDownInGrid(Grid grid) throws BeamManagerException {
 
         long result = 0;
 
@@ -97,7 +97,7 @@ public class BeamManager {
         return result;
     }
 
-    public long calculatePathsDown(Icon current, Grid grid) {
+    public long calculatePathsDown(Icon current, Grid grid) throws BeamManagerException {
 
         long result = 0;
 
@@ -127,7 +127,7 @@ public class BeamManager {
             result += calculatePathsDown(left, grid);
             result += calculatePathsDown(right, grid);
         } else {
-            throw new RuntimeException("Unexpected symbol: " + iconBelow.getIcon());
+            throw new BeamManagerException("Unexpected symbol: " + iconBelow.getIcon());
         }
 
         current.setChecked(true);

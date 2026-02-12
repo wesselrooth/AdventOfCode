@@ -199,7 +199,7 @@ class BeamManagerTest {
     }
 
     @Test
-    void extendBeamDownwardsWithOneSplitter(){
+    void extendBeamDownwardsWithOneSplitter() throws BeamManagerException {
         // Arrange
         List< List<String> > input = List.of(
                 Arrays.asList(".S.".split("")),
@@ -220,7 +220,7 @@ class BeamManagerTest {
     }
 
     @Test
-    void extendBeamDownwardsWithTwoSplitter(){
+    void extendBeamDownwardsWithTwoSplitter() throws BeamManagerException {
         // Arrange
         List< List<String> > input = List.of(
                 Arrays.asList("..S.".split("")),
@@ -244,7 +244,7 @@ class BeamManagerTest {
     }
 
     @Test
-    void extendBeamDownwardsWithThreeSplitter(){
+    void extendBeamDownwardsWithThreeSplitter() throws BeamManagerException {
         // Arrange
         List< List<String> > input = List.of(
                 Arrays.asList("...S...".split("")),
@@ -268,7 +268,7 @@ class BeamManagerTest {
     }
 
     @Test
-    void countPathsDownWithExtendingMiddlePart(){
+    void countPathsDownWithExtendingMiddlePart() throws BeamManagerException {
         // Arrange
         List< List<String> > input = List.of(
                 Arrays.asList("...S...".split("")),
@@ -293,7 +293,7 @@ class BeamManagerTest {
     }
 
     @Test
-    void countPathsdown(){
+    void countPathsdown() throws BeamManagerException {
         // Arrange
         List< List<String> > input = List.of(
                 Arrays.asList("...S...".split("")),
@@ -317,7 +317,7 @@ class BeamManagerTest {
     }
 
     @Test
-    void partTwoPrepTest() throws URISyntaxException, IOException {
+    void partTwoPrepTest() throws URISyntaxException, IOException, BeamManagerException {
         // Arrange
         int expected = 40;
         StarCollector starCollector = new StarCollector();
@@ -330,13 +330,35 @@ class BeamManagerTest {
     }
 
     @Test
-    void partTwoTest() throws URISyntaxException, IOException {
+    void partTwoTest() throws URISyntaxException, IOException, BeamManagerException {
         // Arrange
         long expected = 171692855075500L;
         StarCollector starCollector = new StarCollector();
 
         // Act
         long result = starCollector.partTwo("puzzle-input");
+
+        // Assert
+        assertEquals(expected,result);
+    }
+
+    @Test
+    void testThrowUnexpectedException() throws BeamManagerException {
+        // Arrange
+        List< List<String> > input = List.of(
+                Arrays.asList(".S.".split("")),
+                Arrays.asList(".|.".split("")),
+                Arrays.asList("|&|".split(""))
+        );
+        BeamManager manager = new BeamManager();
+        InputLoader inputLoader = new InputLoader();
+
+        Grid grid = inputLoader.convertRawInputToGrid(input);
+
+        String expected = "Unexpected symbol: &";
+
+        // Act
+        String result = assertThrows(BeamManagerException.class, () -> manager.findPathsDownInGrid(grid)).getMessage();
 
         // Assert
         assertEquals(expected,result);
