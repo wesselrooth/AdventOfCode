@@ -25,7 +25,7 @@ public class StarCollector {
         return result;
     }
 
-    public long partTwo(String file) throws URISyntaxException, IOException {
+    public long partTwo(String file) throws URISyntaxException, IOException, BeamManagerException {
         InputLoader inputLoader = new InputLoader();
         List<List<String>> input = inputLoader.loadInput(file);
 
