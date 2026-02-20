@@ -8,9 +8,9 @@ import java.util.List;
 
 public class CycleManager {
 
-    private static final Logger LOG = LogManager.getLogger(CycleManager.class);
-    private long globalCycleCount = 0;
+    private static final Logger LOG = LogManager.getLogger("CONSOLE_JSON_APPENDER");
 
+    private long globalCycleCount = 0;
     private HashMap<Long,Long> signalStrenghMap;
 
     public CycleManager(List<Long> checkList){
@@ -30,12 +30,12 @@ public class CycleManager {
             globalCycleCount++;
 
             if (signalStrenghMap.containsKey(globalCycleCount)){
-                LOG.info("Update cycle count");
-                long tmpResult = globalCycleCount * registerX;
-                signalStrenghMap.put(globalCycleCount, tmpResult);
+                long cycleCountCalculationResult = globalCycleCount * registerX;
+                signalStrenghMap.put(globalCycleCount, cycleCountCalculationResult);
 
-                LOG.info("CycleCount: " + globalCycleCount);
-                LOG.info("CycleCount result: " + tmpResult);
+                LOG.info(
+                        new JsonLog("Update cycle count",globalCycleCount,cycleCountCalculationResult)
+                );
             }
 
             if (i == 1){
@@ -49,9 +49,10 @@ public class CycleManager {
     public Cycle detectCycleType(String input) throws CycleException {
 
         if (input.isEmpty()){
-            LOG.error("Something went wrong detecting the cycle string");
+            LOG.error(
+                    new JsonLog("Something went wrong detecting the cycle string")
+            );
             throw new CycleException("Empty cycle String");
-
         }
 
         input = input.strip();
@@ -64,14 +65,15 @@ public class CycleManager {
         String[] splittedInput = input.split(" ");
 
         if (splittedInput.length > 2){
-            LOG.error("Something went wrong detecting the cycle string");
+            LOG.error(new JsonLog("Something went wrong detecting the cycle string"));
+
             throw new CycleException("Unexpected amound of Cycles detected");
         }
 
         String firstPart = splittedInput[0];
 
         if (!firstPart.equals("addx")){
-            LOG.error("Something went wrong detecting the cycle string");
+            LOG.error(new JsonLog("Something went wrong detecting the cycle string"));
             throw new CycleException("Unknown cycle type detected");
         }
         long oprant = Long.parseLong(splittedInput[1]);
@@ -88,7 +90,8 @@ public class CycleManager {
     }
 
     public long calculateSignalStrengh(List<String> input) throws CycleException {
-        LOG.info("Start calculating signal strength");
+        LOG.info(new JsonLog("Start calculating signal strength"));
+
         long registryX = 1;
 
         for (int i = 0; i < input.size(); i++){
