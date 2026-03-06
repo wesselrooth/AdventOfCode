@@ -1,8 +1,10 @@
 package com.example.AdventOfCode;
+import com.fasterxml.jackson.annotation.JsonInclude;
 
+@JsonInclude(JsonInclude.Include.NON_DEFAULT)
 public class JsonLog {
 
-    private final String logMessage;
+    private String logMessage;
     private long cycleCount;
     private long cycleCountCalculationResult;
 
@@ -28,8 +30,16 @@ public class JsonLog {
         return cycleCount;
     }
 
+    public void setCycleCount(long cycleCount){
+        this.cycleCount = cycleCount;
+    }
+
     public long getCycleCountCalculationResult(){
         return cycleCountCalculationResult;
+    }
+
+    public void setCycleCountCalculationResult(long cycleCountCalculationResult){
+        this.cycleCountCalculationResult = cycleCountCalculationResult;
     }
 
 }

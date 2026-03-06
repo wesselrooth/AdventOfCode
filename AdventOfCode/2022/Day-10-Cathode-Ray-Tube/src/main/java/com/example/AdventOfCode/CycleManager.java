@@ -47,6 +47,7 @@ public class CycleManager {
     }
 
     public Cycle detectCycleType(String input) throws CycleException {
+        LOG.info(new JsonLog("Start Detect cycle"));
 
         if (input.isEmpty()){
             LOG.error(
