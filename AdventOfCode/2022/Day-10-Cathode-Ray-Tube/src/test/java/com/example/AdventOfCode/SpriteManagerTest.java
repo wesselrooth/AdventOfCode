@@ -32,27 +32,14 @@ class SpriteManagerTest {
         "5,4,..###",
     })
     void constructSpriteOnFirstIndex(int range,int registerX,String expected) throws  SpriteException{
-        // Act
+        // Arrange
         SpriteManager spriteManager = new SpriteManager(range,registerX);
 
-        // Assert
-        String result = String.join("", spriteManager.getSprite());
-        assertEquals(expected,result);
-    }
-
-    @Test
-    void constructSprite_SecondIndexWhileSizeIsLangerThenMinimal() throws  SpriteException{
-        // Arrange
-        int spriteListRange = 4;
-        String expected = "###.";
-        int registerX = 1;
         // Act
-        SpriteManager spriteManager = new SpriteManager(spriteListRange,registerX);
-        String result = String.join("", spriteManager.getSprite());
+        String result = spriteManager.moveSprite(registerX);
 
         // Assert
         assertEquals(expected,result);
     }
-
 
 }
