@@ -3,6 +3,7 @@ package com.example.AdventOfCode;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 
@@ -12,6 +13,8 @@ public class CycleManager {
 
     private long globalCycleCount = 0;
     private HashMap<Long,Long> signalStrenghMap;
+
+    private List<String> circuitRow  = new ArrayList<>();
 
     public CycleManager(List<Long> checkList){
 
@@ -23,18 +26,16 @@ public class CycleManager {
 
     }
 
-    public long cycle(long registerX, long operand, long cycles){
+    public long cyclePartOne(long registerX, long operand, long cycles){
 
         for (int i = 0; i < cycles; i++){
-
             globalCycleCount++;
-
             if (signalStrenghMap.containsKey(globalCycleCount)){
                 long cycleCountCalculationResult = globalCycleCount * registerX;
                 signalStrenghMap.put(globalCycleCount, cycleCountCalculationResult);
 
                 LOG.info(
-                        new JsonLog("Update cycle count",globalCycleCount,cycleCountCalculationResult)
+                    new JsonLog("Update cycle count",globalCycleCount,cycleCountCalculationResult)
                 );
             }
 
@@ -45,6 +46,26 @@ public class CycleManager {
         }
         return registerX;
     }
+
+    public long cyclePartTwo(long registerX, long operand, long cycles){
+
+        for (int i = 0; i < cycles; i++){
+
+            // check of sprite op de matched met de getekende String
+
+            globalCycleCount++;
+            if (signalStrenghMap.containsKey(globalCycleCount)){
+
+            }
+
+            if (i == 1){
+                registerX += operand;
+            }
+
+        }
+        return registerX;
+    }
+
 
     public Cycle detectCycleType(String input) throws CycleException {
         LOG.info(new JsonLog("Start Detect cycle"));
@@ -85,7 +106,7 @@ public class CycleManager {
     public long performCycle(long regestryx, String cycleString) throws CycleException {
 
         Cycle cycle = detectCycleType(cycleString);
-        regestryx = cycle(regestryx,cycle.getOparant(),cycle.getCycleAmount());
+        regestryx = cyclePartOne(regestryx,cycle.getOparant(),cycle.getCycleAmount());
 
         return regestryx;
     }

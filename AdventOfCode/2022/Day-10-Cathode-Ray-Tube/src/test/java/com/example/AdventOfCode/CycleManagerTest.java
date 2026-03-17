@@ -13,26 +13,26 @@ class CycleManagerTest {
 
 
     @Test
-    void test_cycleOneTime(){
+    void test_cyclePartOneOneTime(){
         // Arrange
         CycleManager cycleManager = new CycleManager(List.of(999L));
         long expected = 1;
 
         // Act
-        long result  = cycleManager.cycle(1,1,1);
+        long result  = cycleManager.cyclePartOne(1,1,1);
 
         // Assert
         assertEquals(expected,result);
     }
 
     @Test
-    void test_cycleTwoTime(){
+    void test_cyclePartOneTwoTime(){
         // Arrange
         CycleManager cycleManager = new CycleManager(List.of(999L));
         long expected = 2;
 
         // Act
-        long result  = cycleManager.cycle(1,1,2);
+        long result  = cycleManager.cyclePartOne(1,1,2);
 
         // Assert
         assertEquals(expected,result);
@@ -78,7 +78,7 @@ class CycleManagerTest {
     }
 
     @Test
-    void test_detectUnknownCycle() {
+    void test_detectUnknownCyclePartOne() {
         // Arrange
         CycleManager cycleManager = new CycleManager(List.of(999L));
         String expected = "Unknown cycle type detected";
@@ -90,7 +90,7 @@ class CycleManagerTest {
         assertEquals(expected,result);
     }
     @Test
-    void test_detectTwoCycle() throws CycleException {
+    void test_detectTwoCyclePartOne() throws CycleException {
         // Arrange
         CycleManager cycleManager = new CycleManager(List.of(999L));
         long expected = 2;
