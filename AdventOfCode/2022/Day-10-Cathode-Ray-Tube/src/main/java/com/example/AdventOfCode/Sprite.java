@@ -36,4 +36,8 @@ public class Sprite {
         }
         return String.join("", spriteRange);
     }
+
+    public String getSprite(){
+        return String.join("", spriteRange);
+    }
 }
