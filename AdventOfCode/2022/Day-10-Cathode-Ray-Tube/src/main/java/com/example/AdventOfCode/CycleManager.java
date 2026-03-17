@@ -23,7 +23,7 @@ public class CycleManager {
 
     }
 
-    public long cycle(long registerX, long oparend, long cycles){
+    public long cycle(long registerX, long operand, long cycles){
 
         for (int i = 0; i < cycles; i++){
 
@@ -39,7 +39,7 @@ public class CycleManager {
             }
 
             if (i == 1){
-                registerX += oparend;
+                registerX += operand;
             }
 
         }
