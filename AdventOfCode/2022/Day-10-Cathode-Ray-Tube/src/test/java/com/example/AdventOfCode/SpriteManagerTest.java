@@ -30,6 +30,8 @@ class SpriteManagerTest {
         "5,2,.###.",
         "5,3,..###",
         "5,4,..###",
+        "5,6,..###",
+        "5,-1,###..",
     })
     void constructSpriteOnFirstIndex(int range,int registerX,String expected) throws  SpriteException{
         // Arrange

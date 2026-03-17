@@ -21,14 +21,14 @@ public class SpriteManager {
 
     public String moveSprite(int registerX){
 
-        if (registerX == 0){
-            spritePostion.set(registerX,"#");
-            spritePostion.set(registerX + 1,"#");
-            spritePostion.set(registerX + 2,"#");
-        }else if (registerX == range -1){
-            spritePostion.set(registerX,"#");
-            spritePostion.set(registerX -1,"#");
-            spritePostion.set(registerX -2,"#");
+        if (registerX <= 0){
+            spritePostion.set(0,"#");
+            spritePostion.set(1,"#");
+            spritePostion.set(2,"#");
+        }else if (registerX >= range -1){
+            spritePostion.set(range - 1,"#");
+            spritePostion.set(range - 2,"#");
+            spritePostion.set(range - 3,"#");
         }else {
             spritePostion.set(registerX,"#");
             spritePostion.set(registerX - 1,"#");
