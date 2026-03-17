@@ -12,7 +12,7 @@ class SpriteManagerTest {
         int spriteListRange = 2;
         String expected = "List is to small to fit a Sprite";
         // Act
-        String result = assertThrows(SpriteException.class, () -> new SpriteManager(spriteListRange,0)).getMessage();
+        String result = assertThrows(SpriteException.class, () -> new SpriteManager(spriteListRange)).getMessage();
 
         // Assert
         assertEquals(expected,result);
@@ -33,7 +33,7 @@ class SpriteManagerTest {
     })
     void constructSpriteOnFirstIndex(int range,int registerX,String expected) throws  SpriteException{
         // Arrange
-        SpriteManager spriteManager = new SpriteManager(range,registerX);
+        SpriteManager spriteManager = new SpriteManager(range);
 
         // Act
         String result = spriteManager.moveSprite(registerX);

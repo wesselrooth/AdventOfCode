@@ -10,7 +10,7 @@ public class SpriteManager {
 
     private final int range;
 
-    public SpriteManager(int range, int registerX) throws SpriteException {
+    public SpriteManager(int range) throws SpriteException {
 
         if (range < 3){
             throw new SpriteException("List is to small to fit a Sprite");
