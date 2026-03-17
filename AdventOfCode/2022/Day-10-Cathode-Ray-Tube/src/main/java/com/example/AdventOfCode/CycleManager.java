@@ -46,33 +46,12 @@ public class CycleManager {
         }
         return registerX;
     }
-
-    public long cyclePartTwo(long registerX, long operand, long cycles){
-
-        for (int i = 0; i < cycles; i++){
-
-            // check of sprite op de matched met de getekende String
-
-            globalCycleCount++;
-            if (signalStrenghMap.containsKey(globalCycleCount)){
-
-            }
-
-            if (i == 1){
-                registerX += operand;
-            }
-
-        }
-        return registerX;
-    }
-
-
     public Cycle detectCycleType(String input) throws CycleException {
         LOG.info(new JsonLog("Start Detect cycle"));
 
         if (input.isEmpty()){
             LOG.error(
-                    new JsonLog("Something went wrong detecting the cycle string")
+                new JsonLog("Something went wrong detecting the cycle string")
             );
             throw new CycleException("Empty cycle String");
         }
@@ -128,5 +107,4 @@ public class CycleManager {
 
         return result;
     }
-
 }
