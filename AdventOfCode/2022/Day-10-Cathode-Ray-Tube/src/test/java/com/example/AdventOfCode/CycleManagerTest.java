@@ -111,12 +111,12 @@ class CycleManagerTest {
         "10,addx -20,-10",
         "1,noop,1"
     })
-    void test_registerXValueAfter3Cycles(long registryX,String cycle, long expected) throws CycleException {
+    void test_registerXValueAfter3Cycles(int registryX,String cycle, long expected) throws CycleException {
         // Arrange
         CycleManager cycleManager = new CycleManager(List.of(999L));
 
         // Act
-        long result = cycleManager.performCycle(registryX,cycle);
+        long result = cycleManager.performCycle(registryX,cycle,true,false);
 
         // Assert
         assertEquals(expected,result);

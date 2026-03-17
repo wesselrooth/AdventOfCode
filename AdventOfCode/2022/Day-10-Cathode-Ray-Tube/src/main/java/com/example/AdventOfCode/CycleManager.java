@@ -13,10 +13,14 @@ public class CycleManager {
 
     private long globalCycleCount = 0;
     private HashMap<Long,Long> signalStrenghMap;
+    private HashMap<Long,String> crtStringMap;
 
-    private List<String> circuitRow  = new ArrayList<>();
+    private Sprite sprite;
+    private String crtString = "";
+    private CircuitManager circuitManager = new CircuitManager();
 
-    public CycleManager(List<Long> checkList){
+
+    public CycleManager(List<Long> checkList)  {
 
         this.signalStrenghMap = new HashMap<>();
 
@@ -26,7 +30,16 @@ public class CycleManager {
 
     }
 
-    public long cyclePartOne(long registerX, long operand, long cycles){
+    public CycleManager(List<Long> checkList,int spriteRange) throws SpriteException {
+
+        for (Long number: checkList){
+            crtStringMap.put(number,"");
+        }
+
+        this.sprite = new Sprite(spriteRange);
+    }
+
+    public int cyclePartOne(int registerX, long operand, long cycles){
 
         for (int i = 0; i < cycles; i++){
             globalCycleCount++;
@@ -46,6 +59,34 @@ public class CycleManager {
         }
         return registerX;
     }
+
+    public int cyclePartTwo(int registerX, long operand, long cycles){
+
+        for (int i = 0; i < cycles; i++){
+
+            globalCycleCount++;
+
+            if (circuitManager.spriteTouchesPixelToDraw(crtString,sprite.getSprite())){
+                crtString = circuitManager.updateCircuit(true,crtString);
+            }else {
+                crtString = circuitManager.updateCircuit(false,crtString);
+            }
+
+            if (crtStringMap.containsKey(globalCycleCount)){
+                crtStringMap.put(globalCycleCount,crtString);
+                this.crtString =  "";
+            }
+
+            if (i == 1){
+                registerX += operand;
+                sprite.moveSprite(registerX);
+            }
+
+        }
+        return registerX;
+    }
+
+
     public Cycle detectCycleType(String input) throws CycleException {
         LOG.info(new JsonLog("Start Detect cycle"));
 
@@ -82,22 +123,44 @@ public class CycleManager {
         return new Cycle("addx",2,oprant);
     }
 
-    public long performCycle(long regestryx, String cycleString) throws CycleException {
+    public int performCycle(int regestryx, String cycleString,boolean partOne,boolean partTwo) throws CycleException {
 
         Cycle cycle = detectCycleType(cycleString);
-        regestryx = cyclePartOne(regestryx,cycle.getOparant(),cycle.getCycleAmount());
 
+        if (partOne){
+            return cyclePartOne(regestryx,cycle.getOparant(),cycle.getCycleAmount());
+        }else if (partTwo){
+            return cyclePartTwo(regestryx,cycle.getOparant(),cycle.getCycleAmount());
+        }
         return regestryx;
     }
 
     public long calculateSignalStrengh(List<String> input) throws CycleException {
         LOG.info(new JsonLog("Start calculating signal strength"));
 
-        long registryX = 1;
+        int registryX = 1;
 
         for (int i = 0; i < input.size(); i++){
             String cycle = input.get(i);
-            registryX = performCycle(registryX,cycle);
+            registryX = performCycle(registryX,cycle,true,false);
+        }
+
+        long result = 0;
+        for (Long value: signalStrenghMap.values()){
+            result += value;
+        }
+
+        return result;
+    }
+
+    public long calculateCrtStrings(List<String> input) throws CycleException {
+        LOG.info(new JsonLog("Start crt Strings"));
+
+        int registryX = 1;
+
+        for (int i = 0; i < input.size(); i++){
+            String cycle = input.get(i);
+            registryX = performCycle(registryX,cycle,false,true);
         }
 
         long result = 0;
