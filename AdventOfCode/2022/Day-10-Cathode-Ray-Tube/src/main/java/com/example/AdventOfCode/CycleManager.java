@@ -15,23 +15,12 @@ public class CycleManager {
     private static final Logger LOG = LogManager.getLogger("CONSOLE_JSON_APPENDER");
 
     private long globalCycleCount = 0;
-    private HashMap<Long,Long> signalStrengthMap;
-    private HashMap<Long,String> crtStringMap;
+    private final HashMap<Long,Long> signalStrengthMap;
+    private final HashMap<Long,String> crtStringMap;
 
-    private Sprite sprite;
+    private final Sprite sprite;
     private String crtString = "";
-    private CircuitManager circuitManager = new CircuitManager();
-
-
-    public CycleManager(List<Long> checkList)  {
-
-        this.signalStrengthMap = new HashMap<>();
-
-        for (Long number: checkList){
-            signalStrengthMap.put(number,null);
-        }
-
-    }
+    private final CircuitManager circuitManager = new CircuitManager();
 
     public CycleManager(List<Long> checkList,int spriteRange) throws SpriteException {
         crtStringMap = new HashMap<>();

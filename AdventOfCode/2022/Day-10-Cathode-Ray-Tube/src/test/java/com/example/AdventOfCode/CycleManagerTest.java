@@ -13,11 +13,12 @@ import static org.junit.jupiter.api.Assertions.*;
 
 class CycleManagerTest {
 
+    private static final int spriteRange = 10;
 
     @Test
     void test_cycleTime() throws SpriteException {
         // Arrange
-        CycleManager cycleManager = new CycleManager(List.of(999L),40);
+        CycleManager cycleManager = new CycleManager(List.of(999L),spriteRange);
         long expected = 1;
 
         // Act
@@ -30,7 +31,7 @@ class CycleManagerTest {
     @Test
     void test_cycleTwoTime() throws SpriteException {
         // Arrange
-        CycleManager cycleManager = new CycleManager(List.of(999L),40);
+        CycleManager cycleManager = new CycleManager(List.of(999L),spriteRange);
         long expected = 2;
 
         // Act
@@ -41,9 +42,9 @@ class CycleManagerTest {
     }
 
     @Test
-    void test_detectCyleType() throws CycleException {
+    void test_detectCyleType() throws CycleException, SpriteException {
         // Arrange
-        CycleManager cycleManager = new CycleManager(List.of(999L));
+        CycleManager cycleManager = new CycleManager(List.of(999L),spriteRange);
         long expected = 1;
 
         // Act
@@ -54,9 +55,9 @@ class CycleManagerTest {
     }
 
     @Test
-    void test_detectEmptyCicleString() {
+    void test_detectEmptyCicleString() throws SpriteException {
         // Arrange
-        CycleManager cycleManager = new CycleManager(List.of(999L));
+        CycleManager cycleManager = new CycleManager(List.of(999L),spriteRange);
         String expected = "Empty cycle String";
 
         // Act
@@ -67,9 +68,9 @@ class CycleManagerTest {
     }
 
     @Test
-    void test_detectUnexpectedAmountOfCycles() {
+    void test_detectUnexpectedAmountOfCycles() throws SpriteException {
         // Arrange
-        CycleManager cycleManager = new CycleManager(List.of(999L));
+        CycleManager cycleManager = new CycleManager(List.of(999L),spriteRange);
         String expected = "Unexpected amound of Cycles detected";
 
         // Act
@@ -80,9 +81,9 @@ class CycleManagerTest {
     }
 
     @Test
-    void test_detectUnknownCyclePartOne() {
+    void test_detectUnknownCyclePartOne() throws SpriteException {
         // Arrange
-        CycleManager cycleManager = new CycleManager(List.of(999L));
+        CycleManager cycleManager = new CycleManager(List.of(999L),spriteRange);
         String expected = "Unknown cycle type detected";
 
         // Act
@@ -92,9 +93,9 @@ class CycleManagerTest {
         assertEquals(expected,result);
     }
     @Test
-    void test_detectTwoCycle() throws CycleException {
+    void test_detectTwoCycle() throws CycleException, SpriteException {
         // Arrange
-        CycleManager cycleManager = new CycleManager(List.of(999L));
+        CycleManager cycleManager = new CycleManager(List.of(999L),spriteRange);
         long expected = 2;
 
         // Act
@@ -115,7 +116,7 @@ class CycleManagerTest {
     })
     void test_registerXValueAfter3Cycles(int registryX,String cycle, long expected) throws CycleException, SpriteException {
         // Arrange
-        CycleManager cycleManager = new CycleManager(List.of(999L),20);
+        CycleManager cycleManager = new CycleManager(List.of(999L),spriteRange);
 
         // Act
         long result = cycleManager.performCycle(registryX,cycle,true,false);
@@ -128,7 +129,7 @@ class CycleManagerTest {
     void test_countSignalStrengthWithSingle() throws CycleException, SpriteException {
         // Arrange
 
-        CycleManager cycleManager = new CycleManager(List.of(1L),40);
+        CycleManager cycleManager = new CycleManager(List.of(1L),spriteRange);
         List<String> cycleList =  List.of( "addx 1");
         long expected = 1;
 
@@ -145,7 +146,7 @@ class CycleManagerTest {
         HashMap<Long,Long> cycleIdentifiers = new HashMap<>();
         cycleIdentifiers.put(1L,null);
         cycleIdentifiers.put(2L,null);
-        CycleManager cycleManager = new CycleManager(List.of(1L,2L),40);
+        CycleManager cycleManager = new CycleManager(List.of(1L,2L),spriteRange);
         List<String> cycleList =  List.of( "addx 1","noop");
         long expected = 3;
 
