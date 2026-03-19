@@ -102,7 +102,7 @@ public class CycleManager {
 
         if (input.equals("noop")){
 
-            return new Cycle("noop",1,0);
+            return new Cycle(1,0);
         }
 
         String[] splittedInput = input.split(" ");
@@ -121,7 +121,7 @@ public class CycleManager {
         }
         long oprant = Long.parseLong(splittedInput[1]);
 
-        return new Cycle("addx",2,oprant);
+        return new Cycle(2,oprant);
     }
 
     public int performCycle(int registryX, String cycleString, boolean partOne, boolean partTwo) throws CycleException {
