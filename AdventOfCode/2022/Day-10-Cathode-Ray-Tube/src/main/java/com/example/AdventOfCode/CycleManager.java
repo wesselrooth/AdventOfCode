@@ -42,7 +42,7 @@ public class CycleManager {
         this.sprite = new Sprite(spriteRange);
     }
 
-    public int signalStrengthCycle(int registerX, long operand, long cycles){
+    public int signalStrengthCycle(int registerX, int operand, long cycles){
 
         for (int i = 0; i < cycles; i++){
             globalCycleCount++;
