@@ -1,5 +1,7 @@
 package com.example.AdventOfCode;
 
+import com.example.AdventOfCode.exceptions.CycleException;
+
 import java.io.IOException;
 import java.net.URISyntaxException;
 import java.util.List;

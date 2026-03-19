@@ -1,5 +1,6 @@
 package com.example.AdventOfCode;
 
+import com.example.AdventOfCode.exceptions.CycleException;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
@@ -128,9 +129,9 @@ public class CycleManager {
         Cycle cycle = detectCycleType(cycleString);
 
         if (partOne){
-            return signalStrengthCycle(registryX,cycle.getOparant(),cycle.getCycleAmount());
+            return signalStrengthCycle(registryX,cycle.getOperant(),cycle.getCycleAmount());
         }else if (partTwo){
-            return cyclePartTwo(registryX,cycle.getOparant(),cycle.getCycleAmount());
+            return cyclePartTwo(registryX,cycle.getOperant(),cycle.getCycleAmount());
         }
         return registryX;
     }

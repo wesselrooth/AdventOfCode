@@ -1,12 +1,12 @@
 package com.example.AdventOfCode;
 
+import com.example.AdventOfCode.exceptions.CycleException;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.CsvSource;
 
 import java.io.IOException;
 import java.net.URISyntaxException;
-import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 

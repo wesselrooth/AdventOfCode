@@ -1,5 +1,6 @@
 package com.example.AdventOfCode;
 
+import com.example.AdventOfCode.exceptions.CycleException;
 import org.junit.jupiter.api.Test;
 
 import java.io.IOException;

@@ -11,16 +11,11 @@ public class Cycle {
         this.cycleAmount = cycleAmount;
         this.oparant = oparant;
     }
-
-    public String getCycleType(){
-        return cycleType;
-    }
-
     public long getCycleAmount(){
         return cycleAmount;
     }
 
-    public long getOparant(){
+    public long getOperant(){
         return oparant;
     }
 }

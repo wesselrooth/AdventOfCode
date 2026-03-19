@@ -21,7 +21,6 @@ public class CircuitManager {
         }
 
         return spriteIndexList.stream().anyMatch( i -> i.equals(toDrawIndex));
-
     }
 
     public String updateCircuit(boolean touchesSprite, String crtString){
