@@ -81,8 +81,8 @@ public class CycleManager {
 
         String[] splitInput = input.split(" ");
         if (splitInput.length > 2){
-            LOG.error(new JsonLog("Splitted array is to big than expected"));
-            throw new CycleException("Unexpected amound of Cycles detected");
+            LOG.error(new JsonLog("Split array is to big than expected"));
+            throw new CycleException("Unexpected amount of Cycles detected");
         }
 
         String firstPart = splitInput[0];
@@ -97,8 +97,8 @@ public class CycleManager {
 
     public int performCycle(int registryX, String cycleString) throws CycleException {
 
-        Cycle cycle = detectCycleType(cycleString);
-        return cycle(registryX,cycle.getOperant(),cycle.getCycleAmount());
+        Cycle cycleType = detectCycleType(cycleString);
+        return cycle(registryX, cycleType.getOperant(), cycleType.getCycleAmount());
     }
 
     public int calculateSignalStrength(List<String> input) throws CycleException {
