@@ -1,4 +1,5 @@
 package com.example.AdventOfCode;
+import com.example.AdventOfCode.exceptions.SpriteException;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.CsvSource;
@@ -7,7 +8,7 @@ import static org.junit.jupiter.api.Assertions.*;
 class SpriteTest {
 
     @Test
-    void constructSprite_SpriteRangeToSmallTo() throws  SpriteException{
+    void constructSprite_SpriteRangeToSmallTo() throws SpriteException {
         // Arrange
         int spriteListRange = 2;
         String expected = "List is to small to fit a Sprite";

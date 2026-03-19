@@ -1,6 +1,7 @@
 package com.example.AdventOfCode;
 
 import com.example.AdventOfCode.exceptions.CycleException;
+import com.example.AdventOfCode.exceptions.SpriteException;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.CsvSource;

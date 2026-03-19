@@ -1,5 +1,7 @@
 package com.example.AdventOfCode;
 
+import com.example.AdventOfCode.exceptions.SpriteException;
+
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
