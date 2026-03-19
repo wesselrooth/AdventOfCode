@@ -10,6 +10,8 @@ public class Sprite {
 
     private List<String> spriteRange;
 
+    private String sprite;
+
     private final int range;
 
     public Sprite(int range) throws SpriteException {
@@ -19,13 +21,12 @@ public class Sprite {
         }
         this.range = range;
         this.spriteRange = new ArrayList<>(Collections.nCopies(range,"."));
+        this.sprite = ".".repeat(range);
     }
 
     public String moveSprite(int registerX){
 
-        for (int i = 0; i < spriteRange.size(); i++) {
-            spriteRange.set(i,".");
-        }
+        spriteRange.replaceAll(ignored -> ".");
 
         if (registerX <= 0){
             spriteRange.set(0,"#");
