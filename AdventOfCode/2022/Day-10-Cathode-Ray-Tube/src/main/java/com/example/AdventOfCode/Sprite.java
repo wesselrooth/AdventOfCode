@@ -10,8 +10,6 @@ public class Sprite {
 
     private List<String> spriteRange;
 
-    private String sprite;
-
     private final int range;
 
     public Sprite(int range) throws SpriteException {
@@ -21,7 +19,6 @@ public class Sprite {
         }
         this.range = range;
         this.spriteRange = new ArrayList<>(Collections.nCopies(range,"."));
-        this.sprite = ".".repeat(range);
     }
 
     public String moveSprite(int registerX){
