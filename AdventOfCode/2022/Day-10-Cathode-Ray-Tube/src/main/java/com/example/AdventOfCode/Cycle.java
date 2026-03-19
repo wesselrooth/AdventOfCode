@@ -3,19 +3,19 @@ package com.example.AdventOfCode;
 public class Cycle {
 
 
-    private final long cycleAmount;
-    private final long oparant;
+    private final int cycleAmount;
+    private final int oparant;
 
-    public Cycle(long cycleAmount,long oparant){
+    public Cycle(int cycleAmount,int operant){
 
         this.cycleAmount = cycleAmount;
-        this.oparant = oparant;
+        this.oparant = operant;
     }
     public long getCycleAmount(){
         return cycleAmount;
     }
 
-    public long getOperant(){
+    public int getOperant(){
         return oparant;
     }
 }

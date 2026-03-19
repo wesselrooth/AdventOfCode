@@ -61,7 +61,7 @@ public class CycleManager {
         return registerX;
     }
 
-    public int cyclePartTwo(int registerX, long operand, long cycles){
+    public int cyclePartTwo(int registerX, int operand, long cycles){
 
         for (int i = 0; i < cycles; i++){
 
@@ -72,7 +72,6 @@ public class CycleManager {
             }
 
             globalCycleCount++;
-
             if (crtStringMap.containsKey(globalCycleCount)){
                 crtStringMap.put(globalCycleCount,crtString);
                 this.crtString =  "";
@@ -99,27 +98,22 @@ public class CycleManager {
         }
 
         input = input.strip();
-
         if (input.equals("noop")){
-
             return new Cycle(1,0);
         }
 
         String[] splitInput = input.split(" ");
-
         if (splitInput.length > 2){
             LOG.error(new JsonLog("Something went wrong detecting the cycle string"));
-
             throw new CycleException("Unexpected amound of Cycles detected");
         }
 
         String firstPart = splitInput[0];
-
         if (!firstPart.equals("addx")){
             LOG.error(new JsonLog("Something went wrong detecting the cycle string"));
             throw new CycleException("Unknown cycle type detected");
         }
-        long operant = Long.parseLong(splitInput[1]);
+        int operant = Integer.parseInt(splitInput[1]);
 
         return new Cycle(2,operant);
     }
