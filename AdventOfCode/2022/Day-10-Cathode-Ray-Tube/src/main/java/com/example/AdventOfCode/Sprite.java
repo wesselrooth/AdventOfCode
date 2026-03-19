@@ -8,7 +8,7 @@ import java.util.List;
 
 public class Sprite {
 
-    private List<String> spriteRange;
+    private final List<String> spriteRange;
 
     private final int range;
 
