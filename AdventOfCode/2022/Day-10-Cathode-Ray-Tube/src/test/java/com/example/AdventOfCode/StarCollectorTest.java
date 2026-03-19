@@ -13,7 +13,7 @@ import static org.junit.jupiter.api.Assertions.*;
 class StarCollectorTest {
 
     @Test
-    void test_testInputPartOne() throws CycleException, URISyntaxException, IOException {
+    void test_partOneTestInput() throws CycleException, URISyntaxException, IOException {
         // Arrange
         StarCollector starCollector = new StarCollector();
         long expected = 13140;
@@ -26,7 +26,7 @@ class StarCollectorTest {
     }
 
     @Test
-    void partOne() throws CycleException, URISyntaxException, IOException {
+    void test_partOne() throws CycleException, URISyntaxException, IOException {
         // Arrange
         StarCollector starCollector = new StarCollector();
         long expected = 17840;
@@ -47,7 +47,7 @@ class StarCollectorTest {
             "200,######......######......######......####",
             "240,#######.......#######.......#######....."
     })
-    void partTwoPrepTest(Long cycleKey, String expected) throws SpriteException, URISyntaxException, IOException, CycleException {
+    void test_partTwoPrepTest(Long cycleKey, String expected) throws SpriteException, URISyntaxException, IOException, CycleException {
         // Arrange
         StarCollector starCollector = new StarCollector();
 
@@ -67,7 +67,7 @@ class StarCollectorTest {
             "200,#....#..#.#....#..#.#..#.#....#....#..#.",
             "240,####.#..#.####..###..##..####.#.....###."
     })
-    void partTwo(Long cycleKey, String expected) throws SpriteException, URISyntaxException, IOException, CycleException {
+    void test_partTwo(Long cycleKey, String expected) throws SpriteException, URISyntaxException, IOException, CycleException {
         // Arrange
         StarCollector starCollector = new StarCollector();
 
