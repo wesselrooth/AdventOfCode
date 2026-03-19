@@ -1,4 +1,4 @@
-package com.example.AdventOfCode;
+package com.example.AdventOfCode.exceptions;
 
 public class InputException extends Exception {
 
