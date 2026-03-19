@@ -105,23 +105,23 @@ public class CycleManager {
             return new Cycle(1,0);
         }
 
-        String[] splittedInput = input.split(" ");
+        String[] splitInput = input.split(" ");
 
-        if (splittedInput.length > 2){
+        if (splitInput.length > 2){
             LOG.error(new JsonLog("Something went wrong detecting the cycle string"));
 
             throw new CycleException("Unexpected amound of Cycles detected");
         }
 
-        String firstPart = splittedInput[0];
+        String firstPart = splitInput[0];
 
         if (!firstPart.equals("addx")){
             LOG.error(new JsonLog("Something went wrong detecting the cycle string"));
             throw new CycleException("Unknown cycle type detected");
         }
-        long oprant = Long.parseLong(splittedInput[1]);
+        long operant = Long.parseLong(splitInput[1]);
 
-        return new Cycle(2,oprant);
+        return new Cycle(2,operant);
     }
 
     public int performCycle(int registryX, String cycleString, boolean partOne, boolean partTwo) throws CycleException {
