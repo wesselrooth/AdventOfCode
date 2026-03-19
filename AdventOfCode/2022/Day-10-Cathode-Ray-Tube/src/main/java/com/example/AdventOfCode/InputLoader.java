@@ -23,9 +23,7 @@ public class InputLoader {
         try (Stream<String> lines = Files.lines(inputFile)){
 
             for(String line: (Iterable<String>) lines::iterator ){
-
                 resultList.add(line);
-
             }
         }
 

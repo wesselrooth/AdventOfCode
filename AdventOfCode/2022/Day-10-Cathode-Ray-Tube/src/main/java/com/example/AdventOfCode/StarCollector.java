@@ -11,9 +11,9 @@ import java.util.Map;
 
 public class StarCollector {
 
-    public long partOne(String file) throws URISyntaxException, IOException, CycleException {
+    public long partOne(String file) throws URISyntaxException, IOException, CycleException, SpriteException {
 
-        CycleManager cycleManager = new CycleManager(List.of(20L,60L,100L,140L,180L,220L));
+        CycleManager cycleManager = new CycleManager(List.of(20L,60L,100L,140L,180L,220L),40);
 
         InputLoader inputLoader = new InputLoader();
         List<String> cycleList = inputLoader.loadInput(file);

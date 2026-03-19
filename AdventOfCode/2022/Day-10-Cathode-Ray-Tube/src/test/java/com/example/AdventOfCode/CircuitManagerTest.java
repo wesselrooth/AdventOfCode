@@ -85,21 +85,4 @@ class CircuitManagerTest {
         // Assert
         assertEquals(expected,result);
     }
-
-    @Test
-    void lastTest() throws SpriteException, URISyntaxException, IOException, CycleException {
-        // Arrange
-        List<Long> keys = List.of(40L,80L,120L,160L,200L,240L);
-        CycleManager cycleManager = new CycleManager(keys,40);
-        InputLoader inputLoader = new InputLoader();
-        List<String> input = inputLoader.loadInput("puzzle-input");
-
-        // Act
-        Map<Long,String> result= cycleManager.circuitStrings(input);
-
-        // Assert
-        for (Long key: keys){
-            System.out.println(result.get(key));
-        }
-    }
 }

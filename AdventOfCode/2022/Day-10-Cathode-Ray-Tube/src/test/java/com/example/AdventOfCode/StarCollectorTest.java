@@ -13,7 +13,7 @@ import static org.junit.jupiter.api.Assertions.*;
 class StarCollectorTest {
 
     @Test
-    void test_partOneTestInput() throws CycleException, URISyntaxException, IOException {
+    void test_partOneTestInput() throws CycleException, URISyntaxException, IOException, SpriteException {
         // Arrange
         StarCollector starCollector = new StarCollector();
         long expected = 13140;
@@ -26,7 +26,7 @@ class StarCollectorTest {
     }
 
     @Test
-    void test_partOne() throws CycleException, URISyntaxException, IOException {
+    void test_partOne() throws CycleException, URISyntaxException, IOException, SpriteException {
         // Arrange
         StarCollector starCollector = new StarCollector();
         long expected = 17840;

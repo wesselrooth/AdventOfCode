@@ -15,7 +15,7 @@ public class CycleManager {
     private static final Logger LOG = LogManager.getLogger("CONSOLE_JSON_APPENDER");
 
     private long globalCycleCount = 0;
-    private HashMap<Long,Long> signalStrenghMap;
+    private HashMap<Long,Long> signalStrengthMap;
     private HashMap<Long,String> crtStringMap;
 
     private Sprite sprite;
@@ -25,30 +25,45 @@ public class CycleManager {
 
     public CycleManager(List<Long> checkList)  {
 
-        this.signalStrenghMap = new HashMap<>();
+        this.signalStrengthMap = new HashMap<>();
 
         for (Long number: checkList){
-            signalStrenghMap.put(number,null);
+            signalStrengthMap.put(number,null);
         }
 
     }
 
     public CycleManager(List<Long> checkList,int spriteRange) throws SpriteException {
         crtStringMap = new HashMap<>();
+        signalStrengthMap = new HashMap<>();
+
         for (Long number: checkList){
             crtStringMap.put(number,"");
+            signalStrengthMap.put(number,null);
         }
 
         this.sprite = new Sprite(spriteRange);
     }
 
-    public int signalStrengthCycle(int registerX, int operand, long cycles){
+    public int cycle(int registerX, int operand, long cycles){
 
         for (int i = 0; i < cycles; i++){
             globalCycleCount++;
-            if (signalStrenghMap.containsKey(globalCycleCount)){
+
+            if (circuitManager.spriteTouchesPixelToDraw(crtString,sprite.getSprite())){
+                crtString = circuitManager.updateCircuit(true,crtString);
+            }else {
+                crtString = circuitManager.updateCircuit(false,crtString);
+            }
+
+            if (crtStringMap.containsKey(globalCycleCount)){
+                crtStringMap.put(globalCycleCount,crtString);
+                this.crtString =  "";
+            }
+
+            if (signalStrengthMap.containsKey(globalCycleCount)){
                 long cycleCountCalculationResult = globalCycleCount * registerX;
-                signalStrenghMap.put(globalCycleCount, cycleCountCalculationResult);
+                signalStrengthMap.put(globalCycleCount, cycleCountCalculationResult);
 
                 LOG.info(
                     new JsonLog("Update cycle count",globalCycleCount,cycleCountCalculationResult)
@@ -57,6 +72,7 @@ public class CycleManager {
 
             if (i == 1){
                 registerX += operand;
+                sprite.moveSprite(registerX);
             }
 
         }
@@ -67,13 +83,14 @@ public class CycleManager {
 
         for (int i = 0; i < cycles; i++){
 
+            globalCycleCount++;
+
             if (circuitManager.spriteTouchesPixelToDraw(crtString,sprite.getSprite())){
                 crtString = circuitManager.updateCircuit(true,crtString);
             }else {
                 crtString = circuitManager.updateCircuit(false,crtString);
             }
 
-            globalCycleCount++;
             if (crtStringMap.containsKey(globalCycleCount)){
                 crtStringMap.put(globalCycleCount,crtString);
                 this.crtString =  "";
@@ -123,13 +140,14 @@ public class CycleManager {
     public int performCycle(int registryX, String cycleString, boolean partOne, boolean partTwo) throws CycleException {
 
         Cycle cycle = detectCycleType(cycleString);
+        return cycle(registryX,cycle.getOperant(),cycle.getCycleAmount());
 
-        if (partOne){
-            return signalStrengthCycle(registryX,cycle.getOperant(),cycle.getCycleAmount());
-        }else if (partTwo){
-            return cyclePartTwo(registryX,cycle.getOperant(),cycle.getCycleAmount());
-        }
-        return registryX;
+        //if (partOne){
+
+        //}else if (partTwo){
+        //    return cyclePartTwo(registryX,cycle.getOperant(),cycle.getCycleAmount());
+        //}
+        //return registryX;
     }
 
 
@@ -145,7 +163,7 @@ public class CycleManager {
         }
 
         long result = 0;
-        for (Long value: signalStrenghMap.values()){
+        for (Long value: signalStrengthMap.values()){
             result += value;
         }
         return result;
