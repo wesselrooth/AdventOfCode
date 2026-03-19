@@ -2,25 +2,20 @@ package com.example.AdventOfCode;
 
 public class Cycle {
 
-    private final String cycleType;
-    private final long cycleAmount;
-    private final long oparant;
 
-    public Cycle(String cycleType, long cycleAmount,long oparant){
-        this.cycleType = cycleType;
+    private final int cycleAmount;
+    private final int oparant;
+
+    public Cycle(int cycleAmount,int operant){
+
         this.cycleAmount = cycleAmount;
-        this.oparant = oparant;
+        this.oparant = operant;
     }
-
-    public String getCycleType(){
-        return cycleType;
-    }
-
     public long getCycleAmount(){
         return cycleAmount;
     }
 
-    public long getOparant(){
+    public int getOperant(){
         return oparant;
     }
 }
