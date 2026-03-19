@@ -1,10 +1,13 @@
 package com.example.AdventOfCode;
 
 import com.example.AdventOfCode.exceptions.CycleException;
+import com.example.AdventOfCode.exceptions.SpriteException;
 
 import java.io.IOException;
 import java.net.URISyntaxException;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 public class StarCollector {
 
@@ -18,6 +21,17 @@ public class StarCollector {
         long result = cycleManager.calculateSignalStrength(cycleList);
 
         return result;
+    }
 
+    public Map<Long,String> partTwo(String file) throws URISyntaxException, IOException, CycleException, SpriteException {
+
+        CycleManager cycleManager = new CycleManager(List.of(40L,80L,120L,160L,200L,240L),40);
+
+        InputLoader inputLoader = new InputLoader();
+        List<String> cycleList = inputLoader.loadInput(file);
+
+        Map<Long,String> result = cycleManager.circuitStrings(cycleList);
+
+        return result;
     }
 }

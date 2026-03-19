@@ -101,6 +101,5 @@ class CircuitManagerTest {
         for (Long key: keys){
             System.out.println(result.get(key));
         }
-
     }
 }
