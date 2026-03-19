@@ -21,6 +21,10 @@ public class Sprite {
 
     public String moveSprite(int registerX){
 
+        for (int i = 0; i < spriteRange.size(); i++) {
+            spriteRange.set(i,".");
+        }
+
         if (registerX <= 0){
             spriteRange.set(0,"#");
             spriteRange.set(1,"#");

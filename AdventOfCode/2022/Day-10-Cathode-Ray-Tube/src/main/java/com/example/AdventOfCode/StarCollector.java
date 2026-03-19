@@ -13,19 +13,7 @@ public class StarCollector {
         InputLoader inputLoader = new InputLoader();
         List<String> cycleList = inputLoader.loadInput(file);
 
-        long result = cycleManager.calculateSignalStrengh(cycleList);
-
-        return result;
-
-    }
-    public long parTwo(String file) throws URISyntaxException, IOException, CycleException {
-
-        CycleManager cycleManager = new CycleManager(List.of(40L,80L,120L,160L,200L,240L));
-
-        InputLoader inputLoader = new InputLoader();
-        List<String> cycleList = inputLoader.loadInput(file);
-
-        long result = cycleManager.calculateSignalStrengh(cycleList);
+        long result = cycleManager.calculateSignalStrength(cycleList);
 
         return result;
 

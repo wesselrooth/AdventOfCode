@@ -3,9 +3,9 @@ package com.example.AdventOfCode;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
-import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 public class CycleManager {
 
@@ -31,7 +31,7 @@ public class CycleManager {
     }
 
     public CycleManager(List<Long> checkList,int spriteRange) throws SpriteException {
-
+        crtStringMap = new HashMap<>();
         for (Long number: checkList){
             crtStringMap.put(number,"");
         }
@@ -39,7 +39,7 @@ public class CycleManager {
         this.sprite = new Sprite(spriteRange);
     }
 
-    public int cyclePartOne(int registerX, long operand, long cycles){
+    public int signalStrengthCycle(int registerX, long operand, long cycles){
 
         for (int i = 0; i < cycles; i++){
             globalCycleCount++;
@@ -64,13 +64,13 @@ public class CycleManager {
 
         for (int i = 0; i < cycles; i++){
 
-            globalCycleCount++;
-
             if (circuitManager.spriteTouchesPixelToDraw(crtString,sprite.getSprite())){
                 crtString = circuitManager.updateCircuit(true,crtString);
             }else {
                 crtString = circuitManager.updateCircuit(false,crtString);
             }
+
+            globalCycleCount++;
 
             if (crtStringMap.containsKey(globalCycleCount)){
                 crtStringMap.put(globalCycleCount,crtString);
@@ -123,19 +123,21 @@ public class CycleManager {
         return new Cycle("addx",2,oprant);
     }
 
-    public int performCycle(int regestryx, String cycleString,boolean partOne,boolean partTwo) throws CycleException {
+    public int performCycle(int registryX, String cycleString, boolean partOne, boolean partTwo) throws CycleException {
 
         Cycle cycle = detectCycleType(cycleString);
 
         if (partOne){
-            return cyclePartOne(regestryx,cycle.getOparant(),cycle.getCycleAmount());
+            return signalStrengthCycle(registryX,cycle.getOparant(),cycle.getCycleAmount());
         }else if (partTwo){
-            return cyclePartTwo(regestryx,cycle.getOparant(),cycle.getCycleAmount());
+            return cyclePartTwo(registryX,cycle.getOparant(),cycle.getCycleAmount());
         }
-        return regestryx;
+        return registryX;
     }
 
-    public long calculateSignalStrengh(List<String> input) throws CycleException {
+
+
+    public long calculateSignalStrength(List<String> input) throws CycleException {
         LOG.info(new JsonLog("Start calculating signal strength"));
 
         int registryX = 1;
@@ -149,12 +151,11 @@ public class CycleManager {
         for (Long value: signalStrenghMap.values()){
             result += value;
         }
-
         return result;
     }
 
-    public long calculateCrtStrings(List<String> input) throws CycleException {
-        LOG.info(new JsonLog("Start crt Strings"));
+    public Map<Long,String> circuitStrings(List<String> input) throws CycleException {
+        LOG.info(new JsonLog("Start calculating signal strength"));
 
         int registryX = 1;
 
@@ -162,12 +163,6 @@ public class CycleManager {
             String cycle = input.get(i);
             registryX = performCycle(registryX,cycle,false,true);
         }
-
-        long result = 0;
-        for (Long value: signalStrenghMap.values()){
-            result += value;
-        }
-
-        return result;
+        return crtStringMap;
     }
 }

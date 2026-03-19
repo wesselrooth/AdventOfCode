@@ -13,26 +13,26 @@ class CycleManagerTest {
 
 
     @Test
-    void test_cyclePartOneOneTime(){
+    void test_signalStrengthCycleTime(){
         // Arrange
         CycleManager cycleManager = new CycleManager(List.of(999L));
         long expected = 1;
 
         // Act
-        long result  = cycleManager.cyclePartOne(1,1,1);
+        long result  = cycleManager.signalStrengthCycle(1,1,1);
 
         // Assert
         assertEquals(expected,result);
     }
 
     @Test
-    void test_cyclePartOneTwoTime(){
+    void test_signalStrengthCycleTwoTime(){
         // Arrange
         CycleManager cycleManager = new CycleManager(List.of(999L));
         long expected = 2;
 
         // Act
-        long result  = cycleManager.cyclePartOne(1,1,2);
+        long result  = cycleManager.signalStrengthCycle(1,1,2);
 
         // Assert
         assertEquals(expected,result);
@@ -90,7 +90,7 @@ class CycleManagerTest {
         assertEquals(expected,result);
     }
     @Test
-    void test_detectTwoCyclePartOne() throws CycleException {
+    void test_detectTwoSignalStrengthCycle() throws CycleException {
         // Arrange
         CycleManager cycleManager = new CycleManager(List.of(999L));
         long expected = 2;
@@ -131,7 +131,7 @@ class CycleManagerTest {
         long expected = 1;
 
         // Act
-        long result = cycleManager.calculateSignalStrengh(cycleList);
+        long result = cycleManager.calculateSignalStrength(cycleList);
 
         // Assert
         assertEquals(expected, result);
@@ -148,7 +148,7 @@ class CycleManagerTest {
         long expected = 3;
 
         // Act
-        long result = cycleManager.calculateSignalStrengh(cycleList);
+        long result = cycleManager.calculateSignalStrength(cycleList);
 
         // Assert
         assertEquals(expected, result);

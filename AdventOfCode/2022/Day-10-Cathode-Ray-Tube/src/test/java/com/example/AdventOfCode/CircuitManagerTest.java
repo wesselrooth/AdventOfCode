@@ -4,6 +4,12 @@ import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.CsvSource;
 
+import java.io.IOException;
+import java.net.URISyntaxException;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
+
 import static org.junit.jupiter.api.Assertions.*;
 
 class CircuitManagerTest {
@@ -55,5 +61,45 @@ class CircuitManagerTest {
 
         // Assert
         assertEquals(expected,result);
+    }
+
+    @ParameterizedTest
+    @CsvSource({
+            "40,##..##..##..##..##..##..##..##..##..##..",
+            "80,###...###...###...###...###...###...###.",
+            "120,####....####....####....####....####....",
+            "160,#####.....#####.....#####.....#####.....",
+            "200,######......######......######......####",
+            "240,#######.......#######.......#######....."
+    })
+    void preparationTest(Long cycleKey, String expected) throws SpriteException, URISyntaxException, IOException, CycleException {
+        // Arrange
+        CycleManager cycleManager = new CycleManager(List.of(40L,80L,120L,160L,200L,240L),40);
+        InputLoader inputLoader = new InputLoader();
+        List<String> input = inputLoader.loadInput("test-input");
+
+        // Act
+        String result = cycleManager.circuitStrings(input).get(cycleKey);
+
+        // Assert
+        assertEquals(expected,result);
+    }
+
+    @Test
+    void lastTest() throws SpriteException, URISyntaxException, IOException, CycleException {
+        // Arrange
+        List<Long> keys = List.of(40L,80L,120L,160L,200L,240L);
+        CycleManager cycleManager = new CycleManager(keys,40);
+        InputLoader inputLoader = new InputLoader();
+        List<String> input = inputLoader.loadInput("puzzle-input");
+
+        // Act
+        Map<Long,String> result= cycleManager.circuitStrings(input);
+
+        // Assert
+        for (Long key: keys){
+            System.out.println(result.get(key));
+        }
+
     }
 }
