@@ -2,6 +2,8 @@ package com.example.AdventOfCode;
 
 import com.example.AdventOfCode.exceptions.CycleException;
 import com.example.AdventOfCode.exceptions.SpriteException;
+import com.example.AdventOfCode.io.InputLoader;
+import com.example.AdventOfCode.managers.CircuitManager;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.CsvSource;
@@ -74,7 +76,7 @@ class CircuitManagerTest {
     })
     void preparationTest(Long cycleKey, String expected) throws SpriteException, URISyntaxException, IOException, CycleException {
         // Arrange
-        CycleManager cycleManager = new CycleManager(List.of(40L,80L,120L,160L,200L,240L),40);
+        CircuitManager.CycleManager cycleManager = new CircuitManager.CycleManager(List.of(40L,80L,120L,160L,200L,240L),40);
         InputLoader inputLoader = new InputLoader();
         List<String> input = inputLoader.loadInput("test-input");
 
