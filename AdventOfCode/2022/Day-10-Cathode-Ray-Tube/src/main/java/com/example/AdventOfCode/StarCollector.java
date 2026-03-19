@@ -5,7 +5,6 @@ import com.example.AdventOfCode.exceptions.SpriteException;
 
 import java.io.IOException;
 import java.net.URISyntaxException;
-import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
@@ -32,6 +31,6 @@ public class StarCollector {
 
         cycleManager.calculateSignalStrength(cycleList);
 
-        return cycleManager.getCrtStringMap();
+        return cycleManager.getCircuitStringMap();
     }
 }

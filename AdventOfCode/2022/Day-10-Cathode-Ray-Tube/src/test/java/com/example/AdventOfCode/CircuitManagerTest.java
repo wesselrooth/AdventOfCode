@@ -9,7 +9,6 @@ import org.junit.jupiter.params.provider.CsvSource;
 import java.io.IOException;
 import java.net.URISyntaxException;
 import java.util.List;
-import java.util.Map;
 
 import static org.junit.jupiter.api.Assertions.*;
 
@@ -83,6 +82,6 @@ class CircuitManagerTest {
         cycleManager.calculateSignalStrength(input);
 
         // Assert
-        assertEquals(expected,cycleManager.getCrtStringMap().get(cycleKey));
+        assertEquals(expected,cycleManager.getCircuitStringMap().get(cycleKey));
     }
 }

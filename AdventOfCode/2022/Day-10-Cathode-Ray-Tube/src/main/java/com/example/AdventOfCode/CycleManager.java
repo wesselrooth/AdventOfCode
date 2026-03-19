@@ -16,18 +16,18 @@ public class CycleManager {
 
     private long globalCycleCount = 0;
     private final HashMap<Long,Long> signalStrengthMap;
-    private final HashMap<Long,String> crtStringMap;
+    private final HashMap<Long,String> circuitStringMap;
 
     private final Sprite sprite;
     private String crtString = "";
     private final CircuitManager circuitManager = new CircuitManager();
 
     public CycleManager(List<Long> checkList,int spriteRange) throws SpriteException {
-        crtStringMap = new HashMap<>();
+        circuitStringMap = new HashMap<>();
         signalStrengthMap = new HashMap<>();
 
         for (Long number: checkList){
-            crtStringMap.put(number,"");
+            circuitStringMap.put(number,"");
             signalStrengthMap.put(number,null);
         }
 
@@ -42,8 +42,8 @@ public class CycleManager {
             boolean touchesSprite = circuitManager.spriteTouchesPixelToDraw(crtString,sprite.getSprite());
             crtString = circuitManager.updateCircuit(touchesSprite,crtString);
 
-            if (crtStringMap.containsKey(globalCycleCount)){
-                crtStringMap.put(globalCycleCount,crtString);
+            if (circuitStringMap.containsKey(globalCycleCount)){
+                circuitStringMap.put(globalCycleCount,crtString);
                 this.crtString =  "";
             }
 
@@ -60,7 +60,6 @@ public class CycleManager {
                 registerX += operand;
                 sprite.moveSprite(registerX);
             }
-
         }
         return registerX;
     }
@@ -106,7 +105,6 @@ public class CycleManager {
         LOG.info(new JsonLog("Start calculating signal strength"));
 
         int registryX = 1;
-
         for (int i = 0; i < input.size(); i++){
             String cycle = input.get(i);
             registryX = performCycle(registryX,cycle);
@@ -119,7 +117,7 @@ public class CycleManager {
         return result;
     }
 
-    public Map<Long,String> getCrtStringMap(){
-        return crtStringMap;
+    public Map<Long,String> getCircuitStringMap(){
+        return circuitStringMap;
     }
 }
