@@ -2,6 +2,7 @@ package com.example.AdventOfCode;
 
 import com.example.AdventOfCode.exceptions.CycleException;
 import com.example.AdventOfCode.exceptions.SpriteException;
+import com.example.AdventOfCode.logs.JsonLog;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
