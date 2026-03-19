@@ -68,33 +68,6 @@ public class CycleManager {
         return registerX;
     }
 
-    public int cyclePartTwo(int registerX, int operand, long cycles){
-
-        for (int i = 0; i < cycles; i++){
-
-            globalCycleCount++;
-
-            if (circuitManager.spriteTouchesPixelToDraw(crtString,sprite.getSprite())){
-                crtString = circuitManager.updateCircuit(true,crtString);
-            }else {
-                crtString = circuitManager.updateCircuit(false,crtString);
-            }
-
-            if (crtStringMap.containsKey(globalCycleCount)){
-                crtStringMap.put(globalCycleCount,crtString);
-                this.crtString =  "";
-            }
-
-            if (i == 1){
-                registerX += operand;
-                sprite.moveSprite(registerX);
-            }
-
-        }
-        return registerX;
-    }
-
-
     public Cycle detectCycleType(String input) throws CycleException {
         LOG.info(new JsonLog("Start Detect cycle"));
 
@@ -126,17 +99,10 @@ public class CycleManager {
         return new Cycle(2,operant);
     }
 
-    public int performCycle(int registryX, String cycleString, boolean partOne, boolean partTwo) throws CycleException {
+    public int performCycle(int registryX, String cycleString) throws CycleException {
 
         Cycle cycle = detectCycleType(cycleString);
         return cycle(registryX,cycle.getOperant(),cycle.getCycleAmount());
-
-        //if (partOne){
-
-        //}else if (partTwo){
-        //    return cyclePartTwo(registryX,cycle.getOperant(),cycle.getCycleAmount());
-        //}
-        //return registryX;
     }
 
 
@@ -148,7 +114,7 @@ public class CycleManager {
 
         for (int i = 0; i < input.size(); i++){
             String cycle = input.get(i);
-            registryX = performCycle(registryX,cycle,true,false);
+            registryX = performCycle(registryX,cycle);
         }
 
         long result = 0;
@@ -165,7 +131,7 @@ public class CycleManager {
 
         for (int i = 0; i < input.size(); i++){
             String cycle = input.get(i);
-            registryX = performCycle(registryX,cycle,false,true);
+            registryX = performCycle(registryX,cycle);
         }
         return crtStringMap;
     }

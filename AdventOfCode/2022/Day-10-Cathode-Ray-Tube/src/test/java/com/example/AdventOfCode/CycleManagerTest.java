@@ -119,7 +119,7 @@ class CycleManagerTest {
         CycleManager cycleManager = new CycleManager(List.of(999L),spriteRange);
 
         // Act
-        long result = cycleManager.performCycle(registryX,cycle,true,false);
+        long result = cycleManager.performCycle(registryX,cycle);
 
         // Assert
         assertEquals(expected,result);
