@@ -55,44 +55,22 @@ class CycleManagerTest {
         assertEquals(expected,result);
     }
 
-    @Test
-    void test_detectEmptyCicleString() throws SpriteException {
+    @ParameterizedTest
+    @CsvSource({
+            "'',Empty cycle String",
+            "cycleX 1 1,Unexpected amount of Cycles detected",
+            "XXX 0,Unknown cycle type detected"
+    })
+    void test_detectEmptyCycleString(String input, String expected) throws SpriteException {
         // Arrange
         CircuitManager.CycleManager cycleManager = new CircuitManager.CycleManager(List.of(999L),spriteRange);
-        String expected = "Empty cycle String";
-
         // Act
-        String result = assertThrows(CycleException.class, () -> cycleManager.detectCycleType("")).getMessage();
+        String result = assertThrows(CycleException.class, () -> cycleManager.detectCycleType(input)).getMessage();
 
         // Assert
         assertEquals(expected,result);
     }
 
-    @Test
-    void test_detectUnexpectedAmountOfCycles() throws SpriteException {
-        // Arrange
-        CircuitManager.CycleManager cycleManager = new CircuitManager.CycleManager(List.of(999L),spriteRange);
-        String expected = "Unexpected amount of Cycles detected";
-
-        // Act
-        String result = assertThrows(CycleException.class, () -> cycleManager.detectCycleType("cycleX 1 1")).getMessage();
-
-        // Assert
-        assertEquals(expected,result);
-    }
-
-    @Test
-    void test_detectUnknownCyclePartOne() throws SpriteException {
-        // Arrange
-        CircuitManager.CycleManager cycleManager = new CircuitManager.CycleManager(List.of(999L),spriteRange);
-        String expected = "Unknown cycle type detected";
-
-        // Act
-        String result = assertThrows(CycleException.class, () -> cycleManager.detectCycleType("XXX 0")).getMessage();
-
-        // Assert
-        assertEquals(expected,result);
-    }
     @Test
     void test_detectTwoCycle() throws CycleException, SpriteException {
         // Arrange
