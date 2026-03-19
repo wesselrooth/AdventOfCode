@@ -30,8 +30,8 @@ public class StarCollector {
         InputLoader inputLoader = new InputLoader();
         List<String> cycleList = inputLoader.loadInput(file);
 
-        Map<Long,String> result = cycleManager.circuitStrings(cycleList);
+        cycleManager.calculateSignalStrength(cycleList);
 
-        return result;
+        return cycleManager.getCrtStringMap();
     }
 }

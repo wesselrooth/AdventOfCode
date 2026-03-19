@@ -39,11 +39,8 @@ public class CycleManager {
         for (int i = 0; i < cycles; i++){
             globalCycleCount++;
 
-            if (circuitManager.spriteTouchesPixelToDraw(crtString,sprite.getSprite())){
-                crtString = circuitManager.updateCircuit(true,crtString);
-            }else {
-                crtString = circuitManager.updateCircuit(false,crtString);
-            }
+            boolean touchesSprite = circuitManager.spriteTouchesPixelToDraw(crtString,sprite.getSprite());
+            crtString = circuitManager.updateCircuit(touchesSprite,crtString);
 
             if (crtStringMap.containsKey(globalCycleCount)){
                 crtStringMap.put(globalCycleCount,crtString);
@@ -73,7 +70,7 @@ public class CycleManager {
 
         if (input.isEmpty()){
             LOG.error(
-                new JsonLog("Something went wrong detecting the cycle string")
+                new JsonLog("Detecting Cycle String is empty")
             );
             throw new CycleException("Empty cycle String");
         }
@@ -85,7 +82,7 @@ public class CycleManager {
 
         String[] splitInput = input.split(" ");
         if (splitInput.length > 2){
-            LOG.error(new JsonLog("Something went wrong detecting the cycle string"));
+            LOG.error(new JsonLog("Splitted array is to big than expected"));
             throw new CycleException("Unexpected amound of Cycles detected");
         }
 
@@ -105,9 +102,7 @@ public class CycleManager {
         return cycle(registryX,cycle.getOperant(),cycle.getCycleAmount());
     }
 
-
-
-    public long calculateSignalStrength(List<String> input) throws CycleException {
+    public int calculateSignalStrength(List<String> input) throws CycleException {
         LOG.info(new JsonLog("Start calculating signal strength"));
 
         int registryX = 1;
@@ -117,22 +112,14 @@ public class CycleManager {
             registryX = performCycle(registryX,cycle);
         }
 
-        long result = 0;
+        int result = 0;
         for (Long value: signalStrengthMap.values()){
             result += value;
         }
         return result;
     }
 
-    public Map<Long,String> circuitStrings(List<String> input) throws CycleException {
-        LOG.info(new JsonLog("Start calculating signal strength"));
-
-        int registryX = 1;
-
-        for (int i = 0; i < input.size(); i++){
-            String cycle = input.get(i);
-            registryX = performCycle(registryX,cycle);
-        }
+    public Map<Long,String> getCrtStringMap(){
         return crtStringMap;
     }
 }

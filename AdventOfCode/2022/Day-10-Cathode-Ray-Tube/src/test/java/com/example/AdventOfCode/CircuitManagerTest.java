@@ -80,9 +80,9 @@ class CircuitManagerTest {
         List<String> input = inputLoader.loadInput("test-input");
 
         // Act
-        String result = cycleManager.circuitStrings(input).get(cycleKey);
+        cycleManager.calculateSignalStrength(input);
 
         // Assert
-        assertEquals(expected,result);
+        assertEquals(expected,cycleManager.getCrtStringMap().get(cycleKey));
     }
 }
