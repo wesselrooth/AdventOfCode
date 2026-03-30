@@ -1,17 +1,7 @@
 package com.example.AdventOfCode.managers;
 
-import com.example.AdventOfCode.Cycle;
-import com.example.AdventOfCode.Sprite;
-import com.example.AdventOfCode.exceptions.CycleException;
-import com.example.AdventOfCode.exceptions.SpriteException;
-import com.example.AdventOfCode.logs.JsonLog;
-import org.apache.logging.log4j.LogManager;
-import org.apache.logging.log4j.Logger;
-
 import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
 
 public class CircuitManager {
 
