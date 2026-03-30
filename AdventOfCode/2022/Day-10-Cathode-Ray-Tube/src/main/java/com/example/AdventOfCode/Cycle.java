@@ -9,7 +9,7 @@ public class Cycle {
 
     private static final Logger LOG = LogManager.getLogger("CONSOLE_JSON_APPENDER");
 
-    private final int cycleAmount;
+    private int cycleAmount;
     private int operant;
     private int registerX;
     private String circuitString;
@@ -68,8 +68,11 @@ public class Cycle {
     }
 
     public int incrementRegisterX(){
-        this.registerX += getOperant();
-        return registerX;
+        return this.registerX += getOperant();
+    }
+
+    public int calculateCycleNewCycleAmount(){
+        return cycleAmount = cycleAmount * getRegisterX();
     }
 
 }

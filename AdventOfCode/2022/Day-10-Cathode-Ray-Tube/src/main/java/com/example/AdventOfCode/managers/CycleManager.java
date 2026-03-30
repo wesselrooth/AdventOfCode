@@ -51,9 +51,7 @@ public class CycleManager {
                 System.out.println(cycle.getCircuitString());
                 circuitStringResultList.add(cycle.getCircuitString());
                 cycle.resetCircuitString();
-            }
 
-            if (signalStrengthMap.containsKey(globalCycleCount)) {
                 long cycleCountCalculationResult = globalCycleCount * cycle.getRegisterX();
                 signalStrengthMap.put(globalCycleCount, cycleCountCalculationResult);
 
