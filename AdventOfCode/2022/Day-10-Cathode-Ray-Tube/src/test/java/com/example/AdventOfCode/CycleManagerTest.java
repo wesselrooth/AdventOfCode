@@ -2,7 +2,7 @@ package com.example.AdventOfCode;
 
 import com.example.AdventOfCode.exceptions.CycleException;
 import com.example.AdventOfCode.exceptions.SpriteException;
-import com.example.AdventOfCode.managers.CircuitManager;
+import com.example.AdventOfCode.managers.CycleManager;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.CsvSource;
@@ -19,7 +19,7 @@ class CycleManagerTest {
     @Test
     void test_cycleTime() throws SpriteException {
         // Arrange
-        CircuitManager.CycleManager cycleManager = new CircuitManager.CycleManager(List.of(999L),spriteRange);
+        CycleManager cycleManager = new CycleManager(List.of(999L),spriteRange);
         long expected = 1;
 
         // Act
@@ -32,7 +32,7 @@ class CycleManagerTest {
     @Test
     void test_cycleTwoTime() throws SpriteException {
         // Arrange
-        CircuitManager.CycleManager cycleManager = new CircuitManager.CycleManager(List.of(999L),spriteRange);
+        CycleManager cycleManager = new CycleManager(List.of(999L),spriteRange);
         long expected = 2;
 
         // Act
@@ -45,7 +45,7 @@ class CycleManagerTest {
     @Test
     void test_detectCyleType() throws CycleException, SpriteException {
         // Arrange
-        CircuitManager.CycleManager cycleManager = new CircuitManager.CycleManager(List.of(999L),spriteRange);
+        CycleManager cycleManager = new CycleManager(List.of(999L),spriteRange);
         long expected = 1;
 
         // Act
@@ -63,7 +63,7 @@ class CycleManagerTest {
     })
     void test_detectEmptyCycleString(String input, String expected) throws SpriteException {
         // Arrange
-        CircuitManager.CycleManager cycleManager = new CircuitManager.CycleManager(List.of(999L),spriteRange);
+        CycleManager cycleManager = new CycleManager(List.of(999L),spriteRange);
         // Act
         String result = assertThrows(CycleException.class, () -> cycleManager.detectCycleType(input)).getMessage();
 
@@ -74,7 +74,7 @@ class CycleManagerTest {
     @Test
     void test_detectTwoCycle() throws CycleException, SpriteException {
         // Arrange
-        CircuitManager.CycleManager cycleManager = new CircuitManager.CycleManager(List.of(999L),spriteRange);
+        CycleManager cycleManager = new CycleManager(List.of(999L),spriteRange);
         long expected = 2;
 
         // Act
@@ -95,7 +95,7 @@ class CycleManagerTest {
     })
     void test_registerXValueAfter3Cycles(int registryX,String cycle, long expected) throws CycleException, SpriteException {
         // Arrange
-        CircuitManager.CycleManager cycleManager = new CircuitManager.CycleManager(List.of(999L),spriteRange);
+        CycleManager cycleManager = new CycleManager(List.of(999L),spriteRange);
 
         // Act
         long result = cycleManager.performCycle(registryX,cycle);
@@ -108,7 +108,7 @@ class CycleManagerTest {
     void test_countSignalStrengthWithSingle() throws CycleException, SpriteException {
         // Arrange
 
-        CircuitManager.CycleManager cycleManager = new CircuitManager.CycleManager(List.of(1L),spriteRange);
+        CycleManager cycleManager = new CycleManager(List.of(1L),spriteRange);
         List<String> cycleList =  List.of( "addx 1");
         long expected = 1;
 
@@ -125,7 +125,7 @@ class CycleManagerTest {
         HashMap<Long,Long> cycleIdentifiers = new HashMap<>();
         cycleIdentifiers.put(1L,null);
         cycleIdentifiers.put(2L,null);
-        CircuitManager.CycleManager cycleManager = new CircuitManager.CycleManager(List.of(1L,2L),spriteRange);
+        CycleManager cycleManager = new CycleManager(List.of(1L,2L),spriteRange);
         List<String> cycleList =  List.of( "addx 1","noop");
         long expected = 3;
 
