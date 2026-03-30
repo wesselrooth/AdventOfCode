@@ -8,6 +8,7 @@ import com.example.AdventOfCode.logs.JsonLog;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -18,17 +19,17 @@ public class CycleManager {
 
     private long globalCycleCount = 0;
     private final HashMap<Long, Long> signalStrengthMap;
-    private final HashMap<Long, String> circuitStringMap;
+    private List<String> circuitStringResultList = new ArrayList<>();
+    private final List<Long> checkList;
 
     private final Sprite sprite;
     private String circuitString = "";
 
     public CycleManager(List<Long> checkList, int spriteRange) throws SpriteException {
-        circuitStringMap = new HashMap<>();
+        this.checkList = checkList;
         signalStrengthMap = new HashMap<>();
 
         for (Long number : checkList) {
-            circuitStringMap.put(number, "");
             signalStrengthMap.put(number, null);
         }
 
@@ -44,8 +45,9 @@ public class CycleManager {
             boolean touchesSprite = circuitManager.spriteTouchesPixelToDraw(circuitString, sprite.getSprite());
             circuitString = circuitManager.updateCircuit(touchesSprite, circuitString);
 
-            if (circuitStringMap.containsKey(globalCycleCount)) {
-                circuitStringMap.put(globalCycleCount, circuitString);
+            if (checkList.contains(globalCycleCount)) {
+                System.out.println(circuitString);
+                circuitStringResultList.add(this.circuitString);
                 this.circuitString = "";
             }
 
@@ -53,9 +55,9 @@ public class CycleManager {
                 long cycleCountCalculationResult = globalCycleCount * registerX;
                 signalStrengthMap.put(globalCycleCount, cycleCountCalculationResult);
 
-                LOG.info(
-                        new JsonLog("Update cycle count", globalCycleCount, cycleCountCalculationResult)
-                );
+                //LOG.info(
+                //        new JsonLog("Update cycle count", globalCycleCount, cycleCountCalculationResult)
+                //);
             }
 
             if (i == 1) {
@@ -104,7 +106,6 @@ public class CycleManager {
     }
 
     public int calculateSignalStrength(List<String> input) throws CycleException {
-        LOG.info(new JsonLog("Start calculating signal strength"));
 
         int registryX = 1;
         for (int i = 0; i < input.size(); i++) {
@@ -119,7 +120,7 @@ public class CycleManager {
         return result;
     }
 
-    public Map<Long, String> getCircuitStringMap() {
-        return circuitStringMap;
+    public List<String> getCheckList() {
+        return circuitStringResultList;
     }
 }

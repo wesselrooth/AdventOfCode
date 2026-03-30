@@ -85,6 +85,6 @@ class CircuitManagerTest {
         cycleManager.calculateSignalStrength(input);
 
         // Assert
-        assertEquals(expected,cycleManager.getCircuitStringMap().get(cycleKey));
+        assertTrue(cycleManager.getCheckList().contains(expected));
     }
 }

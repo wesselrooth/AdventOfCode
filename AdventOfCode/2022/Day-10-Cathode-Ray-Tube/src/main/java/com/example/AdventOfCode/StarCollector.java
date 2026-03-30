@@ -24,7 +24,7 @@ public class StarCollector {
         return result;
     }
 
-    public Map<Long,String> partTwo(String file) throws URISyntaxException, IOException, CycleException, SpriteException {
+    public List<String> partTwo(String file) throws URISyntaxException, IOException, CycleException, SpriteException {
 
         CycleManager cycleManager = new CycleManager(List.of(40L,80L,120L,160L,200L,240L),40);
 
@@ -33,6 +33,6 @@ public class StarCollector {
 
         cycleManager.calculateSignalStrength(cycleList);
 
-        return cycleManager.getCircuitStringMap();
+        return cycleManager.getCheckList();
     }
 }
