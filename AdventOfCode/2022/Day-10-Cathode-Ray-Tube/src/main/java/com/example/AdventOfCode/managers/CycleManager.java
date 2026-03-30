@@ -22,7 +22,6 @@ public class CycleManager {
 
     private final Sprite sprite;
     private String circuitString = "";
-    private final CircuitManager circuitManager = new CircuitManager();
 
     public CycleManager(List<Long> checkList, int spriteRange) throws SpriteException {
         circuitStringMap = new HashMap<>();
@@ -41,6 +40,7 @@ public class CycleManager {
         for (int i = 0; i < cycles; i++) {
             globalCycleCount++;
 
+            CircuitManager circuitManager = new CircuitManager();
             boolean touchesSprite = circuitManager.spriteTouchesPixelToDraw(circuitString, sprite.getSprite());
             circuitString = circuitManager.updateCircuit(touchesSprite, circuitString);
 
