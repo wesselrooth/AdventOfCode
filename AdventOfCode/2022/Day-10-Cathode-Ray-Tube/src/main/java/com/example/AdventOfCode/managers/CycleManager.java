@@ -79,10 +79,9 @@ public class CycleManager {
 
         for (int i = 0; i < input.size(); i++) {
             String cycleString = input.get(i);
-
             cycle  = new Cycle(cycleString,registryX, circuitString);
 
-            performCycle(cycle);
+            cycle = performCycle(cycle);
 
             circuitString = cycle.getCircuitString();
             registryX = cycle.getRegisterX();
