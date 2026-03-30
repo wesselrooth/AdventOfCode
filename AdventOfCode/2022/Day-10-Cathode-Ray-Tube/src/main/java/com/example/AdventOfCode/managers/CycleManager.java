@@ -11,7 +11,6 @@ import org.apache.logging.log4j.Logger;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
 
 public class CycleManager {
 
@@ -21,9 +20,7 @@ public class CycleManager {
     private final HashMap<Long, Long> signalStrengthMap;
     private List<String> circuitStringResultList = new ArrayList<>();
     private final List<Long> checkList;
-
     private final Sprite sprite;
-    private String circuitString = "";
 
     public CycleManager(List<Long> checkList, int spriteRange) throws SpriteException {
         this.checkList = checkList;
@@ -36,81 +33,59 @@ public class CycleManager {
         this.sprite = new Sprite(spriteRange);
     }
 
-    public int cycle(int registerX, int operand, long cycles) {
+    public Cycle performCycle(Cycle cycle){
 
-        for (int i = 0; i < cycles; i++) {
+        for (int i = 0; i < cycle.getCycleAmount(); i++) {
             globalCycleCount++;
 
             CircuitManager circuitManager = new CircuitManager();
-            boolean touchesSprite = circuitManager.spriteTouchesPixelToDraw(circuitString, sprite.getSprite());
-            circuitString = circuitManager.updateCircuit(touchesSprite, circuitString);
+            boolean touchesSprite = circuitManager.spriteTouchesPixelToDraw(cycle.getCircuitString(), sprite.getSprite());
+
+            if (touchesSprite){
+                cycle.addCharacterToCircuit("#");
+            }else {
+                cycle.addCharacterToCircuit(".");
+            }
 
             if (checkList.contains(globalCycleCount)) {
-                System.out.println(circuitString);
-                circuitStringResultList.add(this.circuitString);
-                this.circuitString = "";
+                System.out.println(cycle.getCircuitString());
+                circuitStringResultList.add(cycle.getCircuitString());
+                cycle.resetCircuitString();
             }
 
             if (signalStrengthMap.containsKey(globalCycleCount)) {
-                long cycleCountCalculationResult = globalCycleCount * registerX;
+                long cycleCountCalculationResult = globalCycleCount * cycle.getRegisterX();
                 signalStrengthMap.put(globalCycleCount, cycleCountCalculationResult);
 
-                //LOG.info(
-                //        new JsonLog("Update cycle count", globalCycleCount, cycleCountCalculationResult)
-                //);
+                LOG.info(
+                        new JsonLog("Update cycle count", globalCycleCount, cycleCountCalculationResult)
+                );
             }
 
             if (i == 1) {
-                registerX += operand;
-                sprite.moveSprite(registerX);
+                cycle.incrementRegisterX();
+                sprite.moveSprite(cycle.getRegisterX());
             }
         }
-        return registerX;
-    }
 
-    public Cycle detectCycleType(String input) throws CycleException {
-        LOG.info(new JsonLog("Start Detect cycle"));
-
-        if (input.isEmpty()) {
-            LOG.error(
-                    new JsonLog("Detecting Cycle String is empty")
-            );
-            throw new CycleException("Empty cycle String");
-        }
-
-        input = input.strip();
-        if (input.equals("noop")) {
-            return new Cycle(1, 0);
-        }
-
-        String[] splitInput = input.split(" ");
-        if (splitInput.length > 2) {
-            LOG.error(new JsonLog("Split array is to big than expected"));
-            throw new CycleException("Unexpected amount of Cycles detected");
-        }
-
-        String firstPart = splitInput[0];
-        if (!firstPart.equals("addx")) {
-            LOG.error(new JsonLog("Something went wrong detecting the cycle string"));
-            throw new CycleException("Unknown cycle type detected");
-        }
-        int operant = Integer.parseInt(splitInput[1]);
-
-        return new Cycle(2, operant);
-    }
-
-    public int performCycle(int registryX, String cycleString) throws CycleException {
-
-        Cycle cycleType = detectCycleType(cycleString);
-        return cycle(registryX, cycleType.getOperant(), cycleType.getCycleAmount());
+        return cycle;
     }
 
     public int calculateSignalStrength(List<String> input) throws CycleException {
 
         int registryX = 1;
+        String circuitString = "";
+        Cycle cycle;
+
         for (int i = 0; i < input.size(); i++) {
-            String cycle = input.get(i);
-            registryX = performCycle(registryX, cycle);
+            String cycleString = input.get(i);
+
+            cycle  = new Cycle(cycleString,registryX, circuitString);
+
+            performCycle(cycle);
+
+            circuitString = cycle.getCircuitString();
+            registryX = cycle.getRegisterX();
         }
 
         int result = 0;

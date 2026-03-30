@@ -68,14 +68,14 @@ class CircuitManagerTest {
 
     @ParameterizedTest
     @CsvSource({
-            "40,##..##..##..##..##..##..##..##..##..##..",
-            "80,###...###...###...###...###...###...###.",
-            "120,####....####....####....####....####....",
-            "160,#####.....#####.....#####.....#####.....",
-            "200,######......######......######......####",
-            "240,#######.......#######.......#######....."
+            "##..##..##..##..##..##..##..##..##..##..",
+            "###...###...###...###...###...###...###.",
+            "####....####....####....####....####....",
+            "#####.....#####.....#####.....#####.....",
+            "######......######......######......####",
+            "#######.......#######.......#######....."
     })
-    void preparationTest(Long cycleKey, String expected) throws SpriteException, URISyntaxException, IOException, CycleException {
+    void preparationTest(String expected) throws SpriteException, URISyntaxException, IOException, CycleException {
         // Arrange
         CycleManager cycleManager = new CycleManager(List.of(40L,80L,120L,160L,200L,240L),40);
         InputLoader inputLoader = new InputLoader();
