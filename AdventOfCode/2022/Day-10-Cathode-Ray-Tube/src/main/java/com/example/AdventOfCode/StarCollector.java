@@ -8,7 +8,6 @@ import com.example.AdventOfCode.managers.CycleManager;
 import java.io.IOException;
 import java.net.URISyntaxException;
 import java.util.List;
-import java.util.Map;
 
 public class StarCollector {
 
@@ -19,9 +18,7 @@ public class StarCollector {
         InputLoader inputLoader = new InputLoader();
         List<String> cycleList = inputLoader.loadInput(file);
 
-        long result = cycleManager.calculateSignalStrength(cycleList);
-
-        return result;
+        return cycleManager.calculateSignalStrength(cycleList);
     }
 
     public List<String> partTwo(String file) throws URISyntaxException, IOException, CycleException, SpriteException {
