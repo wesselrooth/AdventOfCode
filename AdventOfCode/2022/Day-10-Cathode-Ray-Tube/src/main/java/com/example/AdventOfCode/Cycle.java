@@ -13,7 +13,7 @@ public class Cycle {
     private int operant;
     private int registerX;
     private String circuitString;
-    private int totalCycleCount;
+    private long totalCycleCount;
     public Cycle(String input,int registerX,String circuitString) throws CycleException {
         this.registerX = registerX;
         this.circuitString = circuitString;
@@ -71,11 +71,11 @@ public class Cycle {
         return this.registerX += getOperant();
     }
 
-    public void setTotalCycleCount(int totalCycleCount){
+    public void setTotalCycleCount(long totalCycleCount){
         this.totalCycleCount = totalCycleCount;
     }
 
-    public int getTotalCycleCount(){
+    public long getTotalCycleCount(){
         return totalCycleCount;
     }
 

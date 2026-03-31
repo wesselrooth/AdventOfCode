@@ -32,7 +32,7 @@ public class CycleManager {
         this.sprite = new Sprite(spriteRange);
     }
 
-    public Cycle performCycle(Cycle cycle,int totalCycleCount){
+    public Cycle performCycle(Cycle cycle,long totalCycleCount){
 
         for (int i = 0; i < cycle.getCycleAmount(); i++) {
             totalCycleCount++;
@@ -46,14 +46,14 @@ public class CycleManager {
                 cycle.addCharacterToCircuit(".");
             }
 
-            if (checkList.contains(Long.valueOf(totalCycleCount))) {
+            if (checkList.contains(totalCycleCount)) {
 
                 System.out.println(cycle.getCircuitString());
                 circuitStringResultList.add(cycle.getCircuitString());
                 cycle.resetCircuitString();
 
                 long cycleCountCalculationResult = totalCycleCount * cycle.getRegisterX();
-                signalStrengthMap.put(Long.valueOf(totalCycleCount), cycleCountCalculationResult);
+                signalStrengthMap.put(totalCycleCount, cycleCountCalculationResult);
 
                 LOG.info(
                         new JsonLog("Update cycle count", totalCycleCount, cycleCountCalculationResult)
@@ -76,7 +76,7 @@ public class CycleManager {
         int registryX = 1;
         String circuitString = "";
         Cycle cycle;
-        int totalCycleAmount = 0;
+        long totalCycleAmount = 0;
 
         for (int i = 0; i < input.size(); i++) {
             String cycleString = input.get(i);
