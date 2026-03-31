@@ -16,7 +16,7 @@ public class CycleManager {
     private static final Logger LOG = LogManager.getLogger("CONSOLE_JSON_APPENDER");
 
     private final List<Long> signalStrengthList;
-    private final List<String> circuitStringResultList = new ArrayList<>();
+    private final List<String> circuitStringList = new ArrayList<>();
     private final List<Long> checkList;
     private final Sprite sprite;
 
@@ -43,7 +43,7 @@ public class CycleManager {
             if (checkList.contains(totalCycleCount)) {
 
                 System.out.println(cycle.getCircuitString());
-                circuitStringResultList.add(cycle.getCircuitString());
+                circuitStringList.add(cycle.getCircuitString());
                 cycle.resetCircuitString();
 
                 long cycleCountCalculationResult = totalCycleCount * cycle.getRegisterX();
@@ -92,6 +92,6 @@ public class CycleManager {
     }
 
     public List<String> getCheckList() {
-        return circuitStringResultList;
+        return circuitStringList;
     }
 }
