@@ -9,26 +9,20 @@ import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
 import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.List;
 
 public class CycleManager {
 
     private static final Logger LOG = LogManager.getLogger("CONSOLE_JSON_APPENDER");
 
-    private final HashMap<Long, Long> signalStrengthMap;
+    private final List<Long> signalStrengthList;
     private List<String> circuitStringResultList = new ArrayList<>();
     private final List<Long> checkList;
     private final Sprite sprite;
 
     public CycleManager(List<Long> checkList, int spriteRange) throws SpriteException {
         this.checkList = checkList;
-        signalStrengthMap = new HashMap<>();
-
-        for (Long number : checkList) {
-            signalStrengthMap.put(number, null);
-        }
-
+        signalStrengthList = new ArrayList<>();
         this.sprite = new Sprite(spriteRange);
     }
 
@@ -53,7 +47,8 @@ public class CycleManager {
                 cycle.resetCircuitString();
 
                 long cycleCountCalculationResult = totalCycleCount * cycle.getRegisterX();
-                signalStrengthMap.put(totalCycleCount, cycleCountCalculationResult);
+
+                signalStrengthList.add(cycleCountCalculationResult);
 
                 LOG.info(
                         new JsonLog("Update cycle count", totalCycleCount, cycleCountCalculationResult)
@@ -90,7 +85,7 @@ public class CycleManager {
         }
 
         int result = 0;
-        for (Long value : signalStrengthMap.values()) {
+        for (Long value : signalStrengthList) {
             result += value;
         }
         return result;
