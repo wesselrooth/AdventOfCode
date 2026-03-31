@@ -30,6 +30,6 @@ public class StarCollector {
 
         cycleManager.calculateSignalStrength(cycleList);
 
-        return cycleManager.getCheckList();
+        return cycleManager.getCyclesToCheck();
     }
 }

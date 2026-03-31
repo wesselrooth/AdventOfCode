@@ -17,11 +17,11 @@ public class CycleManager {
 
     private final List<Long> signalStrengthList;
     private final List<String> circuitStringList = new ArrayList<>();
-    private final List<Long> checkList;
+    private final List<Long> cyclesToCheck;
     private final Sprite sprite;
 
     public CycleManager(List<Long> checkList, int spriteRange) throws SpriteException {
-        this.checkList = checkList;
+        this.cyclesToCheck = checkList;
         signalStrengthList = new ArrayList<>();
         this.sprite = new Sprite(spriteRange);
     }
@@ -40,18 +40,13 @@ public class CycleManager {
                 cycle.addCharacterToCircuit(".");
             }
 
-            if (checkList.contains(totalCycleCount)) {
-
-                System.out.println(cycle.getCircuitString());
+            if (cyclesToCheck.contains(totalCycleCount)) {
                 circuitStringList.add(cycle.getCircuitString());
                 cycle.resetCircuitString();
-
                 long cycleCountCalculationResult = totalCycleCount * cycle.getRegisterX();
-
                 signalStrengthList.add(cycleCountCalculationResult);
-
                 LOG.info(
-                        new JsonLog("Update cycle count", totalCycleCount, cycleCountCalculationResult)
+                    new JsonLog("Update cycle count", totalCycleCount, cycleCountCalculationResult)
                 );
             }
 
@@ -91,7 +86,7 @@ public class CycleManager {
         return result;
     }
 
-    public List<String> getCheckList() {
+    public List<String> getCyclesToCheck() {
         return circuitStringList;
     }
 }
