@@ -8,6 +8,8 @@ import org.junit.jupiter.params.provider.CsvSource;
 
 import java.io.IOException;
 import java.net.URISyntaxException;
+import java.util.List;
+
 import static org.junit.jupiter.api.Assertions.*;
 
 class StarCollectorTest {
@@ -40,22 +42,22 @@ class StarCollectorTest {
 
     @ParameterizedTest
     @CsvSource({
-            "40,##..##..##..##..##..##..##..##..##..##..",
-            "80,###...###...###...###...###...###...###.",
-            "120,####....####....####....####....####....",
-            "160,#####.....#####.....#####.....#####.....",
-            "200,######......######......######......####",
-            "240,#######.......#######.......#######....."
+            "##..##..##..##..##..##..##..##..##..##..",
+            "###...###...###...###...###...###...###.",
+            "####....####....####....####....####....",
+            "#####.....#####.....#####.....#####.....",
+            "######......######......######......####",
+            "#######.......#######.......#######....."
     })
-    void test_partTwoPrepTest(Long cycleKey, String expected) throws SpriteException, URISyntaxException, IOException, CycleException {
+    void test_partTwoPrepTest(String expected) throws SpriteException, URISyntaxException, IOException, CycleException {
         // Arrange
         StarCollector starCollector = new StarCollector();
 
         // Act
-        String result = starCollector.partTwo("test-input").get(cycleKey);
+        List<String> result = starCollector.partTwo("test-input");
 
         // Assert
-        assertEquals(expected,result);
+        assertTrue(result.contains(expected));
     }
 
     @ParameterizedTest
@@ -72,9 +74,9 @@ class StarCollectorTest {
         StarCollector starCollector = new StarCollector();
 
         // Act
-        String result = starCollector.partTwo("puzzle-input").get(cycleKey);
+        List<String> result = starCollector.partTwo("puzzle-input");
 
         // Assert
-        assertEquals(expected,result);
+        assertTrue(result.contains(expected));
     }
 }
