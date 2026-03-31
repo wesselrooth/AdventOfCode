@@ -69,7 +69,7 @@ class CycleManagerTest {
         CycleManager cycleManager = new CycleManager(List.of(999L),spriteRange);
         Cycle cycle = new Cycle(input,registryX,"");
         // Act
-        long result = cycleManager.performCycle(cycle).getRegisterX();
+        long result = cycleManager.performCycle(cycle,0).getRegisterX();
 
         // Assert
         assertEquals(expected,result);

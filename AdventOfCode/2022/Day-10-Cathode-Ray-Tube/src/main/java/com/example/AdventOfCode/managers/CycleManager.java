@@ -16,7 +16,6 @@ public class CycleManager {
 
     private static final Logger LOG = LogManager.getLogger("CONSOLE_JSON_APPENDER");
 
-    private long globalCycleCount = 0;
     private final HashMap<Long, Long> signalStrengthMap;
     private List<String> circuitStringResultList = new ArrayList<>();
     private final List<Long> checkList;
@@ -33,10 +32,10 @@ public class CycleManager {
         this.sprite = new Sprite(spriteRange);
     }
 
-    public Cycle performCycle(Cycle cycle){
+    public Cycle performCycle(Cycle cycle,int totalCycleCount){
 
         for (int i = 0; i < cycle.getCycleAmount(); i++) {
-            globalCycleCount++;
+            totalCycleCount++;
 
             CircuitManager circuitManager = new CircuitManager();
             boolean touchesSprite = circuitManager.spriteTouchesPixelToDraw(cycle.getCircuitString(), sprite.getSprite());
@@ -47,16 +46,17 @@ public class CycleManager {
                 cycle.addCharacterToCircuit(".");
             }
 
-            if (checkList.contains(globalCycleCount)) {
+            if (checkList.contains(Long.valueOf(totalCycleCount))) {
+
                 System.out.println(cycle.getCircuitString());
                 circuitStringResultList.add(cycle.getCircuitString());
                 cycle.resetCircuitString();
 
-                long cycleCountCalculationResult = globalCycleCount * cycle.getRegisterX();
-                signalStrengthMap.put(globalCycleCount, cycleCountCalculationResult);
+                long cycleCountCalculationResult = totalCycleCount * cycle.getRegisterX();
+                signalStrengthMap.put(Long.valueOf(totalCycleCount), cycleCountCalculationResult);
 
                 LOG.info(
-                        new JsonLog("Update cycle count", globalCycleCount, cycleCountCalculationResult)
+                        new JsonLog("Update cycle count", totalCycleCount, cycleCountCalculationResult)
                 );
             }
 
@@ -66,6 +66,8 @@ public class CycleManager {
             }
         }
 
+        cycle.setTotalCycleCount(totalCycleCount);
+
         return cycle;
     }
 
@@ -74,12 +76,14 @@ public class CycleManager {
         int registryX = 1;
         String circuitString = "";
         Cycle cycle;
+        int totalCycleAmount = 0;
 
         for (int i = 0; i < input.size(); i++) {
             String cycleString = input.get(i);
             cycle  = new Cycle(cycleString,registryX, circuitString);
+            cycle = performCycle(cycle,totalCycleAmount);
 
-            cycle = performCycle(cycle);
+            totalCycleAmount = cycle.getTotalCycleCount();
 
             circuitString = cycle.getCircuitString();
             registryX = cycle.getRegisterX();
