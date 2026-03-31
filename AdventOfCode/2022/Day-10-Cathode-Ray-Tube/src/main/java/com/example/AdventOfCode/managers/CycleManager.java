@@ -32,7 +32,7 @@ public class CycleManager {
             totalCycleCount++;
 
             CircuitManager circuitManager = new CircuitManager();
-            boolean touchesSprite = circuitManager.spriteTouchesPixelToDraw(cycle.getCircuitString(), sprite.getSprite());
+            boolean touchesSprite = circuitManager.spriteTouchesCircuitString(cycle.getCircuitString(), sprite.getSprite());
 
             if (touchesSprite){
                 cycle.addCharacterToCircuit("#");

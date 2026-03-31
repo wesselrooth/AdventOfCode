@@ -5,7 +5,7 @@ import java.util.List;
 
 public class CircuitManager {
 
-    public boolean spriteTouchesPixelToDraw(String circuit, String sprite){
+    public boolean spriteTouchesCircuitString(String circuit, String sprite){
         int toDrawIndex;
         int spriteIndex = sprite.indexOf("#");
 

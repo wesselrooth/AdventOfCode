@@ -40,7 +40,7 @@ class CircuitManagerTest {
         CircuitManager circuitManager = new CircuitManager();
 
         // Act
-        boolean result = circuitManager.spriteTouchesPixelToDraw(circuitString,sprite);
+        boolean result = circuitManager.spriteTouchesCircuitString(circuitString,sprite);
 
         // Assert
         assertEquals(expected, result);

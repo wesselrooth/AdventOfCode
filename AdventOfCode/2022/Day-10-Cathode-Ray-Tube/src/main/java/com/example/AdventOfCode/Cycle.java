@@ -9,11 +9,12 @@ public class Cycle {
 
     private static final Logger LOG = LogManager.getLogger("CONSOLE_JSON_APPENDER");
 
-    private int cycleAmount;
+    private final int cycleAmount;
     private int operant;
     private int registerX;
     private String circuitString;
     private long totalCycleCount;
+
     public Cycle(String input,int registerX,String circuitString) throws CycleException {
         this.registerX = registerX;
         this.circuitString = circuitString;
@@ -31,10 +32,9 @@ public class Cycle {
             LOG.error(new JsonLog("Split array is to big than expected"));
             throw new CycleException("Unexpected amount of Cycles detected");
         }
+        String cycleType = splitInput[0].strip();
 
-        String firstPart = splitInput[0].strip();
-
-        switch (firstPart) {
+        switch (cycleType) {
             case "addx" -> {
                 this.operant = Integer.parseInt(splitInput[1]);
                 this.cycleAmount = 2;
