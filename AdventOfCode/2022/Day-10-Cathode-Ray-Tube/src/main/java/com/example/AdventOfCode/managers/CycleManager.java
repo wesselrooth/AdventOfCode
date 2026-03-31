@@ -16,7 +16,7 @@ public class CycleManager {
     private static final Logger LOG = LogManager.getLogger("CONSOLE_JSON_APPENDER");
 
     private final List<Long> signalStrengthList;
-    private List<String> circuitStringResultList = new ArrayList<>();
+    private final List<String> circuitStringResultList = new ArrayList<>();
     private final List<Long> checkList;
     private final Sprite sprite;
 

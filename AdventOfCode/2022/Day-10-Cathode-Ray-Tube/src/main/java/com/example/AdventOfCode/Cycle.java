@@ -67,8 +67,8 @@ public class Cycle {
         this.circuitString = "";
     }
 
-    public int incrementRegisterX(){
-        return this.registerX += getOperant();
+    public void incrementRegisterX(){
+        this.registerX += getOperant();
     }
 
     public void setTotalCycleCount(long totalCycleCount){
@@ -77,10 +77,6 @@ public class Cycle {
 
     public long getTotalCycleCount(){
         return totalCycleCount;
-    }
-
-    public void incrementCycleCount(){
-        this.totalCycleCount++;
     }
 
 }
