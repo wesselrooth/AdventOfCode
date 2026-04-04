@@ -1,12 +1,9 @@
 package com.example.AdventOfCode;
 
 import com.example.AdventOfCode.exceptions.InputException;
-import interfaces.JoltageInterface;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.CsvSource;
-
-import java.util.List;
 
 import static org.junit.jupiter.api.Assertions.*;
 
@@ -29,7 +26,7 @@ class JoltageInterfaceImplTest {
     })
     void testGetJoltage(String input,long expected) throws InputException {
         // Arrange
-        JoltageInterface joltageInterface = new JoltageInterfaceImpl();
+        JoltageFactory joltageInterface = new JoltageFactory();
 
         // Act
         long  result = joltageInterface.getJoltage(input);
@@ -41,7 +38,7 @@ class JoltageInterfaceImplTest {
     @Test
     void StringHelperTest_isNull(){
         // Arrange
-        JoltageInterface joltageInterface = new JoltageInterfaceImpl();
+        JoltageFactory joltageInterface = new JoltageFactory();
         String expected = "Input is null or size is null";
 
         // Act
@@ -54,7 +51,7 @@ class JoltageInterfaceImplTest {
     @Test
     void StringHelperTest_isEmpty(){
         // Arrange
-        JoltageInterface joltageInterface = new JoltageInterfaceImpl();
+        JoltageFactory joltageInterface = new JoltageFactory();
         String expected = "Input is null or size is null";
 
         // Act

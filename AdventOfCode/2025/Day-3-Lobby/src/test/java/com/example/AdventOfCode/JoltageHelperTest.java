@@ -12,7 +12,7 @@ class JoltageHelperTest {
     })
     void testGetJoltage() {
         // Arrange
-        JoltageInterfaceImpl joltageInterfaceImpl = new JoltageInterfaceImpl();
+        JoltageFactory joltageInterfaceImpl = new JoltageFactory();
 
 
         // Act

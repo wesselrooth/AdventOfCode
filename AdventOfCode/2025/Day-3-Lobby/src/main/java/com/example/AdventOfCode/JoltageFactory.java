@@ -1,15 +1,14 @@
 package com.example.AdventOfCode;
 
 import com.example.AdventOfCode.exceptions.InputException;
-import interfaces.JoltageInterface;
 
 import java.util.List;
 
-public class JoltageInterfaceImpl implements JoltageInterface {
+public class JoltageFactory {
 
     StringHelper helper = new StringHelper();
 
-    @Override
+
     public long getJoltage(String input) throws InputException {
 
         if (input == null || input.isEmpty()){

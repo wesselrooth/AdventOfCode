@@ -48,7 +48,7 @@ public class StringHelper {
 
         long highestNumber = 0;
 
-        for(int i = 0; i< input.size(); i++){
+        for(int i = 0; i< input.size(); i++) {
 
             int baseNumber = input.get(i);
 
@@ -59,7 +59,6 @@ public class StringHelper {
                 if (combinedNumber > highestNumber){
                     highestNumber = combinedNumber;
                 }
-
             }
 
         }
