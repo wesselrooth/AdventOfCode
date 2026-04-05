@@ -30,8 +30,8 @@ public class JoltageFactory {
         List<Integer> numberList = stringHelper.convertToListOfInteger(input);
 
         long highestNumber = 0;
-
         String baseNumber = input.substring(0,amount);
+
 
         for(int i = amount; i < numberList.size(); i++) {
 
@@ -40,13 +40,11 @@ public class JoltageFactory {
             for (int letterIndex = 0; letterIndex < baseNumber.length(); letterIndex++){
 
                 String[] baseNumberArray = baseNumber.split("");
-
                 List<String> newStringList = new ArrayList<>(
                         Arrays.asList(ArrayUtils.remove(baseNumberArray,letterIndex))
                 );
 
                 newStringList.add(String.valueOf(nextNumber));
-
                 String newHighestNumberString = newStringList.stream().collect(Collectors.joining());
 
                 long highestValue = Long.valueOf(newHighestNumberString);
@@ -56,6 +54,8 @@ public class JoltageFactory {
                 }
 
             }
+
+            baseNumber = String.valueOf(highestNumber);
 
         }
         return highestNumber;

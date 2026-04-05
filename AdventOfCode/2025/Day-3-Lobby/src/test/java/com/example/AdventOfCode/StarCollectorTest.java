@@ -34,4 +34,17 @@ class StarCollectorTest {
         // Assert
         assertEquals(expected,result);
     }
+
+    @Test
+    void testPartTwo() throws InputException, URISyntaxException, IOException {
+        // Arrange
+        StarCollector starCollector = new StarCollector();
+        long expected = 168617068915447L;
+
+        // Act
+        long result = starCollector.partTwo("puzzle-input");
+
+        // Assert
+        assertEquals(expected,result);
+    }
 }

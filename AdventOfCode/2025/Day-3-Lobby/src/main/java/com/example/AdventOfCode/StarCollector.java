@@ -25,4 +25,19 @@ public class StarCollector {
         }
         return result;
     }
+
+    public long partTwo(String filename) throws URISyntaxException, IOException, InputException {
+
+        List<String> input = inputLoader.loadInput(filename);
+
+        long result = 0;
+
+        for (String bank: input){
+            JoltageFactory joltageFactory = new JoltageFactory();
+            result += joltageFactory.getJoltage(bank,12);
+        }
+        return result;
+    }
+
+
 }
