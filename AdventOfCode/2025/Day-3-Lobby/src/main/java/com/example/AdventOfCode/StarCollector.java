@@ -11,22 +11,7 @@ public class StarCollector {
 
     InputLoader inputLoader = new InputLoader();
 
-    StringHelper helper = new StringHelper();
-
-    public long partOne(String filename) throws URISyntaxException, IOException, InputException {
-
-        List<String> input = inputLoader.loadInput(filename);
-
-        long result = 0;
-
-        for (String bank: input){
-            JoltageFactory joltageInterface = new JoltageFactory();
-            result += joltageInterface.getJoltage(bank);
-        }
-        return result;
-    }
-
-    public long partTwo(String filename) throws URISyntaxException, IOException, InputException {
+    public long calucateJoltage(String filename, int joltageSize) throws URISyntaxException, IOException, InputException {
 
         List<String> input = inputLoader.loadInput(filename);
 
@@ -34,7 +19,8 @@ public class StarCollector {
 
         for (String bank: input){
             JoltageFactory joltageFactory = new JoltageFactory();
-            result += joltageFactory.getJoltage(bank,12);
+            long tmpResult = joltageFactory.getJoltage(bank,joltageSize);
+            result += tmpResult;
         }
         return result;
     }

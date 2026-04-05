@@ -17,7 +17,7 @@ class StarCollectorTest {
         long expected = 357;
 
         // Act
-        long result = starCollector.partOne("part-one-test-input");
+        long result = starCollector.calucateJoltage("part-one-test-input",2);
 
         // Assert
         assertEquals(expected,result);
@@ -29,7 +29,7 @@ class StarCollectorTest {
         long expected = 16993;
 
         // Act
-        long result = starCollector.partOne("puzzle-input");
+        long result = starCollector.calucateJoltage("puzzle-input",2);
 
         // Assert
         assertEquals(expected,result);
@@ -42,7 +42,7 @@ class StarCollectorTest {
         long expected = 168617068915447L;
 
         // Act
-        long result = starCollector.partTwo("puzzle-input");
+        long result = starCollector.calucateJoltage("puzzle-input",12);
 
         // Assert
         assertEquals(expected,result);

@@ -29,9 +29,9 @@ public class JoltageFactory {
         StringHelper stringHelper = new StringHelper();
         List<Integer> numberList = stringHelper.convertToListOfInteger(input);
 
-        long highestNumber = 0;
-        String baseNumber = input.substring(0,amount);
 
+        String baseNumber = input.substring(0,amount);
+        long highestNumber = Long.valueOf(baseNumber);
 
         for(int i = amount; i < numberList.size(); i++) {
 
