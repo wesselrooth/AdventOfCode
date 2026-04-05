@@ -29,7 +29,7 @@ class JoltageInterfaceImplTest {
         JoltageFactory joltageInterface = new JoltageFactory();
 
         // Act
-        long  result = joltageInterface.getJoltage(input);
+        long  result = joltageInterface.getJoltage(input,2);
 
         // Assert
         assertEquals(expected,result);
@@ -42,7 +42,7 @@ class JoltageInterfaceImplTest {
         String expected = "Input is null or size is null";
 
         // Act
-        String result = assertThrows(InputException.class, () -> joltageInterface.getJoltage(null)).getMessage();
+        String result = assertThrows(InputException.class, () -> joltageInterface.getJoltage(null,2)).getMessage();
 
         // Assert
         assertEquals(expected,result);
@@ -55,7 +55,7 @@ class JoltageInterfaceImplTest {
         String expected = "Input is null or size is null";
 
         // Act
-        String result = assertThrows(InputException.class, () -> joltageInterface.getJoltage("")).getMessage();
+        String result = assertThrows(InputException.class, () -> joltageInterface.getJoltage("",2)).getMessage();
 
         // Assert
         assertEquals(expected,result);

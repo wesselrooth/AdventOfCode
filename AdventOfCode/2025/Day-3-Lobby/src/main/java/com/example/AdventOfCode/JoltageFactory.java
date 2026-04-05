@@ -18,7 +18,28 @@ public class JoltageFactory {
         StringHelper stringHelper = new StringHelper();
         List<Integer> numberList = stringHelper.convertToListOfInteger(input);
 
-        return stringHelper.get2HighestNumbers(numberList);
+
+        if (input == null || input.isEmpty()){
+            throw new InputException("Input is null or size is null");
+        }
+        if (numberList.size() < 2 ){
+            throw new InputException("Inputsize is less the 2");
+        }
+
+        long highestNumber = 0;
+
+        for(int i = 0; i< numberList.size(); i++) {
+            int baseNumber = numberList.get(i);
+            for (int y = i + 1; y< numberList.size(); y++){
+                int nextNumber = numberList.get(y);
+
+                long combinedNumber = Long.parseLong("" + baseNumber + nextNumber);
+                if (combinedNumber > highestNumber){
+                    highestNumber = combinedNumber;
+                }
+            }
+        }
+        return highestNumber;
     }
 
     public long getJoltage(String input, int amount) throws InputException {
@@ -29,7 +50,6 @@ public class JoltageFactory {
         StringHelper stringHelper = new StringHelper();
         List<Integer> numberList = stringHelper.convertToListOfInteger(input);
 
-
         String baseNumber = input.substring(0,amount);
         long highestNumber = Long.valueOf(baseNumber);
 
@@ -37,20 +57,19 @@ public class JoltageFactory {
 
             int nextNumber = numberList.get(i);
 
-            for (int letterIndex = 0; letterIndex < baseNumber.length(); letterIndex++){
+            for (int baseNumberIndex = 0; baseNumberIndex < baseNumber.length(); baseNumberIndex++){
 
                 String[] baseNumberArray = baseNumber.split("");
                 List<String> newStringList = new ArrayList<>(
-                        Arrays.asList(ArrayUtils.remove(baseNumberArray,letterIndex))
+                        Arrays.asList(ArrayUtils.remove(baseNumberArray, baseNumberIndex))
                 );
 
                 newStringList.add(String.valueOf(nextNumber));
                 String newHighestNumberString = newStringList.stream().collect(Collectors.joining());
+                long newCreatedNumber = Long.valueOf(newHighestNumberString);
 
-                long highestValue = Long.valueOf(newHighestNumberString);
-
-                if (highestValue > highestNumber){
-                    highestNumber = highestValue;
+                if (newCreatedNumber > highestNumber){
+                    highestNumber = newCreatedNumber;
                 }
 
             }
