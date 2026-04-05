@@ -50,18 +50,18 @@ public class JoltageFactory {
         StringHelper stringHelper = new StringHelper();
         List<Integer> numberList = stringHelper.convertToListOfInteger(input);
 
-        String baseNumber = input.substring(0,amount);
-        long highestNumber = Long.valueOf(baseNumber);
+        String HighestNumberString = input.substring(0,amount);
+        long highestNumber = Long.valueOf(HighestNumberString);
 
         for(int i = amount; i < numberList.size(); i++) {
 
             int nextNumber = numberList.get(i);
 
-            for (int baseNumberIndex = 0; baseNumberIndex < baseNumber.length(); baseNumberIndex++){
+            for (int highestNumberIndex = 0; highestNumberIndex < HighestNumberString.length(); highestNumberIndex++){
 
-                String[] baseNumberArray = baseNumber.split("");
+                String[] highestNumberArray = HighestNumberString.split("");
                 List<String> newStringList = new ArrayList<>(
-                        Arrays.asList(ArrayUtils.remove(baseNumberArray, baseNumberIndex))
+                        Arrays.asList(ArrayUtils.remove(highestNumberArray, highestNumberIndex))
                 );
 
                 newStringList.add(String.valueOf(nextNumber));
@@ -74,7 +74,7 @@ public class JoltageFactory {
 
             }
 
-            baseNumber = String.valueOf(highestNumber);
+            HighestNumberString = String.valueOf(highestNumber);
 
         }
         return highestNumber;
