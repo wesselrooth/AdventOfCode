@@ -10,6 +10,6 @@
         <relativePath>../../pom.xml</relativePath>
     </parent>
 
-    <artifactId>Day1-Historian-Hysteria</artifactId>
+    <artifactId>Day-1-Historian-Hysteria</artifactId>
 
 </project>

@@ -10,12 +10,6 @@
         <relativePath>../../pom.xml</relativePath>
     </parent>
 
-    <artifactId>Day4-Printing-Department</artifactId>
-
-    <properties>
-        <maven.compiler.source>21</maven.compiler.source>
-        <maven.compiler.target>21</maven.compiler.target>
-        <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
-    </properties>
+    <artifactId>Day-2-Red-Nosed-Reactor</artifactId>
 
 </project>
