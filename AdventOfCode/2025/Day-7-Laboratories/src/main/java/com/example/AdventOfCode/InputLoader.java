@@ -45,9 +45,7 @@ public class InputLoader {
 
                 String iconString = inputRow.get(x);
                 Icon icon = new Icon(iconString,x,y);
-
                 row.addIcon(icon);
-
             }
 
             grid.addRow(row);

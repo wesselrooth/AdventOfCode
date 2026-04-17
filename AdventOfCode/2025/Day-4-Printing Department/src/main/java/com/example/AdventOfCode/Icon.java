@@ -4,7 +4,12 @@ public class Icon {
 
     private String symbol;
 
-    public Icon(String symbol){
+    private int x;
+    private int y;
+
+    public Icon(String symbol,int x, int y){
+        this.x = x;
+        this.y = y;
         this.symbol = symbol;
     }
 
@@ -14,6 +19,14 @@ public class Icon {
 
     public String getSymbol(){
         return symbol;
+    }
+
+    public int getX() {
+        return x;
+    }
+
+    public int getY() {
+        return y;
     }
 
 }

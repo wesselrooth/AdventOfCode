@@ -1,7 +1,5 @@
 package com.example.AdventOfCode;
 
-import com.fasterxml.jackson.annotation.JsonTypeInfo;
-
 import java.util.ArrayList;
 import java.util.List;
 
@@ -9,11 +7,15 @@ public class Row {
 
     List<Icon> rowContent = new ArrayList<>();
 
-    public Row(List<Icon> rowContent){
-        this.rowContent = rowContent;
+    public Row(){
+
     }
 
-    public Icon getItem(int i){
+    public void addIcon(Icon icon){
+        rowContent.add(icon);
+    }
+
+    public Icon getItem(int i) {
         return rowContent.get(i);
     }
 
