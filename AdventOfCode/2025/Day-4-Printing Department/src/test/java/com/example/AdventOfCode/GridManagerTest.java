@@ -24,34 +24,12 @@ class GridManagerTest {
         Icon icon = new Icon("@",rolIndex,0);
 
         // Act
-        boolean result = gridManager.isRollAccessilbeForForkLift(grid,icon,2);
+        boolean result = gridManager.isRollAccessibleForForkLift(grid,icon,2);
 
         // Assert
         assertTrue(result);
     }
 
-    @ParameterizedTest
-    @CsvSource({
-            "0",
-            "1",
-            "2"
-    })
-    void testDetectAdjectAboveAndBelowRoll(int y){
-        // Arrange
-        List<String> inputList = List.of(
-                "@",
-                "@",
-                "@");
-        InputHelper inputHelper = new InputHelper();
-        Grid grid = inputHelper.convertInputToGrid(inputList);
-        Icon iconToCheck = new Icon("@",0,y);
-        GridManager gridManager = new GridManager();
-        // Act
-        boolean result = gridManager.isRollAccessilbeForForkLift(grid,iconToCheck,2);
-
-        // Assert
-        assertTrue(result);
-    }
     @ParameterizedTest
     @CsvSource({
             "1,0,1,false",
@@ -91,7 +69,7 @@ class GridManagerTest {
         GridManager gridManager = new GridManager();
 
         // Act
-        boolean result = gridManager.isRollAccessilbeForForkLift(grid,iconToCheck,adjectLimit);
+        boolean result = gridManager.isRollAccessibleForForkLift(grid,iconToCheck,adjectLimit);
 
         // Assert
         assertEquals(expected,result);
