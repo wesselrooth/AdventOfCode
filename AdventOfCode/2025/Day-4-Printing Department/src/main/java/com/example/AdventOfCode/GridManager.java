@@ -2,7 +2,6 @@ package com.example.AdventOfCode;
 
 public class GridManager {
 
-
     public boolean isRollAccessibleForForkLift(Grid grid, Icon iconToCheck, long adjectLimit) {
 
         int adjectCount = 0;

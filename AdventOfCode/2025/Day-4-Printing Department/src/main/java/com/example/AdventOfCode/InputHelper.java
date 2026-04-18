@@ -12,15 +12,15 @@ import java.util.stream.Stream;
 
 public class InputHelper {
 
-    public List<List<String>> loadInput(String filename) throws URISyntaxException, IOException {
+    public List<String> loadInput(String filename) throws URISyntaxException, IOException {
 
         Path inputFile = Paths.get(
                 InputHelper.class.getClassLoader().getResource(filename).toURI()
         );
-        List<List<String>> resultList = new ArrayList<>();
+        List<String> resultList = new ArrayList<>();
         try (Stream<String> lines = Files.lines(inputFile)){
             for(String line: (Iterable<String>) lines::iterator ){
-                resultList.add(Arrays.asList(line.split("")));
+                resultList.add(line);
             }
         }
         return resultList;
