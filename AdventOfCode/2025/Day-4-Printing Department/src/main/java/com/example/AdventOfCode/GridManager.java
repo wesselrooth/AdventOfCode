@@ -2,8 +2,7 @@ package com.example.AdventOfCode;
 
 public class GridManager {
 
-    private boolean adjectAbove(Grid grid,Icon icon){
-
+    private boolean adjectAbove(Grid grid,Icon icon) {
         if (!(icon.getY() == 0)){
             Row rowAbove = grid.getRow(icon.getY() - 1 );
             Icon iconAbove = rowAbove.getItem(icon.getX());
@@ -15,7 +14,7 @@ public class GridManager {
     }
 
     private boolean adjectAboveRight(Grid grid, Icon icon) {
-        // Above Right
+
         if (!(icon.getY() == 0)){
             Row rowAbove = grid.getRow(icon.getY() - 1 );
             if (!(icon.getX() + 1 >= rowAbove.getRowContent().size())) {
@@ -29,7 +28,6 @@ public class GridManager {
     }
 
     public boolean adjectRight(Grid grid, Icon icon) {
-        // Right
         Row row = grid.getRow(icon.getY());
         if (!(icon.getX() + 1 >= row.getRowContent().size())){
             Icon iconRight = row.getItem(icon.getX() + 1);
@@ -40,14 +38,14 @@ public class GridManager {
         return false;
     }
 
-    private boolean adjectRightBelow(Grid grid, Icon icon){
+    private boolean adjectRightBelow(Grid grid, Icon icon) {
         // Below Right
-        if (!(icon.getY() + 1 >= grid.getRows().size())){
+        if (!(icon.getY() + 1 >= grid.getRows().size())) {
             Row nextRow = grid.getRow(icon.getY() + 1);
 
-            if (!(icon.getX() + 1 >= grid.getRows().size())){
+            if (!(icon.getX() + 1 >= grid.getRows().size())) {
                 Icon iconBelowRight = nextRow.getItem(icon.getX() + 1);
-                if (iconBelowRight.getSymbol().equals("@")){
+                if (iconBelowRight.getSymbol().equals("@")) {
                     return true;
                 }
             }
@@ -55,24 +53,24 @@ public class GridManager {
         return false;
     }
 
-    public boolean adjectBelow(Grid grid, Icon icon){
+    public boolean adjectBelow(Grid grid, Icon icon) {
 
-        if (!(icon.getY() + 1 >= grid.getRows().size())){
+        if (!(icon.getY() + 1 >= grid.getRows().size())) {
             Row nextRow = grid.getRow(icon.getY() + 1);
             Icon iconBelow = nextRow.getItem(icon.getX());
-            if (iconBelow.getSymbol().equals("@")){
+            if (iconBelow.getSymbol().equals("@")) {
                 return true;
             }
         }
         return false;
     }
 
-    private boolean adjectBelowLeft(Grid grid, Icon icon){
-        if (!(icon.getY() + 1 >= grid.getRows().size())){
+    private boolean adjectBelowLeft(Grid grid, Icon icon) {
+        if (!(icon.getY() + 1 >= grid.getRows().size())) {
             Row nextRow = grid.getRow(icon.getY() + 1);
             if (!(icon.getX() == 0 )) {
                 Icon belowLeft = nextRow.getItem(icon.getX() -1);
-                if (belowLeft.getSymbol().equals("@")){
+                if (belowLeft.getSymbol().equals("@")) {
                     return true;
                 }
             }
@@ -80,10 +78,10 @@ public class GridManager {
         return false;
     }
 
-    private boolean adjectLeft(Grid grid, Icon icon){
+    private boolean adjectLeft(Grid grid, Icon icon) {
 
         Row row = grid.getRow(icon.getY());
-        if (!(icon.getX() == 0 )){
+        if (!(icon.getX() == 0 )) {
             Icon iconLeft = row.getItem(icon.getX() -1);
             if (iconLeft.getSymbol().equals("@")){
                 return true;
@@ -92,9 +90,9 @@ public class GridManager {
         return false;
     }
 
-    private boolean adjectLeftAbove(Grid grid, Icon icon){
+    private boolean adjectLeftAbove(Grid grid, Icon icon) {
 
-        if (!(icon.getY() == 0)){
+        if (!(icon.getY() == 0)) {
             Row rowAbove = grid.getRow( icon.getY() - 1);
             if (!(icon.getX() == 0 )){
                 Icon iconLeftAbove = rowAbove.getItem(icon.getX() -1);
@@ -106,7 +104,7 @@ public class GridManager {
         return false;
     }
 
-    public boolean isRollAccessibleForForkLift(Grid grid, Icon iconToCheck, long adjectLimit){
+    public boolean isRollAccessibleForForkLift(Grid grid, Icon iconToCheck, long adjectLimit) {
 
         int adjectCount = 0;
 
