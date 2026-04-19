@@ -1,5 +1,6 @@
 package com.example.AdventOfCode;
 
+import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.CsvSource;
 
@@ -76,5 +77,23 @@ class GridManagerTest {
     }
 
 
+    @Test
+    void changeRollToCros() {
+        // Arrange
+        GridManager gridManager = new GridManager();
+        InputHelper inputHelper = new InputHelper();
+        Row row = inputHelper.convertInputToGrid(List.of(".@.")).getRows().get(0);
+        Icon icon = new Icon("@",1,0);
+        String expected = ".X.";
 
+        // Act
+        Row resultRow = gridManager.changeRollToCros(row,icon);
+
+        // Assert
+        String resultString = "";
+        for (Icon resultIcon: resultRow.getRowContent()){
+            resultString += resultIcon.getSymbol();
+        }
+        assertEquals(expected,resultString);
+    }
 }

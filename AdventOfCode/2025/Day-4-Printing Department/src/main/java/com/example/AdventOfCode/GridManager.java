@@ -33,4 +33,36 @@ public class GridManager {
         return adjectCount < adjectLimit;
     }
 
+    public long calculateRollsAccessible(Grid grid){
+        long amountOfRollsAccessible = 0;
+
+        for (int y = 0; y < grid.getRows().size(); y++) {
+
+            Row row = grid.getRow(y);
+            String rowString = "";
+            for (Icon icon: row.getRowContent()) {
+
+                if (icon.getSymbol().equals("@")){
+                    if (isRollAccessibleForForkLift(grid,icon,4)) {
+//                        row.getRowContent().get(icon.getX()).setSymbol("X");
+                        amountOfRollsAccessible++;
+                    }
+                }
+
+                rowString += icon.getSymbol();
+
+            }
+            System.out.println(rowString);
+
+        }
+
+        return amountOfRollsAccessible;
+
+    }
+
+    public Row changeRollToCros(Row row, Icon icon) {
+        row.getRowContent().get(icon.getX()).setSymbol("X");
+        return row;
+    }
+
 }
