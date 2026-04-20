@@ -6,25 +6,25 @@ public class GridManager {
 
         int adjectCount = 0;
         AdjectDetector adjectDetector = new AdjectDetector();
-        if (adjectDetector.adjectAbove(grid,iconToCheck)){
+        if (adjectDetector.adjectAbove(grid,iconToCheck)) {
             adjectCount++;
         }
-        if (adjectDetector.adjectAboveRight(grid,iconToCheck)){
+        if (adjectDetector.adjectAboveRight(grid,iconToCheck)) {
             adjectCount++;
         }
-        if (adjectDetector.adjectRight(grid,iconToCheck)){
+        if (adjectDetector.adjectRight(grid,iconToCheck)) {
             adjectCount++;
         }
-        if (adjectDetector.adjectRightBelow(grid,iconToCheck)){
+        if (adjectDetector.adjectRightBelow(grid,iconToCheck)) {
             adjectCount++;
         }
-        if (adjectDetector.adjectBelow(grid,iconToCheck)){
+        if (adjectDetector.adjectBelow(grid,iconToCheck)) {
             adjectCount++;
         }
-        if (adjectDetector.adjectBelowLeft(grid,iconToCheck)){
+        if (adjectDetector.adjectBelowLeft(grid,iconToCheck)) {
             adjectCount++;
         }
-        if (adjectDetector.adjectLeft(grid,iconToCheck)){
+        if (adjectDetector.adjectLeft(grid,iconToCheck)) {
             adjectCount++;
         }
         if (adjectDetector.adjectLeftAbove(grid,iconToCheck)) {
@@ -33,27 +33,19 @@ public class GridManager {
         return adjectCount < adjectLimit;
     }
 
-    public long calculateRollsAccessible(Grid grid){
+    public long calculateRollsAccessible(Grid grid) {
         long amountOfRollsAccessible = 0;
 
         for (int y = 0; y < grid.getRows().size(); y++) {
 
             Row row = grid.getRow(y);
-            String rowString = "";
             for (Icon icon: row.getRowContent()) {
-
                 if (icon.getSymbol().equals("@")){
                     if (isRollAccessibleForForkLift(grid,icon,4)) {
-//                        row.getRowContent().get(icon.getX()).setSymbol("X");
                         amountOfRollsAccessible++;
                     }
                 }
-
-                rowString += icon.getSymbol();
-
             }
-            System.out.println(rowString);
-
         }
 
         return amountOfRollsAccessible;
