@@ -35,28 +35,26 @@ public class GridManager {
 
     public long calculateRollsAccessible(Grid grid){
         long amountOfRollsAccessible = 0;
+        long totalamount = 0;
 
-        for (int y = 0; y < grid.getRows().size(); y++) {
-
-            Row row = grid.getRow(y);
-            String rowString = "";
-            for (Icon icon: row.getRowContent()) {
-
-                if (icon.getSymbol().equals("@")){
-                    if (isRollAccessibleForForkLift(grid,icon,4)) {
-//                        row.getRowContent().get(icon.getX()).setSymbol("X");
-                        amountOfRollsAccessible++;
+        do {
+            amountOfRollsAccessible = 0;
+            for (int y = 0; y < grid.getRows().size(); y++) {
+                Row row = grid.getRow(y);
+                for (Icon icon: row.getRowContent()) {
+                    if (icon.getSymbol().equals("@")){
+                        if (isRollAccessibleForForkLift(grid,icon,4)) {
+                            row.getRowContent().get(icon.getX()).setSymbol("X");
+                            amountOfRollsAccessible++;
+                            totalamount++;
+                        }
                     }
                 }
-
-                rowString += icon.getSymbol();
-
             }
-            System.out.println(rowString);
 
-        }
+        }while (amountOfRollsAccessible != 0);
 
-        return amountOfRollsAccessible;
+        return totalamount;
 
     }
 

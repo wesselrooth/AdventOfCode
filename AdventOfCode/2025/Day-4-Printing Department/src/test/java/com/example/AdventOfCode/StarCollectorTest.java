@@ -13,8 +13,8 @@ class StarCollectorTest {
 
     @ParameterizedTest
     @CsvSource({
-            "test-input,13",
-            "puzzle-input, 13",
+            "test-input,43",
+            "puzzle-input, 9024",
     })
     void partOne(String filename, long expected) throws URISyntaxException, IOException {
         // Arrange
