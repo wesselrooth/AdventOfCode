@@ -12,7 +12,7 @@ class StartCollectorTest {
     @ParameterizedTest
     @CsvSource({
             "test-input,3",
-            "puzzle-input,3"
+            "puzzle-input,525"
     })
     void testPartOne(String filename,long expected) throws URISyntaxException, IOException {
         // Arrange
