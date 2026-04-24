@@ -57,4 +57,17 @@ class RangeDetectorTest {
         assertEquals(expected,result);
     }
 
+    @Test
+    void testCalculateFreshIds() {
+        // Arrange
+        Range range = new Range(3,5);
+        RangeDetector rangeDetector = new RangeDetector(List.of(range));
+        long expected = 3L;
+
+        // Act
+        long result = rangeDetector.calculateFreshIds();
+
+        // Assert
+        assertEquals(result,expected);
+    }
 }

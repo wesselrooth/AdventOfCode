@@ -25,4 +25,20 @@ class StartCollectorTest {
         assertEquals(expected,result);
     }
 
+    @ParameterizedTest
+    @CsvSource({
+            "test-input,14",
+            "puzzle-input,525"
+    })
+    void testPartTwo(String filename,long expected) throws URISyntaxException, IOException {
+        // Arrange
+        StartCollector startCollector = new StartCollector();
+
+        // Act
+        long result = startCollector.partTwo_CalculateAllFreshIds(filename);
+
+        // Assert
+        assertEquals(expected,result);
+    }
+
 }
