@@ -11,15 +11,6 @@ import static org.junit.jupiter.api.Assertions.assertNotNull;
 
 class RangeDetectorTest {
 
-    @Test
-    void testRange(){
-        // Arrange + Act
-        RangeDetector rangeDetector = new RangeDetector(new ArrayList<>());
-
-        // Assert
-        assertNotNull(rangeDetector);
-    }
-
     @ParameterizedTest
     @CsvSource({
             "0,true",
