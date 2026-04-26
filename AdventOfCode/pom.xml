@@ -10,16 +10,17 @@
     <packaging>pom</packaging>
 
     <modules>
-        <module>2024/Day1-Historian-Hysteria</module>
-        <module>2024/Day2-Red-Nosed-Reactor</module>
-        <module>2024/Day11-StoneMemorization</module>
-        <module>2024/Day12-GardenGroups</module>
-        <module>2025/Day1-Secret-Entrance</module>
+        <module>2024/Day-1-Historian-Hysteria</module>
+        <module>2024/Day-2-Red-Nosed-Reactor</module>
+        <module>2024/Day-11-StoneMemorization</module>
+        <module>2024/Day-12-GardenGroups</module>
+        <module>2025/Day-1-Secret-Entrance</module>
         <module>2025/Day-2-Gift-Shop</module>
         <module>2025/Day-7-Laboratories</module>
         <module>2024/Day-7-Bridge-Repair</module>
         <module>2022/Day-10-Cathode-Ray-Tube</module>
         <module>2025/Day-3-Lobby</module>
+        <module>2025/Day-4-Printing Department</module>
     </modules>
 
     <properties>

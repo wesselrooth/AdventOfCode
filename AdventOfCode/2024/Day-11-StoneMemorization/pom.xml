@@ -10,5 +10,5 @@
         <relativePath>../../pom.xml</relativePath>
     </parent>
 
-    <artifactId>Day11-StoneMemorization</artifactId>
+    <artifactId>Day-11-StoneMemorization</artifactId>
 </project>

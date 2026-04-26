@@ -10,5 +10,5 @@
         <relativePath>../../pom.xml</relativePath>
     </parent>
 
-    <artifactId>Day12-GardenGroups</artifactId>
+    <artifactId>Day-12-GardenGroups</artifactId>
 </project>

@@ -10,7 +10,7 @@
         <relativePath>../../pom.xml</relativePath>
     </parent>
 
-    <artifactId>Day1-Secret-Entrance</artifactId>
+    <artifactId>Day-1-Secret-Entrance</artifactId>
 
 
 </project>
