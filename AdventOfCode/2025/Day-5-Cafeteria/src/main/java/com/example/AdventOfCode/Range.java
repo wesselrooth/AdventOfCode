@@ -4,7 +4,7 @@ public class Range {
 
     private long min;
     private long max;
-    private boolean redundent = false;
+    private boolean redundant = false;
 
     public Range(long min, long max){
         this.min = min;
@@ -28,9 +28,9 @@ public class Range {
     }
 
     public void setRedundent(boolean redundent){
-        this.redundent = redundent;
+        this.redundant = redundent;
     }
     public boolean getRedundent(){
-        return redundent;
+        return redundant;
     }
 }

@@ -74,15 +74,12 @@ public class RangeDetector {
     }
 
     public List<Long> returnFreshIds(List<Long> idList) {
-
         List<Long> resultList = new ArrayList<>();
-
         for (Long id: idList){
             if (isIdInAnyRange(id)){
                 resultList.add(id);
             }
         }
-
         return resultList;
     }
 }
