@@ -198,7 +198,7 @@ class RangeDetectorTest {
         assertEquals(expected,result);
     }
     @Test
-    void testExample() {
+    void testPuzzleExample() {
         // Arrange
         List<Range> rangeList = List.of(
                 new Range(3, 5),
