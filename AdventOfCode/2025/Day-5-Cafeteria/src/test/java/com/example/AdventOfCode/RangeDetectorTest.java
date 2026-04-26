@@ -61,4 +61,22 @@ class RangeDetectorTest {
         // Assert
         assertEquals(result,expected);
     }
+
+    @Test
+    void testRangeOverlapsMultipleRanges() {
+        // Arrange
+        List<Range> rangeList = List.of(
+                new Range(2,3),
+                new Range(5,6),
+                new Range(1,7)
+        );
+        RangeDetector rangeDetector = new RangeDetector(rangeList);
+        long expected = 7;
+
+        // Act
+        long result = rangeDetector.calculateFreshIds();
+
+        // Assert
+        assertEquals(expected,result);
+    }
 }

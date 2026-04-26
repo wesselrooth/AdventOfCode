@@ -27,19 +27,36 @@ public class RangeDetector {
 
             for (int i = 0; i < checkedRanges.size(); i++) {
                 Range checkRange = checkedRanges.get(i);
+
+                if (checkRange.getRedundent() == true){
+                    continue;
+                }
+
                 if (range.getMin() >= checkRange.getMin() && range.getMax() <= checkRange.getMax()) {
                     continue RANGELOOP;
                 }
-                if (range.getMin() > checkRange.getMin() && range.getMin() < checkRange.getMax()) {
+                if (range.getMin() >= checkRange.getMin() && range.getMin() <= checkRange.getMax()) {
                     range.setMin(checkRange.getMax() + 1);
                 }
-                if (range.getMax() > checkRange.getMin() && range.getMax() < checkRange.getMax()) {
+                if (range.getMax() >= checkRange.getMin() && range.getMax() <= checkRange.getMax()) {
                     range.setMax(checkRange.getMin() - 1);
                 }
+
+                if (range.getMin() <= checkRange.getMin() && range.getMax() >= checkRange.getMax()){
+                    checkRange.setRedundent(true);
+                }
+
             }
             checkedRanges.add(range);
+        }
+
+        for (Range range: checkedRanges){
+            if (range.getRedundent() == true){
+                continue;
+            }
             result += Math.abs(range.getMin() - range.getMax()) + 1;
         }
+
         return result;
     }
 
