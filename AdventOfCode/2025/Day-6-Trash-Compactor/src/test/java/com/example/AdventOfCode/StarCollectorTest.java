@@ -1,6 +1,5 @@
 package com.example.AdventOfCode;
 
-import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.CsvSource;
 
@@ -14,7 +13,7 @@ class StarCollectorTest {
     @ParameterizedTest
     @CsvSource({
             "test-input,4277556",
-            "puzzle-input,0"
+            "puzzle-input,5322004718681"
     })
     void test(String filename, Long expected) throws URISyntaxException, IOException {
         // Arrange
