@@ -15,7 +15,7 @@ class StarCollectorTest {
             "test-input,4277556",
             "puzzle-input,5322004718681"
     })
-    void test(String filename, Long expected) throws URISyntaxException, IOException {
+    void testPartOne(String filename, Long expected) throws URISyntaxException, IOException {
         // Arrange
         StarCollector starCollector = new StarCollector();
 
@@ -25,5 +25,22 @@ class StarCollectorTest {
         // Assert
         assertEquals(expected,result);
     }
+
+    @ParameterizedTest
+    @CsvSource({
+            "test-input,3263827",
+            "puzzle-input,0"
+    })
+    void testPartTwo(String filename, Long expected) throws URISyntaxException, IOException {
+        // Arrange
+        StarCollector starCollector = new StarCollector();
+
+        // Act
+        long result = starCollector.partTwo(filename);
+
+        // Assert
+        assertEquals(expected,result);
+    }
+
 
 }

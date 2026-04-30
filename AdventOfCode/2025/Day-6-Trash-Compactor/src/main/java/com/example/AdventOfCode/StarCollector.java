@@ -18,4 +18,19 @@ public class StarCollector {
         }
         return result;
     }
+
+    public long partTwo(String filename) throws URISyntaxException, IOException {
+        InputLoader inputLoader = new InputLoader();
+        Grid grid = inputLoader.convertInputToGrid(filename);
+        GridHelper gridHelper = new GridHelper();
+        grid = gridHelper.calculateColumnsForGrid(grid);
+        long result = 0;
+        ColumnManager columnManager = new ColumnManager();
+        for(Collumn collumn: grid.getCollumns()) {
+            columnManager.generateNumberStrings(collumn);
+            long columnResult = columnManager.calculateColumnOutput(collumn);
+            result += columnResult;
+        }
+        return result;
+    }
 }

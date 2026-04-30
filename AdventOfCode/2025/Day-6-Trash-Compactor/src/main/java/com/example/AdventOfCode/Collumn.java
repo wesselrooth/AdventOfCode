@@ -30,11 +30,19 @@ public class Collumn {
         this.numberList.add(number);
     }
 
+    public void setNumber(Long number, int index){
+        this.numberList.set(index, number);
+    }
+
     public List<String> getNumberStringList() {
         return numberStringList;
     }
 
     public void setNumberStringList(List<String> numberStringList) {
         this.numberStringList = numberStringList;
+    }
+
+    public void addNumberString(String numberString){
+        this.numberStringList.add(numberString);
     }
 }

@@ -76,10 +76,10 @@ class ColumnManagerTest {
             "1,1,*,1",
             "1,1,+,1",
     })
-    void padNumbers(String number1, String number2, String oparent, String expected) {
+    void padNumbers(long number1, long number2, String oparent, String expected) {
         // Arrange
         Collumn collumn = new Collumn();
-        collumn.setNumberStringList(Arrays.asList(number1,number2));
+        collumn.setNumberList(Arrays.asList(number1,number2));
         collumn.setOparent(oparent);
         ColumnManager columnManager = new ColumnManager();
 
@@ -102,10 +102,10 @@ class ColumnManagerTest {
         "20,10,+,21",
         "20,20,+,22",
     })
-    void generateNumberStrings(String number1, String number2, String oparent, long expected) {
+    void generateNumberStrings(long number1, long number2, String oparent, long expected) {
         // Arrange
         Collumn collumn = new Collumn();
-        collumn.setNumberStringList(Arrays.asList(number1,number2));
+        collumn.setNumberList(Arrays.asList(number1,number2));
         collumn.setOparent(oparent);
         ColumnManager columnManager = new ColumnManager();
 
@@ -124,10 +124,10 @@ class ColumnManagerTest {
             "51,387,215,*,3253600",
             "64,23,314,+,1058",
     })
-    void test(String number1, String number2,String number3, String oparent, long expected) {
+    void test(long number1, long number2,long number3, String oparent, long expected) {
         // Arrange
         Collumn collumn = new Collumn();
-        collumn.setNumberStringList(Arrays.asList(number1,number2,number3));
+        collumn.setNumberList(Arrays.asList(number1,number2,number3));
         collumn.setOparent(oparent);
         ColumnManager columnManager = new ColumnManager();
 

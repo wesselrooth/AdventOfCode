@@ -24,41 +24,31 @@ public class ColumnManager {
     }
 
     public Collumn padNumbers(Collumn collumn) {
-
         int longestNumberSize = getLongestNumberStringSize(collumn);
-
         return switch (collumn.getOparent()) {
             case "*" -> {
-
-                for (int i = 0; i < collumn.getNumberStringList().size(); i++) {
-                    String numberString = collumn.getNumberStringList().get(i);
-
+                for (int i = 0; i < collumn.getNumberList().size(); i++) {
+                    String numberString = collumn.getNumberList().get(i).toString();
                     if (numberString.length() < longestNumberSize) {
                         for (int j = numberString.length(); j < longestNumberSize; j++) {
                             numberString = "#" + numberString;
                         }
-
                     }
-                    collumn.getNumberStringList().set(i, numberString);
-
+                    collumn.addNumberString(numberString);
                 }
-
                 yield collumn;
             }
             case "+" -> {
 
-                for (int i = 0; i < collumn.getNumberStringList().size(); i++) {
-                    String numberString = collumn.getNumberStringList().get(i);
-
+                for (int i = 0; i < collumn.getNumberList().size(); i++) {
+                    String numberString = collumn.getNumberList().get(i).toString();
                     if (numberString.length() < longestNumberSize) {
                         for (int j = numberString.length(); j < longestNumberSize; j++) {
                             numberString = numberString + "#";
                         }
-
                     }
-                    collumn.getNumberStringList().set(i, numberString);
+                    collumn.addNumberString(numberString);
                 }
-
                 yield collumn;
             }
             default -> throw new IllegalArgumentException("Unexpected value: " + collumn.getOparent());
@@ -78,16 +68,16 @@ public class ColumnManager {
                 }
                 numberString.append(number);
             }
-            collumn.addNumber(Long.valueOf(numberString.toString()));
+            collumn.setNumber(Long.valueOf(numberString.toString()),i);
         }
         return collumn;
     }
 
     private int getLongestNumberStringSize(Collumn collumn) {
         int longestNumberSize = 0;
-        for (String numberString : collumn.getNumberStringList()) {
-            if (numberString.length() > longestNumberSize) {
-                longestNumberSize = numberString.length();
+        for (Long numberString : collumn.getNumberList()) {
+            if (numberString.toString().length() > longestNumberSize) {
+                longestNumberSize = numberString.toString().length();
             }
         }
         return longestNumberSize;
