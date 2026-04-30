@@ -74,6 +74,8 @@ class ColumnManagerTest {
             "1,10,+,1#",
             "1,100,+,1##",
             "1,100,*,##1",
+            "1,1,*,1",
+            "1,1,+,1",
     })
     void padNumbers(String number1, String number2, String oparent, String expected) {
         // Arrange
