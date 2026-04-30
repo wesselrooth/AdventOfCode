@@ -7,6 +7,7 @@ public class Collumn {
 
     private List<Long> numberList = new ArrayList<>();
     private List<String> numberStringList = new ArrayList<>();
+
     private String oparent;
 
     public List<Long> getNumberList() {
@@ -29,12 +30,10 @@ public class Collumn {
         this.numberList.add(number);
     }
 
-    public void addNumberString(String numberString){
-        this.numberStringList.add(numberString);
-    }
     public List<String> getNumberStringList() {
         return numberStringList;
     }
+
     public void setNumberStringList(List<String> numberStringList) {
         this.numberStringList = numberStringList;
     }

@@ -1,6 +1,5 @@
 package com.example.AdventOfCode;
 
-import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.CsvSource;
 
@@ -90,5 +89,53 @@ class ColumnManagerTest {
 
         // Assert
         assertEquals(expected, paddedNumberResult);
+    }
+
+    @ParameterizedTest
+    @CsvSource({
+        "1,10,+,11",
+        "1,1,+,11",
+        "10,1,+,11",
+        "10,10,+,11",
+        "10,20,+,12",
+        "20,20,+,22",
+        "20,10,+,21",
+        "20,20,+,22",
+    })
+    void generateNumberStrings(String number1, String number2, String oparent, long expected) {
+        // Arrange
+        Collumn collumn = new Collumn();
+        collumn.setNumberStringList(Arrays.asList(number1,number2));
+        collumn.setOparent(oparent);
+        ColumnManager columnManager = new ColumnManager();
+
+        // Act
+        collumn = columnManager.generateNumberStrings(collumn);
+        long result = collumn.getNumberList().get(0);
+
+        // Assert
+        assertEquals(expected,result);
+    }
+
+    @ParameterizedTest
+    @CsvSource({
+            "123,45,6,*,8544",
+            "328,64,98,+,625",
+            "51,387,215,*,3253600",
+            "64,23,314,+,1058",
+    })
+    void test(String number1, String number2,String number3, String oparent, long expected) {
+        // Arrange
+        Collumn collumn = new Collumn();
+        collumn.setNumberStringList(Arrays.asList(number1,number2,number3));
+        collumn.setOparent(oparent);
+        ColumnManager columnManager = new ColumnManager();
+
+        // Act
+        collumn = columnManager.generateNumberStrings(collumn);
+        long result = columnManager.calculateColumnOutput(collumn);
+
+        // Assert
+        assertEquals(expected,result);
     }
 }

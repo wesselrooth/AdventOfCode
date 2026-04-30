@@ -65,6 +65,24 @@ public class ColumnManager {
         };
     }
 
+    public Collumn generateNumberStrings(Collumn collumn) {
+
+        collumn = padNumbers(collumn);
+        for (int i = 0; i < collumn.getNumberStringList().get(0).length(); i++) {
+            StringBuilder numberString = new StringBuilder();
+            for (int numberRow = 0; numberRow < collumn.getNumberStringList().size(); numberRow++) {
+                String baseString = collumn.getNumberStringList().get(numberRow);
+                char number = baseString.charAt(i);
+                if (number == '#'){
+                    continue;
+                }
+                numberString.append(number);
+            }
+            collumn.addNumber(Long.valueOf(numberString.toString()));
+        }
+        return collumn;
+    }
+
     private int getLongestNumberStringSize(Collumn collumn) {
         int longestNumberSize = 0;
         for (String numberString : collumn.getNumberStringList()) {
