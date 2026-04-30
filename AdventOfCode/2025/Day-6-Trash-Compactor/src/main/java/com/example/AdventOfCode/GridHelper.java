@@ -1,11 +1,8 @@
 package com.example.AdventOfCode;
 
-import java.util.List;
-
 public class GridHelper {
 
     public Grid calculateColumnsForGrid(Grid grid){
-
 
         for (int columnIndex = 0; columnIndex < grid.getRow(0).rowContent.size(); columnIndex++) {
             Collumn collumn = new Collumn();
@@ -29,4 +26,6 @@ public class GridHelper {
         }
         return grid;
     }
+
+
 }

@@ -11,9 +11,9 @@ public class StarCollector {
         GridHelper gridHelper = new GridHelper();
         grid = gridHelper.calculateColumnsForGrid(grid);
         long result = 0;
-        ColumnCalculator columnCalculator = new ColumnCalculator();
+        ColumnManager columnManager = new ColumnManager();
         for(Collumn collumn: grid.getCollumns()) {
-            long columnResult = columnCalculator.calculateColumnOutput(collumn);
+            long columnResult = columnManager.calculateColumnOutput(collumn);
             result += columnResult;
         }
         return result;
