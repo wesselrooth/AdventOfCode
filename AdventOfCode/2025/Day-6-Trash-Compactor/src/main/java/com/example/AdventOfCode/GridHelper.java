@@ -3,17 +3,22 @@ import java.util.List;
 
 public class GridHelper {
 
-    public Grid calculateColumnsForGrid(Grid grid){
-
+    private int calculateLongestRowSize(Grid grid) {
         int longestRowSize = 0;
-        final int columnDepth = grid.getRows().size();
         for (Row row: grid.getRows()){
             if (row.getRowContent().size() > longestRowSize){
                 longestRowSize = row.getRowContent().size();
             }
         }
-        Collumn collumn = null;
+        return longestRowSize;
+    }
 
+    public Grid calculateColumnsForGrid(Grid grid){
+
+        int longestRowSize = calculateLongestRowSize(grid);
+        final int columnDepth = grid.getRows().size();
+
+        Collumn collumn = null;
         for (int charIndex = 0; charIndex < longestRowSize; charIndex++) {
             if (collumn == null){
                 collumn = new Collumn();
@@ -28,8 +33,6 @@ public class GridHelper {
                 String rowCharacter = "";
                 if (charIndex < rowContent.size()){
                     rowCharacter = rowContent.get(charIndex);
-                }else {
-                    System.out.println("te groot");
                 }
 
                 if (rowCharacter.equals("*") | rowCharacter.equals("+")) {
@@ -39,7 +42,6 @@ public class GridHelper {
 
                 if (rowCharacter.isEmpty() || rowCharacter.isBlank()) {
                     emptyCharacterinRowCount++;
-
                 }
                 numberString.append(rowCharacter);
 
