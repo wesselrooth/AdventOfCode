@@ -24,7 +24,7 @@ public class InputLoader {
                     continue;
                 }
                 Row row = new Row();
-                List<String> rowItems = Arrays.stream(line.trim().split("\\s+")).toList();
+                List<String> rowItems = Arrays.stream(line.split("")).toList();
                 row.setRowContent(rowItems);
 
                 grid.addRow(row);
@@ -32,4 +32,7 @@ public class InputLoader {
         }
         return grid;
     }
+
+
+
 }

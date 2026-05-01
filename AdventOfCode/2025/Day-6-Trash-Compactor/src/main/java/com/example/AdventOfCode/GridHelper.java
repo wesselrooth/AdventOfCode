@@ -1,28 +1,61 @@
 package com.example.AdventOfCode;
+import java.util.List;
 
 public class GridHelper {
 
     public Grid calculateColumnsForGrid(Grid grid){
 
-        for (int columnIndex = 0; columnIndex < grid.getRow(0).rowContent.size(); columnIndex++) {
-            Collumn collumn = new Collumn();
+        int longestRowSize = 0;
+        final int columnDepth = grid.getRows().size();
+        for (Row row: grid.getRows()){
+            if (row.getRowContent().size() > longestRowSize){
+                longestRowSize = row.getRowContent().size();
+            }
+        }
+        Collumn collumn = null;
 
-            for (int rowIndex = 0; rowIndex < grid.getRows().size(); rowIndex++) {
-                String itemString  = grid.getRow(rowIndex).getRowContent().get(columnIndex);
+        for (int charIndex = 0; charIndex < longestRowSize; charIndex++) {
+            if (collumn == null){
+                collumn = new Collumn();
+            }
 
-                try {
-                    Long number = Long.valueOf(itemString);
-                    collumn.addNumber(number);
-                } catch (NumberFormatException e) {
+            int emptyCharacterinRowCount = 0;
+            StringBuilder numberString = new StringBuilder();
 
-                    if (itemString.equals("*") | itemString.equals("+")){
-                        collumn.setOparent(itemString);
-                    }else {
-                        throw new IllegalArgumentException("Unexpected value: " + itemString);
-                    }
+            for (Row row: grid.getRows()) {
+                List<String> rowContent = row.getRowContent();
+
+                String rowCharacter = "";
+                if (charIndex < rowContent.size()){
+                    rowCharacter = rowContent.get(charIndex);
+                }else {
+                    System.out.println("te groot");
+                }
+
+                if (rowCharacter.equals("*") | rowCharacter.equals("+")) {
+                    collumn.setOparent(rowCharacter);
+                    continue;
+                }
+
+                if (rowCharacter.isEmpty() || rowCharacter.isBlank()) {
+                    emptyCharacterinRowCount++;
+
+                }
+                numberString.append(rowCharacter);
+
+                if (emptyCharacterinRowCount == columnDepth) {
+                    grid.addCollumn(collumn);
+                    collumn = null;
                 }
             }
-            grid.addCollumn(collumn);
+
+            if (emptyCharacterinRowCount != columnDepth) {
+                collumn.addNumber(Long.valueOf(numberString.toString().trim()));
+            }
+
+            if (charIndex == longestRowSize -1) {
+                grid.addCollumn(collumn);
+            }
         }
         return grid;
     }

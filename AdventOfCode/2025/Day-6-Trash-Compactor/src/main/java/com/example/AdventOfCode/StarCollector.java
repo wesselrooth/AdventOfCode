@@ -27,7 +27,7 @@ public class StarCollector {
         long result = 0;
         ColumnManager columnManager = new ColumnManager();
         for(Collumn collumn: grid.getCollumns()) {
-            columnManager.generateNumberStrings(collumn);
+
             long columnResult = columnManager.calculateColumnOutput(collumn);
             result += columnResult;
         }
