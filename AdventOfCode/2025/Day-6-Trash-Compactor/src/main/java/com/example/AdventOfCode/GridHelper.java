@@ -61,6 +61,4 @@ public class GridHelper {
         }
         return grid;
     }
-
-
 }
