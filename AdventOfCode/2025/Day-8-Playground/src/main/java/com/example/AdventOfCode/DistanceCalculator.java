@@ -7,8 +7,7 @@ public class DistanceCalculator {
         double yDistance = Math.pow(box1.getY() - box2.getY(), 2);
         double zDistance = Math.pow(box1.getZ() - box2.getZ(), 2);
         double sum = xDistance + yDistance + zDistance;
-        double squireRoot = Math.sqrt(sum);
-        return squireRoot;
+        return Math.sqrt(sum);
     }
 
 }
