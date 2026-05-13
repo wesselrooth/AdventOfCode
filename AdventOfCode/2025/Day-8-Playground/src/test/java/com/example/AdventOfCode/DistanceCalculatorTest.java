@@ -7,7 +7,6 @@ import static org.junit.jupiter.api.Assertions.*;
 
 class DistanceCalculatorTest {
 
-
     @ParameterizedTest
     @CsvSource({
             "0, 0, 0, 0, 0, 0, 0",
@@ -19,7 +18,6 @@ class DistanceCalculatorTest {
             "-1, -2, -3, -4, -6, -6, 5.830951894845301",
             "-1, 2, -3, 4, -6, 3, 11.180339887498949",
             "10, 20, 30, 40, 50, 60, 51.96152422706632"
-
     })
     void calculateEuclideanDistance(long leftX, long leftY, long leftZ, long rightX, long rightY, long rightZ, double expected) {
         // Arrange
@@ -33,5 +31,4 @@ class DistanceCalculatorTest {
         // Assert
         assertEquals(expected, result);
     }
-
 }
