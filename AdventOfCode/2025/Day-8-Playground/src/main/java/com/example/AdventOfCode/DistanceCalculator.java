@@ -14,7 +14,7 @@ public class DistanceCalculator {
         return Math.sqrt(sum);
     }
 
-    public HashMap<DistanceJunctionBoxCombination, Double> calculateJunctionBoxPairDistances(List<JunctionBox> junctionBoxes) {
+    public Map<DistanceJunctionBoxCombination, Double> calculateJunctionBoxPairDistances(List<JunctionBox> junctionBoxes) {
         junctionBoxes = calculateDistancePerJunctionBox(junctionBoxes);
 
         return calculateAllDistanceCombinations(junctionBoxes);
