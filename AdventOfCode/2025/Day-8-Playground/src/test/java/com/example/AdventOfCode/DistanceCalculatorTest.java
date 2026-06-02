@@ -38,7 +38,7 @@ class DistanceCalculatorTest {
     }
 
     @Test
-    void testCalculateJunctionBoxPair_Distance_AtTheSameSpot() {
+    void testCalculateJunctionBoxPairDistance_AtTheSameSpot() {
         // Arrange
         DistanceCalculator distanceCalculator = new DistanceCalculator();
 
@@ -61,7 +61,7 @@ class DistanceCalculatorTest {
     }
 
     @Test
-    void testCalculateJunctionBoxPair_Distance_WithSmallDifference() {
+    void testCalculateJunctionBoxPairDistance_WithSmallDifference() {
         // Arrange
         DistanceCalculator distanceCalculator = new DistanceCalculator();
 
@@ -84,7 +84,7 @@ class DistanceCalculatorTest {
     }
 
     @Test
-    void testCalculateJunctionBoxPair_Distance_WithSmallDifference1() {
+    void testCalculateJunctionBoxPairDistance_WithSmallDifference1() {
         // Arrange
         DistanceCalculator distanceCalculator = new DistanceCalculator();
 
@@ -105,7 +105,7 @@ class DistanceCalculatorTest {
     }
 
     @Test
-    void testCalculateJunctionBoxPair_Distance_InTheMiddleOf2Points() {
+    void testCalculateJunctionBoxPairDistance_InTheMiddleOf2Points() {
         // Arrange
         DistanceCalculator distanceCalculator = new DistanceCalculator();
 
@@ -174,7 +174,7 @@ class DistanceCalculatorTest {
     }
 
     @Test
-    void testCalculateJunctionBoxPair_Distance_TwoMostDistantPoints() {
+    void testCalculateJunctionBoxPairDistance_TwoMostDistantPoints() {
         // Arrange
         DistanceCalculator distanceCalculator = new DistanceCalculator();
         DistanceJunctionBoxCombination expectedDistanceJunctionBoxCombination = new DistanceJunctionBoxCombination(new JunctionBox(0,0,0),new JunctionBox(0,0,1));
