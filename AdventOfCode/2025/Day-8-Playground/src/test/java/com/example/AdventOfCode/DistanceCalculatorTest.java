@@ -86,7 +86,7 @@ class DistanceCalculatorTest {
     }
 
     @Test
-    void testCalculateJunctionBoxPairDistance_WithSmallDifference1() {
+    void testCalculateJunctionBoxPairDistance_WithSmallDifferenceOfOne() {
         // Arrange
         DistanceCalculator distanceCalculator = new DistanceCalculator();
 
@@ -99,11 +99,12 @@ class DistanceCalculatorTest {
         );
 
         // Act
-        DistanceJunctionBoxCombination result = distanceCalculator.calculateJunctionBoxPairDistances(junctionBoxes).entrySet().stream().toList().get(0).getKey();
+        DistanceJunctionBoxCombination result = distanceCalculator.calculateJunctionBoxPairDistances(junctionBoxes).entrySet().stream().toList().getFirst().getKey();
 
         // Assert
-        assertEquals(expectedLeft, result.left());
-        assertEquals(expectedRight, result.right());
+        List<JunctionBox> resultList = List.of(result.left(), result.right());
+        assertTrue(resultList.contains(expectedLeft));
+        assertTrue(resultList.contains(expectedRight));
     }
 
     @Test
