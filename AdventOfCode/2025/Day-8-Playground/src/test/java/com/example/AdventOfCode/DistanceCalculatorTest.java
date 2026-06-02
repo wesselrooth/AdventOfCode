@@ -149,11 +149,13 @@ class DistanceCalculatorTest {
         );
 
         // Act
-        DistanceJunctionBoxCombination result = distanceCalculator.calculateJunctionBoxPairDistances(junctionBoxes).entrySet().stream().toList().get(0).getKey();
+        Map<DistanceJunctionBoxCombination,Double> result = distanceCalculator.calculateJunctionBoxPairDistances(junctionBoxes);
+        DistanceJunctionBoxCombination resultCombination = distanceCalculator.sortCollectionOfJunctionBoxCombinationDistances(result).getFirst().getKey();
 
         // Assert
-        assertEquals(expectedLeft, result.left());
-        assertEquals(expectedRight, result.right());
+        List<JunctionBox> resultList = List.of(resultCombination.left(), resultCombination.right());
+        assertTrue(resultList.contains(expectedLeft));
+        assertTrue(resultList.contains(expectedRight));
     }
 
     @Test
