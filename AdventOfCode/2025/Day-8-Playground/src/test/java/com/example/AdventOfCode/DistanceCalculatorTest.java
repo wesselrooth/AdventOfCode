@@ -4,7 +4,6 @@ import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.CsvSource;
 
-import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
@@ -174,11 +173,13 @@ class DistanceCalculatorTest {
         );
 
         // Act
-        DistanceJunctionBoxCombination result = distanceCalculator.calculateJunctionBoxPairDistances(junctionBoxes).entrySet().stream().toList().get(0).getKey();
+        Map<DistanceJunctionBoxCombination,Double> result = distanceCalculator.calculateJunctionBoxPairDistances(junctionBoxes);
+        DistanceJunctionBoxCombination resultCombination = distanceCalculator.sortCollectionOfJunctionBoxCombinationDistances(result).getFirst().getKey();
 
         // Assert
-        assertEquals(expectedLeft, result.left());
-        assertEquals(expectedRight, result.right());
+        List<JunctionBox> resultList = List.of(resultCombination.left(), resultCombination.right());
+        assertTrue(resultList.contains(expectedLeft));
+        assertTrue(resultList.contains(expectedRight));
     }
 
     @Test
@@ -186,19 +187,21 @@ class DistanceCalculatorTest {
         // Arrange
         DistanceCalculator distanceCalculator = new DistanceCalculator();
         DistanceJunctionBoxCombination expectedDistanceJunctionBoxCombination = new DistanceJunctionBoxCombination(new JunctionBox(0,0,0),new JunctionBox(0,0,1));
-        DistanceJunctionBoxCombination expectedDistanceJunctionBoxCombination2 = new DistanceJunctionBoxCombination(new JunctionBox(0,0,10),new JunctionBox(0,0,11));
+        DistanceJunctionBoxCombination distanceJunctionBoxCombination = new DistanceJunctionBoxCombination(new JunctionBox(0,0,10),new JunctionBox(0,0,11));
+
         List<JunctionBox> junctionBoxes = List.of(
                 expectedDistanceJunctionBoxCombination.left(),
                 expectedDistanceJunctionBoxCombination.right(),
-                expectedDistanceJunctionBoxCombination2.left(),
-                expectedDistanceJunctionBoxCombination2.right()
+                distanceJunctionBoxCombination.left(),
+                distanceJunctionBoxCombination.right()
         );
 
         // Act
-        DistanceJunctionBoxCombination result = distanceCalculator.calculateJunctionBoxPairDistances(junctionBoxes).entrySet().stream().toList().get(0).getKey();
+        Map<DistanceJunctionBoxCombination,Double> result = distanceCalculator.calculateJunctionBoxPairDistances(junctionBoxes);
+        DistanceJunctionBoxCombination resultCombination = distanceCalculator.sortCollectionOfJunctionBoxCombinationDistances(result).getFirst().getKey();
 
-        // Assert
-        assertEquals(expectedDistanceJunctionBoxCombination.left(), result.left());
-        assertEquals(expectedDistanceJunctionBoxCombination2, result.right());
+        List<JunctionBox> resultList = List.of(resultCombination.left(), resultCombination.right());
+        assertTrue(resultList.contains(expectedDistanceJunctionBoxCombination.left()));
+        assertTrue(resultList.contains(expectedDistanceJunctionBoxCombination.right()));
     }
 }
