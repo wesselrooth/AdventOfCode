@@ -7,7 +7,7 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 class CircuitManagerTest {
 
     @Test
-    void circuitManager_testTwoConnectingJunctionBoxes() {
+    void testCalculateCircuits_TwoConnectingJunctionBoxes() {
         // Arrange
         CircuitManager circuitManager = new CircuitManager();
         List<JunctionBox> junctionBoxes = List.of(
@@ -25,7 +25,7 @@ class CircuitManagerTest {
     }
 
     @Test
-    void circuitManager_testTwoConnectingJunctionBoxesAtTheSameSpot() {
+    void testCalculateCircuits_TwoConnectingJunctionBoxesAtTheSameSpot() {
         // Arrange
         CircuitManager circuitManager = new CircuitManager();
 
@@ -44,7 +44,7 @@ class CircuitManagerTest {
     }
 
     @Test
-    void circuitManager_testCreateTwoCircuits() {
+    void testCalculateCircuits_TestCreateTwoCircuits() {
         // Arrange
         CircuitManager circuitManager = new CircuitManager();
 
@@ -67,7 +67,7 @@ class CircuitManagerTest {
     }
 
     @Test
-    void circuitManager_testDifferentSizeJunctionBoxesSizes() {
+    void testCalculateCircuits_DifferentSizeJunctionBoxesSizes() {
         // Arrange
         CircuitManager circuitManager = new CircuitManager();
 
@@ -88,7 +88,7 @@ class CircuitManagerTest {
     }
 
     @Test
-    void circuitManager_testOneCircuitWithAllPointsAreAtTheSameSpot() {
+    void testCalculateCircuits_OneCircuitWithAllPointsAreAtTheSameSpot() {
         // Arrange
         CircuitManager circuitManager = new CircuitManager();
 
@@ -108,7 +108,7 @@ class CircuitManagerTest {
     }
 
     @Test
-    void circuitManager_testOneCircuitWithNullJunctionBoxes() {
+    void testCalculateCircuits_OneCircuitWithNullJunctionBoxes() {
         // Arrange
         CircuitManager circuitManager = new CircuitManager();
 
@@ -123,7 +123,7 @@ class CircuitManagerTest {
     }
 
     @Test
-    void circuitManager_testCircuitWithJunctionBox() {
+    void testCalculateCircuits_CircuitWithJunctionBox() {
         // Arrange
         CircuitManager circuitManager = new CircuitManager();
 
