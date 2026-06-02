@@ -4,7 +4,6 @@ import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.CsvSource;
 
-import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
@@ -51,7 +50,7 @@ class DistanceCalculatorTest {
         );
 
         // Act
-        HashMap<DistanceJunctionBoxCombination,Double> resultMap = distanceCalculator.calculateJunctionBoxPairDistances(junctionBoxes);
+        Map<DistanceJunctionBoxCombination,Double> resultMap = distanceCalculator.calculateJunctionBoxPairDistances(junctionBoxes);
         List<Map.Entry<DistanceJunctionBoxCombination, Double>> sortedEntryList = distanceCalculator.sortCollectionOfJunctionBoxCombinationDistances(resultMap);
         DistanceJunctionBoxCombination result = sortedEntryList.getFirst().getKey();
 
@@ -74,7 +73,7 @@ class DistanceCalculatorTest {
         );
 
         // Act
-        HashMap<DistanceJunctionBoxCombination,Double> resultMap = distanceCalculator.calculateJunctionBoxPairDistances(junctionBoxes);
+        Map<DistanceJunctionBoxCombination,Double> resultMap = distanceCalculator.calculateJunctionBoxPairDistances(junctionBoxes);
         List<Map.Entry<DistanceJunctionBoxCombination, Double>> sortedEntryList = distanceCalculator.sortCollectionOfJunctionBoxCombinationDistances(resultMap);
         DistanceJunctionBoxCombination result = sortedEntryList.getFirst().getKey();
 
