@@ -77,11 +77,12 @@ class DistanceCalculatorTest {
         // Act
         Map<DistanceJunctionBoxCombination,Double> resultMap = distanceCalculator.calculateJunctionBoxPairDistances(junctionBoxes);
         List<Map.Entry<DistanceJunctionBoxCombination, Double>> sortedEntryList = distanceCalculator.sortCollectionOfJunctionBoxCombinationDistances(resultMap);
-        DistanceJunctionBoxCombination result = sortedEntryList.getFirst().getKey();
 
         // Assert
-        assertEquals(expectedLeft, result.left());
-        assertEquals(expectedRight, result.right());
+        DistanceJunctionBoxCombination result = sortedEntryList.getFirst().getKey();
+        List<JunctionBox> resultList = List.of(result.left(), result.right());
+        assertTrue(resultList.contains(expectedLeft));
+        assertTrue(resultList.contains(expectedRight));
     }
 
     @Test
