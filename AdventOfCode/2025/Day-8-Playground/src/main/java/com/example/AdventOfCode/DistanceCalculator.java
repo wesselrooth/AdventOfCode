@@ -14,13 +14,13 @@ public class DistanceCalculator {
         return Math.sqrt(sum);
     }
 
-    public HashMap<DistanceJunctionBoxCombination, Double> calculateJunctionBoxPair(List<JunctionBox> junctionBoxes) {
+    public HashMap<DistanceJunctionBoxCombination, Double> calculateJunctionBoxPairDistances(List<JunctionBox> junctionBoxes) {
         junctionBoxes = calculateDistancePerJunctionBox(junctionBoxes);
-        HashMap<DistanceJunctionBoxCombination, Double> junctionBoxPairs = calculateAllDistanceCombinations(junctionBoxes);
-        return junctionBoxPairs;
+
+        return calculateAllDistanceCombinations(junctionBoxes);
     }
 
-    public List<Map.Entry<DistanceJunctionBoxCombination, Double>> sortJunctionBoxPairs(HashMap<DistanceJunctionBoxCombination, Double> input) {
+    public List<Map.Entry<DistanceJunctionBoxCombination, Double>> sortCollectionOfJunctionBoxCombinationDistances(Map<DistanceJunctionBoxCombination, Double> input) {
         List<Map.Entry<DistanceJunctionBoxCombination, Double>> list = new ArrayList<>(input.entrySet());
         list.sort(Map.Entry.comparingByValue());
         return list;
@@ -31,7 +31,7 @@ public class DistanceCalculator {
         HashMap<DistanceJunctionBoxCombination, Double> connectingBoxes = new HashMap<>();
 
         for (JunctionBox current : junctionBoxes) {
-            for (HashMap.Entry<JunctionBox, Double> other : current.getDistanceMap().entrySet()) {
+            for (Map.Entry<JunctionBox, Double> other : current.getDistanceMap().entrySet()) {
                 DistanceJunctionBoxCombination distanceJunctionBoxCombination = new DistanceJunctionBoxCombination(other.getKey(),current);
                 connectingBoxes.put(distanceJunctionBoxCombination, other.getValue());
             }

@@ -1,13 +1,14 @@
 package com.example.AdventOfCode;
 
 import java.util.HashMap;
+import java.util.Map;
 
 public class JunctionBox {
 
     private final long x;
     private final long y;
     private final long z;
-    private HashMap<JunctionBox,Double> distanceMap = new HashMap<>();
+    private Map<JunctionBox,Double> distanceMap = new HashMap<>();
 
     public JunctionBox(long x, long y, long z) {
         this.x = x;
@@ -31,7 +32,7 @@ public class JunctionBox {
         distanceMap.put(junctionBox,distance);
     }
 
-    public HashMap<JunctionBox,Double> getDistanceMap() {
+    public Map<JunctionBox,Double> getDistanceMap() {
         return distanceMap;
     }
 

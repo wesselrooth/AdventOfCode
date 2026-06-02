@@ -38,7 +38,7 @@ class DistanceCalculatorTest {
     }
 
     @Test
-    void testCalculateJunctionBoxPair_AtTheSameSpot() {
+    void testCalculateJunctionBoxPair_Distance_AtTheSameSpot() {
         // Arrange
         DistanceCalculator distanceCalculator = new DistanceCalculator();
 
@@ -51,8 +51,8 @@ class DistanceCalculatorTest {
         );
 
         // Act
-        HashMap<DistanceJunctionBoxCombination,Double> resultMap = distanceCalculator.calculateJunctionBoxPair(junctionBoxes);
-        List<Map.Entry<DistanceJunctionBoxCombination, Double>> sortedEntryList = distanceCalculator.sortJunctionBoxPairs(resultMap);
+        HashMap<DistanceJunctionBoxCombination,Double> resultMap = distanceCalculator.calculateJunctionBoxPairDistances(junctionBoxes);
+        List<Map.Entry<DistanceJunctionBoxCombination, Double>> sortedEntryList = distanceCalculator.sortCollectionOfJunctionBoxCombinationDistances(resultMap);
         DistanceJunctionBoxCombination result = sortedEntryList.getFirst().getKey();
 
         // Assert
@@ -61,7 +61,7 @@ class DistanceCalculatorTest {
     }
 
     @Test
-    void testCalculateJunctionBoxPair_WithSmallDifference() {
+    void testCalculateJunctionBoxPair_Distance_WithSmallDifference() {
         // Arrange
         DistanceCalculator distanceCalculator = new DistanceCalculator();
 
@@ -74,8 +74,8 @@ class DistanceCalculatorTest {
         );
 
         // Act
-        HashMap<DistanceJunctionBoxCombination,Double> resultMap = distanceCalculator.calculateJunctionBoxPair(junctionBoxes);
-        List<Map.Entry<DistanceJunctionBoxCombination, Double>> sortedEntryList = distanceCalculator.sortJunctionBoxPairs(resultMap);
+        HashMap<DistanceJunctionBoxCombination,Double> resultMap = distanceCalculator.calculateJunctionBoxPairDistances(junctionBoxes);
+        List<Map.Entry<DistanceJunctionBoxCombination, Double>> sortedEntryList = distanceCalculator.sortCollectionOfJunctionBoxCombinationDistances(resultMap);
         DistanceJunctionBoxCombination result = sortedEntryList.getFirst().getKey();
 
         // Assert
@@ -84,7 +84,7 @@ class DistanceCalculatorTest {
     }
 
     @Test
-    void testCalculateJunctionBoxPair_WithSmallDifference1() {
+    void testCalculateJunctionBoxPair_Distance_WithSmallDifference1() {
         // Arrange
         DistanceCalculator distanceCalculator = new DistanceCalculator();
 
@@ -97,7 +97,7 @@ class DistanceCalculatorTest {
         );
 
         // Act
-        DistanceJunctionBoxCombination result = distanceCalculator.calculateJunctionBoxPair(junctionBoxes).entrySet().stream().toList().get(0).getKey();
+        DistanceJunctionBoxCombination result = distanceCalculator.calculateJunctionBoxPairDistances(junctionBoxes).entrySet().stream().toList().get(0).getKey();
 
         // Assert
         assertEquals(expectedLeft, result.left());
@@ -105,7 +105,7 @@ class DistanceCalculatorTest {
     }
 
     @Test
-    void testCalculateJunctionBoxPair_InTheMiddleOf2Points() {
+    void testCalculateJunctionBoxPair_Distance_InTheMiddleOf2Points() {
         // Arrange
         DistanceCalculator distanceCalculator = new DistanceCalculator();
 
@@ -120,7 +120,7 @@ class DistanceCalculatorTest {
         );
 
         // Act
-        DistanceJunctionBoxCombination result = distanceCalculator.calculateJunctionBoxPair(junctionBoxes).entrySet().stream().toList().get(0).getKey();
+        DistanceJunctionBoxCombination result = distanceCalculator.calculateJunctionBoxPairDistances(junctionBoxes).entrySet().stream().toList().get(0).getKey();
 
         // Assert
         assertEquals(expectedLeft, result.left());
@@ -143,7 +143,7 @@ class DistanceCalculatorTest {
         );
 
         // Act
-        DistanceJunctionBoxCombination result = distanceCalculator.calculateJunctionBoxPair(junctionBoxes).entrySet().stream().toList().get(0).getKey();
+        DistanceJunctionBoxCombination result = distanceCalculator.calculateJunctionBoxPairDistances(junctionBoxes).entrySet().stream().toList().get(0).getKey();
 
         // Assert
         assertEquals(expectedLeft, result.left());
@@ -166,7 +166,7 @@ class DistanceCalculatorTest {
         );
 
         // Act
-        DistanceJunctionBoxCombination result = distanceCalculator.calculateJunctionBoxPair(junctionBoxes).entrySet().stream().toList().get(0).getKey();
+        DistanceJunctionBoxCombination result = distanceCalculator.calculateJunctionBoxPairDistances(junctionBoxes).entrySet().stream().toList().get(0).getKey();
 
         // Assert
         assertEquals(expectedLeft, result.left());
@@ -174,13 +174,11 @@ class DistanceCalculatorTest {
     }
 
     @Test
-    void testCalculateJunctionBoxPair_TwoMostDistantPoints() {
+    void testCalculateJunctionBoxPair_Distance_TwoMostDistantPoints() {
         // Arrange
         DistanceCalculator distanceCalculator = new DistanceCalculator();
-
         DistanceJunctionBoxCombination expectedDistanceJunctionBoxCombination = new DistanceJunctionBoxCombination(new JunctionBox(0,0,0),new JunctionBox(0,0,1));
         DistanceJunctionBoxCombination expectedDistanceJunctionBoxCombination2 = new DistanceJunctionBoxCombination(new JunctionBox(0,0,10),new JunctionBox(0,0,11));
-
         List<JunctionBox> junctionBoxes = List.of(
                 expectedDistanceJunctionBoxCombination.left(),
                 expectedDistanceJunctionBoxCombination.right(),
@@ -189,7 +187,7 @@ class DistanceCalculatorTest {
         );
 
         // Act
-        DistanceJunctionBoxCombination result = distanceCalculator.calculateJunctionBoxPair(junctionBoxes).entrySet().stream().toList().get(0).getKey();
+        DistanceJunctionBoxCombination result = distanceCalculator.calculateJunctionBoxPairDistances(junctionBoxes).entrySet().stream().toList().get(0).getKey();
 
         // Assert
         assertEquals(expectedDistanceJunctionBoxCombination.left(), result.left());
