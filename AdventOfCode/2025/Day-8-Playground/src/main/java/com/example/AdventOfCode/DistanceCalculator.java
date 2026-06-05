@@ -1,8 +1,6 @@
 package com.example.AdventOfCode;
 import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
 
 public class DistanceCalculator {
 
@@ -14,43 +12,50 @@ public class DistanceCalculator {
         return Math.sqrt(sum);
     }
 
-    public Map<DistanceJunctionBoxCombination, Double> calculateJunctionBoxPairDistances(List<JunctionBox> junctionBoxes) {
-        junctionBoxes = calculateDistancePerJunctionBox(junctionBoxes);
+    public List<JunctionBoxPair> calculateJunctionBoxPairDistances(List<JunctionBox> junctionBoxes) {
 
-        return calculateAllDistanceCombinations(junctionBoxes);
-    }
-
-    public List<Map.Entry<DistanceJunctionBoxCombination, Double>> sortCollectionOfJunctionBoxCombinationDistances(Map<DistanceJunctionBoxCombination, Double> input) {
-        List<Map.Entry<DistanceJunctionBoxCombination, Double>> list = new ArrayList<>(input.entrySet());
-        list.sort(Map.Entry.comparingByValue());
-        return list;
-    }
-
-    public HashMap<DistanceJunctionBoxCombination, Double> calculateAllDistanceCombinations(List<JunctionBox> junctionBoxes) {
-
-        HashMap<DistanceJunctionBoxCombination, Double> connectingBoxes = new HashMap<>();
-
+        List<JunctionBoxPair> junctionBoxPairs = new ArrayList<>();
         for (JunctionBox current : junctionBoxes) {
-            for (Map.Entry<JunctionBox, Double> other : current.getDistanceMap().entrySet()) {
-                DistanceJunctionBoxCombination distanceJunctionBoxCombination = new DistanceJunctionBoxCombination(other.getKey(),current);
-                connectingBoxes.put(distanceJunctionBoxCombination, other.getValue());
-            }
-        }
-        return connectingBoxes;
-    }
 
-    private List<JunctionBox> calculateDistancePerJunctionBox(List<JunctionBox> junctionBoxList) {
-        for (JunctionBox current : junctionBoxList) {
-
-            for (JunctionBox junctionBox : junctionBoxList) {
+            for (JunctionBox junctionBox : junctionBoxes) {
                 if (junctionBox.equals(current)) {
                     continue;
                 }
-                double distance  = calculateEuclideanDistance(current, junctionBox);
-                current.addDistance(junctionBox, distance);
+
+                double distance = calculateEuclideanDistance(current, junctionBox);
+                junctionBoxPairs.add(new JunctionBoxPair(current, junctionBox, distance));
             }
         }
-        return junctionBoxList;
+
+        return junctionBoxPairs;
     }
 
+    public List<JunctionBoxPair> sortJunctionBoxPairs(List<JunctionBoxPair> input) {
+
+        List<JunctionBoxPair> sortedJunctionBoxPairs = new ArrayList<>();
+
+        for (JunctionBoxPair current : input) {
+
+            if (sortedJunctionBoxPairs.isEmpty()) {
+                sortedJunctionBoxPairs.add(current);
+                continue;
+            }
+
+            int insertIndex = 0;
+            for (int i = 0; i < sortedJunctionBoxPairs.size(); i++) {
+                JunctionBoxPair junctionBoxPair = sortedJunctionBoxPairs.get(i);
+                if (current.distance() <= junctionBoxPair.distance()) {
+                    insertIndex = i;
+                    break;
+                }
+                if ((i == sortedJunctionBoxPairs.size() - 1 ) && current.distance() > junctionBoxPair.distance() ) {
+                    insertIndex = i;
+                }
+            }
+            sortedJunctionBoxPairs.add(insertIndex, current);
+
+        }
+
+        return sortedJunctionBoxPairs;
+    }
 }

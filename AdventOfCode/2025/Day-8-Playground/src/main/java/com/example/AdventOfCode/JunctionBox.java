@@ -1,14 +1,10 @@
 package com.example.AdventOfCode;
 
-import java.util.HashMap;
-import java.util.Map;
-
 public class JunctionBox {
 
     private final long x;
     private final long y;
     private final long z;
-    private Map<JunctionBox,Double> distanceMap = new HashMap<>();
 
     public JunctionBox(long x, long y, long z) {
         this.x = x;
@@ -26,14 +22,6 @@ public class JunctionBox {
 
     public long getZ() {
         return z;
-    }
-
-    public void addDistance(JunctionBox junctionBox,double distance) {
-        distanceMap.put(junctionBox,distance);
-    }
-
-    public Map<JunctionBox,Double> getDistanceMap() {
-        return distanceMap;
     }
 
     @Override
