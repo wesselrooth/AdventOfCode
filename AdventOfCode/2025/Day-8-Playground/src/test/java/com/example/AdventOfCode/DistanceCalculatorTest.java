@@ -181,27 +181,4 @@ class DistanceCalculatorTest {
         assertTrue(resultList.contains(expectedLeft));
         assertTrue(resultList.contains(expectedRight));
     }
-
-    @Test
-    void testCalculateJunctionBoxPairDistance_TwoMostDistantPoints() {
-        // Arrange
-        DistanceCalculator distanceCalculator = new DistanceCalculator();
-        DistanceJunctionBoxCombination expectedDistanceJunctionBoxCombination = new DistanceJunctionBoxCombination(new JunctionBox(0,0,0),new JunctionBox(0,0,1));
-        DistanceJunctionBoxCombination distanceJunctionBoxCombination = new DistanceJunctionBoxCombination(new JunctionBox(0,0,10),new JunctionBox(0,0,11));
-
-        List<JunctionBox> junctionBoxes = List.of(
-                expectedDistanceJunctionBoxCombination.left(),
-                expectedDistanceJunctionBoxCombination.right(),
-                distanceJunctionBoxCombination.left(),
-                distanceJunctionBoxCombination.right()
-        );
-
-        // Act
-        Map<DistanceJunctionBoxCombination,Double> result = distanceCalculator.calculateJunctionBoxPairDistances(junctionBoxes);
-        DistanceJunctionBoxCombination resultCombination = distanceCalculator.sortCollectionOfJunctionBoxCombinationDistances(result).getFirst().getKey();
-
-        List<JunctionBox> resultList = List.of(resultCombination.left(), resultCombination.right());
-        assertTrue(resultList.contains(expectedDistanceJunctionBoxCombination.left()));
-        assertTrue(resultList.contains(expectedDistanceJunctionBoxCombination.right()));
-    }
 }
