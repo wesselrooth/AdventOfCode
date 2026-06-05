@@ -16,9 +16,7 @@ public class Circuit {
     public void addJunctionBox(JunctionBox junctionBox) {
         junctionsBoxes.add(junctionBox);
     }
-    public JunctionBox getJunctionBox(int index) {
-        return junctionsBoxes.get(index);
-    }
+
     public List<JunctionBox> getJunctionsBoxes() {
         return junctionsBoxes;
     }
