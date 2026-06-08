@@ -30,25 +30,25 @@ public class Circuit {
         return false;
     }
 
-    public boolean junctionHaveTheSameCoordinate(JunctionBox current) {
+    public boolean junctionHaveTheSameCoordinate(JunctionBoxPair current) {
         for (JunctionBox junctionBox : junctionsBoxes) {
 
             if (junctionBox.equals(current)) {
                 continue;
             }
 
-            if (junctionBox.getX() == current.getX() && junctionBox.getY() == current.getY() && junctionBox.getZ() == current.getZ()) {
+            if (junctionBox.getX() == current.left().getX() && junctionBox.getY() == current.left().getY() && junctionBox.getZ() == current.left().getZ()) {
                 return true;
             }
         }
         return false;
     }
 
-    public boolean junctionBoxesAlreadyInTheSameCircuit(JunctionBox junctionBox1, JunctionBox junctionBox2) {
+    public boolean junctionBoxesAlreadyInTheSameCircuit(JunctionBoxPair current) {
 
         int count = 0;
         for (JunctionBox box : junctionsBoxes) {
-            if (box.equals(junctionBox1) | box.equals(junctionBox2)) {
+            if (box.equals(current.left()) | box.equals(current.right())) {
                 count++;
             }
         }

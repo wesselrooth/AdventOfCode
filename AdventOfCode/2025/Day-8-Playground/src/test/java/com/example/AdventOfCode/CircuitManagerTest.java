@@ -15,9 +15,10 @@ class CircuitManagerTest {
                 new JunctionBox(0,0,1)
         );
         int expectedLength = 2;
-
+        DistanceCalculator distanceCalculator = new DistanceCalculator();
+        List<JunctionBoxPair> junctionBoxPairs = distanceCalculator.calculateJunctionBoxPairDistances(junctionBoxes);
         // Act
-        List<Circuit> result = circuitManager.calculateCircuits(junctionBoxes);
+        List<Circuit> result = circuitManager.calculateCircuits(junctionBoxPairs,1);
         Circuit circuit = result.getFirst();
 
         // Assert
@@ -35,8 +36,12 @@ class CircuitManagerTest {
         );
         int expectedLenght = 2;
 
+
+        DistanceCalculator distanceCalculator = new DistanceCalculator();
+        List<JunctionBoxPair> junctionBoxPairs = distanceCalculator.calculateJunctionBoxPairDistances(junctionBoxes);
+
         // Act
-        List<Circuit> result = circuitManager.calculateCircuits(junctionBoxes);
+        List<Circuit> result = circuitManager.calculateCircuits(junctionBoxPairs,1);
         Circuit circuit = result.get(0);
 
         // Assert
@@ -55,8 +60,12 @@ class CircuitManagerTest {
                 new JunctionBox(0,0,11)
         );
         int expectedLength = 2;
+        DistanceCalculator distanceCalculator = new DistanceCalculator();
+        List<JunctionBoxPair> junctionBoxPairs = distanceCalculator.calculateJunctionBoxPairDistances(junctionBoxes);
+
+        List<JunctionBoxPair> junctionBoxPairsSorted = distanceCalculator.sortJunctionBoxPairs(junctionBoxPairs);
         // Act
-        List<Circuit> result = circuitManager.calculateCircuits(junctionBoxes);
+        List<Circuit> result = circuitManager.calculateCircuits(junctionBoxPairsSorted,4);
         Circuit circuit = result.get(0);
         Circuit circuit2 = result.get(1);
 
@@ -79,9 +88,14 @@ class CircuitManagerTest {
                 new JunctionBox(0,0,12)
         );
         int expectedLength = 3;
+
+        DistanceCalculator distanceCalculator = new DistanceCalculator();
+        List<JunctionBoxPair> junctionBoxPairs = distanceCalculator.calculateJunctionBoxPairDistances(junctionBoxes);
+        List<JunctionBoxPair> sortenList = distanceCalculator.sortJunctionBoxPairs(junctionBoxPairs);
+
         // Act
-        List<Circuit> result = circuitManager.calculateCircuits(junctionBoxes);
-        Circuit circuit2 = result.get(1);
+        List<Circuit> result = circuitManager.calculateCircuits(sortenList,5);
+        Circuit circuit2 = result.get(0);
 
         // Assert
         assertEquals(expectedLength, circuit2.getJunctionsBoxes().size());
@@ -99,8 +113,10 @@ class CircuitManagerTest {
                 new JunctionBox(0,0,0)
         );
         int expectedLength = 4;
+        DistanceCalculator distanceCalculator = new DistanceCalculator();
+        List<JunctionBoxPair> junctionBoxPairs = distanceCalculator.calculateJunctionBoxPairDistances(junctionBoxes);
         // Act
-        List<Circuit> result = circuitManager.calculateCircuits(junctionBoxes);
+        List<Circuit> result = circuitManager.calculateCircuits(junctionBoxPairs,4);
         Circuit circuit2 = result.getFirst();
 
         // Assert
@@ -111,12 +127,10 @@ class CircuitManagerTest {
     void testCalculateCircuits_OneCircuitWithNullJunctionBoxes() {
         // Arrange
         CircuitManager circuitManager = new CircuitManager();
-
-        List<JunctionBox> emptyjunctionBoxes = List.of();
         int expectedLength = 0;
 
         // Act
-        List<Circuit> result = circuitManager.calculateCircuits(emptyjunctionBoxes);
+        List<Circuit> result = circuitManager.calculateCircuits(List.of(),0);
 
         // Assert
         assertEquals(expectedLength, result.size());
@@ -137,13 +151,42 @@ class CircuitManagerTest {
         int expectedJunctionBoxSize = 5;
         int circuitSizeLength = 1;
 
-        // Act
-        List<Circuit> result = circuitManager.calculateCircuits(junctionBoxes);
+        DistanceCalculator distanceCalculator = new DistanceCalculator();
+        List<JunctionBoxPair> junctionBoxPairs = distanceCalculator.calculateJunctionBoxPairDistances(junctionBoxes);
 
+        // Act
+        List<Circuit> result = circuitManager.calculateCircuits(junctionBoxPairs,5);
 
         // Assert
         Circuit circuit = result.get(0);
         assertEquals(expectedJunctionBoxSize, circuit.getJunctionsBoxes().size());
         assertEquals(circuitSizeLength, result.size());
+    }
+
+    @Test
+    void testCalculateCircuits_CircuitOfThreeJunctionBoxesAndOne() {
+        // Arrange
+        CircuitManager circuitManager = new CircuitManager();
+        JunctionBox expectedJunctionBox = new JunctionBox(0,0,1);
+        JunctionBox expectedJunctionBox2 = new JunctionBox(0,0,2);
+        JunctionBox expectedJunctionBox3 = new JunctionBox(0,0,3);
+        JunctionBox expectedJunctionBox4 = new JunctionBox(0,0,10);
+
+        List<JunctionBox> junctionBoxes = List.of(
+                expectedJunctionBox, expectedJunctionBox2, expectedJunctionBox3, expectedJunctionBox4
+        );
+        DistanceCalculator distanceCalculator = new DistanceCalculator();
+
+        int expectedJunctionBoxSize = 3;
+
+
+        List<JunctionBoxPair> junctionBoxPairs = distanceCalculator.calculateJunctionBoxPairDistances(junctionBoxes);
+        List<JunctionBoxPair> sortenList = distanceCalculator.sortJunctionBoxPairs(junctionBoxPairs);
+        // Act
+        List<Circuit> result = circuitManager.calculateCircuits(sortenList,4);
+
+        // Assert
+        Circuit circuit = result.getFirst();
+        assertEquals(expectedJunctionBoxSize, circuit.getJunctionsBoxes().size());
     }
 }

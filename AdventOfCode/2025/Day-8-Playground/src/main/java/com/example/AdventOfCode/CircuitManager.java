@@ -10,44 +10,44 @@ public class CircuitManager {
         circuits = new ArrayList<>();
     }
 
-    public List<Circuit> calculateCircuits(List<JunctionBox> junctionBoxes) {
+    public List<Circuit> calculateCircuits(List<JunctionBoxPair> junctionBoxPairs, int amountOfPairs) {
 
-        JunctionBoxLoop: for (JunctionBox current : junctionBoxes) {
-            JunctionBox closesdJunctionBox = findClosesJunctionBox(current,junctionBoxes);
+        JunctionBoxLoop: for (int i = 0; i < amountOfPairs; i++) {
+
+            JunctionBoxPair current = junctionBoxPairs.get(i);
+
             if (circuits.isEmpty()){
                 Circuit circuit = new Circuit();
-                circuit.addJunctionBox(current);
-                circuit.addJunctionBox(closesdJunctionBox);
+                circuit.addJunctionBox(current.left());
+                circuit.addJunctionBox(current.right());
                 circuits.add(circuit);
                 continue;
             }
 
             for (Circuit circuit : circuits) {
-                if (circuit.junctionBoxesAlreadyInTheSameCircuit(current,closesdJunctionBox)) {
+                if (circuit.junctionBoxesAlreadyInTheSameCircuit(current)) {
                     continue JunctionBoxLoop;
                 }
 
-                if (circuit.junctionBoxExistsInCircuit(current)){
-                    circuit.addJunctionBox(closesdJunctionBox);
+                if (circuit.junctionBoxExistsInCircuit(current.left())){
+                    circuit.addJunctionBox(current.right());
                     continue JunctionBoxLoop;
                 }
-                if (circuit.junctionBoxExistsInCircuit(closesdJunctionBox)){
-                    circuit.addJunctionBox(current);
+                if (circuit.junctionBoxExistsInCircuit(current.right())){
+                    circuit.addJunctionBox(current.left());
                     continue JunctionBoxLoop;
                 }
 
                 if (circuit.junctionHaveTheSameCoordinate(current)){
-                    circuit.addJunctionBox(current);
-                    circuit.addJunctionBox(closesdJunctionBox);
+                    circuit.addJunctionBox(current.left());
+                    circuit.addJunctionBox(current.right());
                     continue JunctionBoxLoop;
                 }
-
-
             }
 
             Circuit circuit = new Circuit();
-            circuit.addJunctionBox(current);
-            circuit.addJunctionBox(closesdJunctionBox);
+            circuit.addJunctionBox(current.left());
+            circuit.addJunctionBox(current.right());
             circuits.add(circuit);
         }
         return circuits;
