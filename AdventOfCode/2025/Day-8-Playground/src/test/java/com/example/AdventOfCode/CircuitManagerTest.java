@@ -34,18 +34,17 @@ class CircuitManagerTest {
                 new JunctionBox(0,0,0),
                 new JunctionBox(0,0,0)
         );
-        int expectedLenght = 2;
-
+        int expectedLength = 2;
 
         DistanceCalculator distanceCalculator = new DistanceCalculator();
         List<JunctionBoxPair> junctionBoxPairs = distanceCalculator.calculateJunctionBoxPairDistances(junctionBoxes);
 
         // Act
         List<Circuit> result = circuitManager.calculateCircuits(junctionBoxPairs,1);
-        Circuit circuit = result.get(0);
+        Circuit circuit = result.getFirst();
 
         // Assert
-        assertEquals(expectedLenght, circuit.getJunctionsBoxes().size());
+        assertEquals(expectedLength, circuit.getJunctionsBoxes().size());
     }
 
     @Test
@@ -96,7 +95,7 @@ class CircuitManagerTest {
 
         // Act
         List<Circuit> result = circuitManager.calculateCircuits(sortenList,5);
-        Circuit circuit2 = result.get(0);
+        Circuit circuit2 = result.getFirst();
 
         // Assert
         assertEquals(expectedLength, circuit2.getJunctionsBoxes().size());
@@ -158,7 +157,7 @@ class CircuitManagerTest {
         List<Circuit> result = circuitManager.calculateCircuits(junctionBoxPairs,5);
 
         // Assert
-        Circuit circuit = result.get(0);
+        Circuit circuit = result.getFirst();
         assertEquals(expectedJunctionBoxSize, circuit.getJunctionsBoxes().size());
         assertEquals(circuitSizeLength, result.size());
     }
