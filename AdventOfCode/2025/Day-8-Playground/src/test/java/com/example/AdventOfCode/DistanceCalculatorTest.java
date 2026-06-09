@@ -50,7 +50,8 @@ class DistanceCalculatorTest {
 
         // Act
         List<JunctionBoxPair> resultList = distanceCalculator.calculateJunctionBoxPairDistances(junctionBoxes);
-        List<JunctionBoxPair> sortedList = distanceCalculator.sortJunctionBoxPairs(resultList);
+        JunctioBoxHelper junctioBoxHelper = new JunctioBoxHelper();
+        List<JunctionBoxPair> sortedList = junctioBoxHelper.sortJunctionBoxPairs(resultList);
 
 
         // Assert
@@ -75,7 +76,8 @@ class DistanceCalculatorTest {
 
         // Act
         List<JunctionBoxPair> resultList = distanceCalculator.calculateJunctionBoxPairDistances(junctionBoxes);
-        List<JunctionBoxPair> sortedEntryList = distanceCalculator.sortJunctionBoxPairs(resultList);
+        JunctioBoxHelper junctioBoxHelper = new JunctioBoxHelper();
+        List<JunctionBoxPair> sortedEntryList = junctioBoxHelper.sortJunctionBoxPairs(resultList);
 
         // Assert
         JunctionBoxPair result = sortedEntryList.getFirst();
@@ -123,7 +125,8 @@ class DistanceCalculatorTest {
 
         // Act
         List<JunctionBoxPair> result = distanceCalculator.calculateJunctionBoxPairDistances(junctionBoxes);
-        JunctionBoxPair resultCombination = distanceCalculator.sortJunctionBoxPairs(result).getFirst();
+        JunctioBoxHelper junctioBoxHelper = new JunctioBoxHelper();
+        JunctionBoxPair resultCombination = junctioBoxHelper.sortJunctionBoxPairs(result).getFirst();
 
         // Assert
         List<JunctionBox> resultList = List.of(resultCombination.left(), resultCombination.right());
@@ -148,7 +151,8 @@ class DistanceCalculatorTest {
 
         // Act
         List<JunctionBoxPair> result = distanceCalculator.calculateJunctionBoxPairDistances(junctionBoxes);
-        JunctionBoxPair resultCombination = distanceCalculator.sortJunctionBoxPairs(result).getFirst();
+        JunctioBoxHelper junctioBoxHelper = new JunctioBoxHelper();
+        JunctionBoxPair resultCombination = junctioBoxHelper.sortJunctionBoxPairs(result).getFirst();
 
         // Assert
         List<JunctionBox> resultList = List.of(resultCombination.left(), resultCombination.right());
@@ -173,7 +177,8 @@ class DistanceCalculatorTest {
 
         // Act
         List<JunctionBoxPair> result = distanceCalculator.calculateJunctionBoxPairDistances(junctionBoxes);
-        JunctionBoxPair resultCombination = distanceCalculator.sortJunctionBoxPairs(result).getFirst();
+        JunctioBoxHelper junctioBoxHelper = new JunctioBoxHelper();
+        JunctionBoxPair resultCombination = junctioBoxHelper.sortJunctionBoxPairs(result).getFirst();
 
         // Assert
         List<JunctionBox> resultList = List.of(resultCombination.left(), resultCombination.right());

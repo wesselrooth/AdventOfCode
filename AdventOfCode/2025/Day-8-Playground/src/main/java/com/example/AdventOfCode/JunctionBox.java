@@ -5,6 +5,7 @@ public class JunctionBox {
     private final long x;
     private final long y;
     private final long z;
+    private Circuit circuit;
 
     public JunctionBox(long x, long y, long z) {
         this.x = x;
@@ -22,6 +23,14 @@ public class JunctionBox {
 
     public long getZ() {
         return z;
+    }
+
+    public Circuit getCircuit() {
+        return circuit;
+    }
+
+    public void setCircuit(Circuit circuit) {
+        this.circuit = circuit;
     }
 
     @Override

@@ -14,6 +14,7 @@ public class Circuit {
     }
 
     public void addJunctionBox(JunctionBox junctionBox) {
+        junctionBox.setCircuit(this);
         junctionsBoxes.add(junctionBox);
     }
 

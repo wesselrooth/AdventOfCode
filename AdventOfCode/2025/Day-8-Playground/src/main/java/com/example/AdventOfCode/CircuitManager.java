@@ -50,6 +50,22 @@ public class CircuitManager {
             circuit.addJunctionBox(current.right());
             circuits.add(circuit);
         }
+
+        for (JunctionBoxPair junctionBoxPair : junctionBoxPairs) {
+
+            if (junctionBoxPair.left().getCircuit() == null) {
+                Circuit circuit = new Circuit();
+                circuit.addJunctionBox(junctionBoxPair.left());
+                circuits.add(circuit);
+            }
+
+            if (junctionBoxPair.right().getCircuit() == null) {
+                Circuit circuit = new Circuit();
+                circuit.addJunctionBox(junctionBoxPair.right());
+                circuits.add(circuit);
+            }
+        }
+
         return circuits;
     }
 
