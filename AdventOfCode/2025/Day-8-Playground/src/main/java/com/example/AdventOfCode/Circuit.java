@@ -1,13 +1,12 @@
 package com.example.AdventOfCode;
 
-import com.example.AdventOfCode.exceptions.CircuitException;
-
 import java.util.ArrayList;
 import java.util.List;
 
 public class Circuit {
 
     private List<JunctionBox>  junctionsBoxes;
+    private boolean ignore;
 
     public Circuit() {
         junctionsBoxes = new ArrayList<>();
@@ -31,34 +30,11 @@ public class Circuit {
         return false;
     }
 
-    public boolean junctionHaveTheSameCoordinate(JunctionBoxPair current) {
-        for (JunctionBox junctionBox : junctionsBoxes) {
-
-            if (junctionBox.equals(current)) {
-                continue;
-            }
-
-            if (junctionBox.getX() == current.left().getX() && junctionBox.getY() == current.left().getY() && junctionBox.getZ() == current.left().getZ()) {
-                return true;
-            }
-        }
-        return false;
+    public void setIgnore(boolean ignore){
+        this.ignore = ignore;
     }
 
-    public boolean junctionBoxesAlreadyInTheSameCircuit(JunctionBoxPair current) {
-
-        int count = 0;
-        for (JunctionBox box : junctionsBoxes) {
-            if (box.equals(current.left()) | box.equals(current.right())) {
-                count++;
-            }
-        }
-
-        if (count > 2){
-            throw new CircuitException("JunctionBoxes appear more then once");
-        }
-
-        return count == 2;
+    public boolean isIgnore() {
+        return ignore;
     }
-
 }
