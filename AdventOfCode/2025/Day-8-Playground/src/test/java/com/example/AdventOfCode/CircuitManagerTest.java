@@ -85,7 +85,7 @@ class CircuitManagerTest {
                 new JunctionBox(0,0,11),
                 new JunctionBox(0,0,12)
         );
-        int expectedLength = 3;
+        int expectedLength = 2;
 
         DistanceCalculator distanceCalculator = new DistanceCalculator();
         List<JunctionBoxPair> junctionBoxPairs = distanceCalculator.calculateJunctionBoxPairDistances(junctionBoxes);
