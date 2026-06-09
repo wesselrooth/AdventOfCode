@@ -61,10 +61,9 @@ class CircuitManagerTest {
         int expectedLength = 2;
         DistanceCalculator distanceCalculator = new DistanceCalculator();
         List<JunctionBoxPair> junctionBoxPairs = distanceCalculator.calculateJunctionBoxPairDistances(junctionBoxes);
-        JunctioBoxHelper junctioBoxHelper = new JunctioBoxHelper();
-        List<JunctionBoxPair> junctionBoxPairsSorted = junctioBoxHelper.sortJunctionBoxPairs(junctionBoxPairs);
+
         // Act
-        List<Circuit> result = circuitManager.calculateCircuits(junctionBoxPairsSorted,4);
+        List<Circuit> result = circuitManager.calculateCircuits(junctionBoxPairs,4);
         Circuit circuit = result.get(0);
         Circuit circuit2 = result.get(1);
 
@@ -90,11 +89,9 @@ class CircuitManagerTest {
 
         DistanceCalculator distanceCalculator = new DistanceCalculator();
         List<JunctionBoxPair> junctionBoxPairs = distanceCalculator.calculateJunctionBoxPairDistances(junctionBoxes);
-        JunctioBoxHelper junctioBoxHelper = new JunctioBoxHelper();
-        List<JunctionBoxPair> sortenList = junctioBoxHelper.sortJunctionBoxPairs(junctionBoxPairs);
 
         // Act
-        List<Circuit> result = circuitManager.calculateCircuits(sortenList,5);
+        List<Circuit> result = circuitManager.calculateCircuits(junctionBoxPairs,5);
         Circuit circuit2 = result.getFirst();
 
         // Assert
@@ -105,7 +102,6 @@ class CircuitManagerTest {
     void testCalculateCircuits_OneCircuitWithAllPointsAreAtTheSameSpot() {
         // Arrange
         CircuitManager circuitManager = new CircuitManager();
-
         List<JunctionBox> junctionBoxes = List.of(
                 new JunctionBox(0,0,0),
                 new JunctionBox(0,0,0),
@@ -115,6 +111,7 @@ class CircuitManagerTest {
         int expectedLength = 4;
         DistanceCalculator distanceCalculator = new DistanceCalculator();
         List<JunctionBoxPair> junctionBoxPairs = distanceCalculator.calculateJunctionBoxPairDistances(junctionBoxes);
+
         // Act
         List<Circuit> result = circuitManager.calculateCircuits(junctionBoxPairs,4);
         Circuit circuit2 = result.getFirst();
@@ -140,7 +137,6 @@ class CircuitManagerTest {
     void testCalculateCircuits_CircuitWithJunctionBox() {
         // Arrange
         CircuitManager circuitManager = new CircuitManager();
-
         List<JunctionBox> junctionBoxes = List.of(
                 new JunctionBox(0,0,1),
                 new JunctionBox(0,0,10),
@@ -148,8 +144,8 @@ class CircuitManagerTest {
                 new JunctionBox(0,0,12),
                 new JunctionBox(0,0,13)
         );
-        int expectedJunctionBoxSize = 5;
-        int circuitSizeLength = 1;
+        int expectedJunctionBoxSize = 4;
+        int circuitSizeLength = 2;
         DistanceCalculator distanceCalculator = new DistanceCalculator();
         List<JunctionBoxPair> junctionBoxPairs = distanceCalculator.calculateJunctionBoxPairDistances(junctionBoxes);
 
@@ -178,10 +174,9 @@ class CircuitManagerTest {
         int expectedJunctionBoxSize = 3;
 
         List<JunctionBoxPair> junctionBoxPairs = distanceCalculator.calculateJunctionBoxPairDistances(junctionBoxes);
-        JunctioBoxHelper junctioBoxHelper = new JunctioBoxHelper();
-        List<JunctionBoxPair> sortenList = junctioBoxHelper.sortJunctionBoxPairs(junctionBoxPairs);
+
         // Act
-        List<Circuit> result = circuitManager.calculateCircuits(sortenList,4);
+        List<Circuit> result = circuitManager.calculateCircuits(junctionBoxPairs,4);
 
         // Assert
         Circuit circuit = result.getFirst();
@@ -201,11 +196,9 @@ class CircuitManagerTest {
         DistanceCalculator distanceCalculator = new DistanceCalculator();
         int expectedJunctionBoxSize = 1;
         List<JunctionBoxPair> junctionBoxPairs = distanceCalculator.calculateJunctionBoxPairDistances(junctionBoxes);
-        JunctioBoxHelper junctioBoxHelper = new JunctioBoxHelper();
-        List<JunctionBoxPair> sortenList = junctioBoxHelper.sortJunctionBoxPairs(junctionBoxPairs);
 
         // Act
-        List<Circuit> result = circuitManager.calculateCircuits(sortenList,0);
+        List<Circuit> result = circuitManager.calculateCircuits(junctionBoxPairs,0);
 
         // Assert
         for (Circuit circuit : result) {
@@ -232,7 +225,7 @@ class CircuitManagerTest {
         List<JunctionBoxPair> sortenList = junctioBoxHelper.sortJunctionBoxPairs(junctionBoxPairs);
 
         // Act
-        List<Circuit> result = circuitManager.calculateCircuits(sortenList,0);
+        List<Circuit> result = circuitManager.calculateCircuits(junctionBoxPairs,0);
 
         // Assert
         for (Circuit circuit : result) {

@@ -12,9 +12,13 @@ public class CircuitManager {
 
     public List<Circuit> calculateCircuits(List<JunctionBoxPair> junctionBoxPairs, int amountOfPairs) {
 
+        JunctioBoxHelper junctioBoxHelper = new JunctioBoxHelper();
+        List<JunctionBoxPair> sortenList = junctioBoxHelper.sortJunctionBoxPairs(junctionBoxPairs);
+
+
         JunctionBoxLoop: for (int i = 0; i < amountOfPairs; i++) {
 
-            JunctionBoxPair current = junctionBoxPairs.get(i);
+            JunctionBoxPair current = sortenList.get(i);
 
             if (circuits.isEmpty()){
                 Circuit circuit = new Circuit();
@@ -51,7 +55,7 @@ public class CircuitManager {
             circuits.add(circuit);
         }
 
-        for (JunctionBoxPair junctionBoxPair : junctionBoxPairs) {
+        for (JunctionBoxPair junctionBoxPair : sortenList) {
 
             if (junctionBoxPair.left().getCircuit() == null) {
                 Circuit circuit = new Circuit();
