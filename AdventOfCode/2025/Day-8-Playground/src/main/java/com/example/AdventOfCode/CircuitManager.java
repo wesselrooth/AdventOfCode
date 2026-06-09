@@ -73,32 +73,4 @@ public class CircuitManager {
         return circuits;
     }
 
-    private JunctionBox findClosesJunctionBox(JunctionBox current, List<JunctionBox> junctionBoxList) {
-
-        JunctionBox closesdJuncionBox = null;
-        Double junctionBoxDistance = null;
-
-        for (JunctionBox junctionBox : junctionBoxList) {
-
-            if (junctionBox.equals(current)) {
-                continue;
-            }
-
-            if (junctionBox == null) {
-                closesdJuncionBox = junctionBox;
-            }
-            DistanceCalculator distanceCalculator = new DistanceCalculator();
-            double distance = distanceCalculator.calculateEuclideanDistance(current, junctionBox);
-
-            if (junctionBoxDistance == null) {
-                junctionBoxDistance = distance;
-            } else if (distance > junctionBoxDistance) {
-                continue;
-            }
-            closesdJuncionBox = junctionBox;
-        }
-
-        return closesdJuncionBox;
-    }
-
 }
