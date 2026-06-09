@@ -18,48 +18,41 @@ public class CircuitManager {
         for (int i = 0; i < amountOfPairs; i++) {
 
             JunctionBoxPair current = sortenList.get(i);
-            Circuit leftCircuit = null;
-            Circuit rigtCircuit = null;
-
-            for (Circuit circuit : circuits) {
-
-                if (circuit.isIgnore()){
-                    continue;
-                }
-
-
-                if (circuit.junctionBoxExistsInCircuit(current.left())){
-                    leftCircuit = circuit;
-                }
-                if (circuit.junctionBoxExistsInCircuit(current.right())){
-                    rigtCircuit = circuit;
-                }
-            }
+            Circuit leftCircuit = current.left().getCircuit();
+            Circuit rigtCircuit = current.right().getCircuit();
 
             if (leftCircuit == null && rigtCircuit == null){
                 Circuit circuit = new Circuit();
                 circuit.addJunctionBox(current.left());
                 circuit.addJunctionBox(current.right());
+
+                current.left().setCircuit(circuit);
+                current.right().setCircuit(circuit);
+
                 circuits.add(circuit);
-            }else if (leftCircuit == rigtCircuit){
-                //nothing happens
             }
             else if (leftCircuit != null && rigtCircuit == null){
                 leftCircuit.addJunctionBox(current.right());
+                current.right().setCircuit(leftCircuit);
+                current.left().setCircuit(leftCircuit);
             }
             else if (leftCircuit == null && rigtCircuit != null){
                 rigtCircuit.addJunctionBox(current.left());
+                current.left().setCircuit(rigtCircuit);
+                current.right().setCircuit(rigtCircuit);
             }else if (leftCircuit != null && rigtCircuit != null){
-                leftCircuit.setIgnore(true);
-                rigtCircuit.setIgnore(true);
-                Circuit circuit = new Circuit();
-                for (JunctionBox junctionBox : leftCircuit.getJunctionsBoxes()) {
-                    circuit.addJunctionBox(junctionBox);
+
+                if (leftCircuit == rigtCircuit){
+                    continue;
                 }
+
+                Circuit circuit = leftCircuit;
                 for (JunctionBox junctionBox : rigtCircuit.getJunctionsBoxes()) {
                     circuit.addJunctionBox(junctionBox);
+                    junctionBox.setCircuit(circuit);
                 }
                 circuits.add(circuit);
+                rigtCircuit.setIgnore(true);
             }
         }
 
