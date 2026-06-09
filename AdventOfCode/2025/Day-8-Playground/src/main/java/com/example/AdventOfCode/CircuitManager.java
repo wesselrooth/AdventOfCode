@@ -1,5 +1,6 @@
 package com.example.AdventOfCode;
 import java.util.ArrayList;
+import java.util.Comparator;
 import java.util.List;
 
 public class CircuitManager {
@@ -12,16 +13,17 @@ public class CircuitManager {
 
     public List<Circuit> calculateCircuits(List<JunctionBoxPair> junctionBoxPairs, int amountOfPairs) {
 
-        JunctioBoxHelper junctioBoxHelper = new JunctioBoxHelper();
-        List<JunctionBoxPair> sortenList = junctioBoxHelper.sortJunctionBoxPairs(junctionBoxPairs);
+        List<JunctionBoxPair> sortenList = junctionBoxPairs.stream()
+                .sorted(Comparator.comparingDouble(JunctionBoxPair::distance))
+                .toList();
 
         for (int i = 0; i < amountOfPairs; i++) {
 
             JunctionBoxPair current = sortenList.get(i);
             Circuit leftCircuit = current.left().getCircuit();
-            Circuit rigtCircuit = current.right().getCircuit();
+            Circuit rightCircuit = current.right().getCircuit();
 
-            if (leftCircuit == null && rigtCircuit == null){
+            if (leftCircuit == null && rightCircuit == null){
                 Circuit circuit = new Circuit();
                 circuit.addJunctionBox(current.left());
                 circuit.addJunctionBox(current.right());
@@ -31,43 +33,26 @@ public class CircuitManager {
 
                 circuits.add(circuit);
             }
-            else if (leftCircuit != null && rigtCircuit == null){
+            else if (leftCircuit != null && rightCircuit == null){
                 leftCircuit.addJunctionBox(current.right());
                 current.right().setCircuit(leftCircuit);
                 current.left().setCircuit(leftCircuit);
             }
-            else if (leftCircuit == null && rigtCircuit != null){
-                rigtCircuit.addJunctionBox(current.left());
-                current.left().setCircuit(rigtCircuit);
-                current.right().setCircuit(rigtCircuit);
-            }else if (leftCircuit != null && rigtCircuit != null){
+            else if (leftCircuit == null && rightCircuit != null){
+                rightCircuit.addJunctionBox(current.left());
+                current.left().setCircuit(rightCircuit);
+                current.right().setCircuit(rightCircuit);
+            }else {
 
-                if (leftCircuit == rigtCircuit){
+                if (leftCircuit == rightCircuit){
                     continue;
                 }
 
-                Circuit circuit = leftCircuit;
-                for (JunctionBox junctionBox : rigtCircuit.getJunctionsBoxes()) {
-                    circuit.addJunctionBox(junctionBox);
-                    junctionBox.setCircuit(circuit);
+                for (JunctionBox junctionBox : rightCircuit.getJunctionsBoxes()) {
+                    leftCircuit.addJunctionBox(junctionBox);
+                    junctionBox.setCircuit(leftCircuit);
                 }
-                circuits.add(circuit);
-                rigtCircuit.setIgnore(true);
-            }
-        }
-
-        for (JunctionBoxPair junctionBoxPair : sortenList) {
-
-            if (junctionBoxPair.left().getCircuit() == null) {
-                Circuit circuit = new Circuit();
-                circuit.addJunctionBox(junctionBoxPair.left());
-                circuits.add(circuit);
-            }
-
-            if (junctionBoxPair.right().getCircuit() == null) {
-                Circuit circuit = new Circuit();
-                circuit.addJunctionBox(junctionBoxPair.right());
-                circuits.add(circuit);
+                rightCircuit.setIgnore(true);
             }
         }
 

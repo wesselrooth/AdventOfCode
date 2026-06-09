@@ -33,9 +33,4 @@ public class JunctionBox {
         this.circuit = circuit;
     }
 
-    @Override
-    public String toString() {
-        return getX() + "," + getY() + "," + getZ();
-    }
-
 }
