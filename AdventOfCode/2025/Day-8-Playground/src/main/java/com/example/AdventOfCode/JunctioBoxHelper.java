@@ -26,9 +26,6 @@ public class JunctioBoxHelper {
 
                 insertIndex = i;
 
-                if ((i == sortedJunctionBoxPairs.size() - 1 ) && current.distance() < junctionBoxPair.distance() ) {
-                    insertIndex = i;
-                }
                 if ((i == sortedJunctionBoxPairs.size() - 1 ) && current.distance() > junctionBoxPair.distance() ) {
                     insertIndex = i + 1;
                 }
