@@ -1,8 +1,12 @@
 package com.example.AdventOfCode;
 import org.junit.jupiter.api.Test;
-import java.util.List;
+
+import java.io.IOException;
+import java.net.URISyntaxException;
+import java.util.*;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertTrue;
 
 class CircuitManagerTest {
 
@@ -172,7 +176,6 @@ class CircuitManagerTest {
         );
         DistanceCalculator distanceCalculator = new DistanceCalculator();
         int expectedJunctionBoxSize = 3;
-
         List<JunctionBoxPair> junctionBoxPairs = distanceCalculator.calculateJunctionBoxPairDistances(junctionBoxes);
 
         // Act
@@ -221,8 +224,6 @@ class CircuitManagerTest {
         DistanceCalculator distanceCalculator = new DistanceCalculator();
         int expectedJunctionBoxSize = 1;
         List<JunctionBoxPair> junctionBoxPairs = distanceCalculator.calculateJunctionBoxPairDistances(junctionBoxes);
-        JunctioBoxHelper junctioBoxHelper = new JunctioBoxHelper();
-        List<JunctionBoxPair> sortenList = junctioBoxHelper.sortJunctionBoxPairs(junctionBoxPairs);
 
         // Act
         List<Circuit> result = circuitManager.calculateCircuits(junctionBoxPairs,0);
@@ -232,5 +233,172 @@ class CircuitManagerTest {
             assertEquals(expectedJunctionBoxSize, circuit.getJunctionsBoxes().size());
         }
 
+    }
+
+    @Test
+    void twoPairsSameComponent_shouldProduceOneCircuit() {
+
+        CircuitManager manager = new CircuitManager();
+
+        JunctionBox a = new JunctionBox(0, 0, 0);
+        JunctionBox b = new JunctionBox(1, 0, 0);
+        JunctionBox c = new JunctionBox(2, 0, 0);
+
+        List<JunctionBoxPair> input = List.of(
+                new JunctionBoxPair(a, b, 1.0),
+                new JunctionBoxPair(b, c, 1.0)
+        );
+
+        List<Circuit> result = manager.calculateCircuits(input, input.size());
+
+        assertEquals(1, result.size());
+    }
+
+    @Test
+    void orderShouldNotMatter() {
+
+        CircuitManager manager = new CircuitManager();
+
+        JunctionBox a = new JunctionBox(0, 0, 0);
+        JunctionBox b = new JunctionBox(1, 0, 0);
+        JunctionBox c = new JunctionBox(2, 0, 0);
+
+        List<JunctionBoxPair> input1 = List.of(
+                new JunctionBoxPair(a, b, 3.0),
+                new JunctionBoxPair(b, c, 1.0)
+        );
+
+        List<JunctionBoxPair> input2 = List.of(
+                new JunctionBoxPair(b, c, 1.0),
+                new JunctionBoxPair(a, b, 3.0)
+        );
+
+        assertEquals(
+                manager.calculateCircuits(input1, 2).size(),
+                manager.calculateCircuits(input2, 2).size()
+        );
+    }
+
+    @Test
+    void disconnectedPairs_shouldProduceTwoCircuits() {
+
+        CircuitManager manager = new CircuitManager();
+
+        JunctionBox a = new JunctionBox(0, 0, 0);
+        JunctionBox b = new JunctionBox(1, 0, 0);
+        JunctionBox c = new JunctionBox(100, 0, 0);
+        JunctionBox d = new JunctionBox(101, 0, 0);
+
+        List<JunctionBoxPair> input = List.of(
+                new JunctionBoxPair(a, b, 1.0),
+                new JunctionBoxPair(c, d, 1.0)
+        );
+
+        List<Circuit> result = manager.calculateCircuits(input, input.size());
+
+        assertEquals(2, result.size());
+    }
+    @Test
+    void allNodesShouldEndInSameCircuit() {
+
+        CircuitManager manager = new CircuitManager();
+
+        JunctionBox a = new JunctionBox(0, 0, 0);
+        JunctionBox b = new JunctionBox(1, 0, 0);
+        JunctionBox c = new JunctionBox(2, 0, 0);
+        JunctionBox d = new JunctionBox(3, 0, 0);
+
+        List<JunctionBoxPair> input = List.of(
+                new JunctionBoxPair(a, b, 1.0),
+                new JunctionBoxPair(b, c, 2.0),
+                new JunctionBoxPair(c, d, 3.0)
+        );
+
+        List<Circuit> result = manager.calculateCircuits(input, input.size());
+        assertEquals(1, result.size());
+        Circuit only = result.get(0);
+        assertTrue(only.getJunctionsBoxes().containsAll(List.of(a, b, c, d)));
+    }
+    @Test
+    void debugPrintCircuits() throws URISyntaxException, IOException {
+
+        CircuitManager manager = new CircuitManager();
+
+        InputLoader inputLoader = new InputLoader();
+        List<JunctionBox> input = inputLoader.loadInput("test-input");
+        DistanceCalculator distanceCalculator = new DistanceCalculator();
+        List<JunctionBoxPair> pairList = distanceCalculator.calculateJunctionBoxPairDistances(input);
+        List<Circuit> result = manager.calculateCircuits(pairList, input.size());
+
+        for (int i = 0; i < result.size(); i++) {
+            System.out.println("Circuit " + i + ": " + result.get(i).getJunctionsBoxes());
+        }
+    }
+    @Test
+    void diamond_merge_should_create_single_circuit() {
+
+        CircuitManager manager = new CircuitManager();
+
+        JunctionBox a = new JunctionBox(0, 0, 0);
+        JunctionBox b = new JunctionBox(1, 0, 0);
+        JunctionBox c = new JunctionBox(2, 0, 0);
+        JunctionBox d = new JunctionBox(3, 0, 0);
+
+        List<JunctionBoxPair> input = List.of(
+                new JunctionBoxPair(a, b, 1.0),
+                new JunctionBoxPair(a, c, 1.0),
+                new JunctionBoxPair(b, d, 1.0),
+                new JunctionBoxPair(c, d, 1.0)
+        );
+
+        List<Circuit> result = manager.calculateCircuits(input, input.size());
+
+        assertEquals(1, result.size(),
+                "All nodes should collapse into one circuit");
+    }
+
+
+    @Test
+    void everyJunctionBoxShouldBelongToExactlyOneCircuit() throws URISyntaxException, IOException {
+
+        CircuitManager manager = new CircuitManager();
+        InputLoader inputLoader = new InputLoader();
+        List<JunctionBox> input = inputLoader.loadInput("test-input");
+        DistanceCalculator distanceCalculator = new DistanceCalculator();
+        List<JunctionBoxPair> inputList = distanceCalculator.calculateJunctionBoxPairDistances(input);
+        List<Circuit> circuits = manager.calculateCircuits(inputList, input.size());
+
+        Map<JunctionBox, Integer> count = new HashMap<>();
+
+        for (Circuit c : circuits) {
+            for (JunctionBox j : c.getJunctionsBoxes()) {
+                count.put(j, count.getOrDefault(j, 0) + 1);
+            }
+        }
+
+        for (Map.Entry<JunctionBox, Integer> e : count.entrySet()) {
+            assertEquals(1, e.getValue(),
+                    "JunctionBox appears in multiple circuits: " + e.getKey());
+        }
+    }
+    @Test
+    void circuitsShouldBeUniqueByMembership() throws URISyntaxException, IOException {
+
+        CircuitManager manager = new CircuitManager();
+        InputLoader inputLoader = new InputLoader();
+        List<JunctionBox> input = inputLoader.loadInput("test-input");
+        DistanceCalculator distanceCalculator = new DistanceCalculator();
+        List<JunctionBoxPair> inputList = distanceCalculator.calculateJunctionBoxPairDistances(input);
+
+        List<Circuit> circuits = manager.calculateCircuits(inputList, input.size());
+
+        Set<JunctionBox> seen = new HashSet<>();
+
+        for (Circuit c : circuits) {
+            for (JunctionBox j : c.getJunctionsBoxes()) {
+                assertTrue(seen.add(j),
+                        "Duplicate membership found: " + j);
+            }
+        }
     }
 }
