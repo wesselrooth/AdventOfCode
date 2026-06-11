@@ -21,7 +21,7 @@ public class CircuitManager {
             Circuit leftCircuit = current.left().getCircuit();
             Circuit rightCircuit = current.right().getCircuit();
 
-            if (leftCircuit == null & rightCircuit == null){
+            if (leftCircuit == null && rightCircuit == null){
                 Circuit circuit = new Circuit();
                 circuit.addJunctionBox(current.left());
                 circuit.addJunctionBox(current.right());
@@ -30,23 +30,24 @@ public class CircuitManager {
                 current.right().setCircuit(circuit);
                 circuits.add(circuit);
             }
-            else if (leftCircuit != null & rightCircuit == null){
+            else if (leftCircuit != null && rightCircuit == null){
                 leftCircuit.addJunctionBox(current.right());
+                current.right().setCircuit(leftCircuit);
             }
-            else if (leftCircuit == null & rightCircuit != null){
+            else if (leftCircuit == null && rightCircuit != null){
                 rightCircuit.addJunctionBox(current.left());
+                current.left().setCircuit(rightCircuit);
             } else if (leftCircuit == rightCircuit) {
                 continue;
             } else {
 
-                for (JunctionBox junctionBox : rightCircuit.getJunctionsBoxes()) {
-                    leftCircuit.addJunctionBox(junctionBox);
+                for (JunctionBox rightBox : rightCircuit.getJunctionsBoxes()) {
+                    leftCircuit.addJunctionBox(rightBox);
+                    rightBox.setCircuit(leftCircuit);
                 }
+                circuits.remove(rightCircuit);
             }
         }
-
-
-
         return circuits;
     }
 

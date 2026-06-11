@@ -10,7 +10,7 @@ public class Circuit {
     private Set<JunctionBox> junctionsBoxes;
 
     public Circuit() {
-        junctionsBoxes  = new HashSet<>();
+        junctionsBoxes  = new ArrayList<>();
 
     }
 
@@ -19,7 +19,7 @@ public class Circuit {
         junctionsBoxes.add(junctionBox);
     }
 
-    public Set<JunctionBox> getJunctionsBoxes() {
+    public List<JunctionBox> getJunctionsBoxes() {
         return junctionsBoxes;
     }
 
