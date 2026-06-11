@@ -7,7 +7,7 @@ import java.util.Set;
 
 public class Circuit {
 
-    private Set<JunctionBox> junctionsBoxes;
+    private List<JunctionBox> junctionsBoxes;
 
     public Circuit() {
         junctionsBoxes  = new ArrayList<>();
