@@ -1,7 +1,5 @@
 package com.example.AdventOfCode;
-import java.util.ArrayList;
-import java.util.Comparator;
-import java.util.List;
+import java.util.*;
 
 public class CircuitManager {
 
@@ -23,38 +21,31 @@ public class CircuitManager {
             Circuit leftCircuit = current.left().getCircuit();
             Circuit rightCircuit = current.right().getCircuit();
 
-            if (leftCircuit == null && rightCircuit == null){
+            if (leftCircuit == null & rightCircuit == null){
                 Circuit circuit = new Circuit();
                 circuit.addJunctionBox(current.left());
                 circuit.addJunctionBox(current.right());
 
                 current.left().setCircuit(circuit);
                 current.right().setCircuit(circuit);
-
                 circuits.add(circuit);
             }
-            else if (leftCircuit != null && rightCircuit == null){
+            else if (leftCircuit != null & rightCircuit == null){
                 leftCircuit.addJunctionBox(current.right());
-                current.right().setCircuit(leftCircuit);
-                current.left().setCircuit(leftCircuit);
             }
-            else if (leftCircuit == null && rightCircuit != null){
+            else if (leftCircuit == null & rightCircuit != null){
                 rightCircuit.addJunctionBox(current.left());
-                current.left().setCircuit(rightCircuit);
-                current.right().setCircuit(rightCircuit);
-            }else {
-
-                if (leftCircuit == rightCircuit){
-                    continue;
-                }
+            } else if (leftCircuit == rightCircuit) {
+                continue;
+            } else {
 
                 for (JunctionBox junctionBox : rightCircuit.getJunctionsBoxes()) {
                     leftCircuit.addJunctionBox(junctionBox);
-                    junctionBox.setCircuit(leftCircuit);
                 }
-                rightCircuit.setIgnore(true);
             }
         }
+
+
 
         return circuits;
     }

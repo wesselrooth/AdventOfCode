@@ -12,7 +12,6 @@ public class StarCollector {
 
         DistanceCalculator distanceCalculator = new DistanceCalculator();
         List<JunctionBoxPair> junctionBoxPairs = distanceCalculator.calculateJunctionBoxPairDistances(input);
-
         CircuitManager circuitManager = new CircuitManager();
         List<Circuit> circuitList = circuitManager.calculateCircuits(junctionBoxPairs,pairs);
 
@@ -22,6 +21,7 @@ public class StarCollector {
             Circuit circuit = circuitList.get(i);
             if (i == 0){
                 result = circuit.getJunctionsBoxes().size();
+                continue;
             }
             result *= circuit.getJunctionsBoxes().size();
         }

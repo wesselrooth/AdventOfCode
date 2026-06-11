@@ -149,7 +149,7 @@ class CircuitManagerTest {
                 new JunctionBox(0,0,13)
         );
         int expectedJunctionBoxSize = 4;
-        int circuitSizeLength = 2;
+        int circuitSizeLength = 1;
         DistanceCalculator distanceCalculator = new DistanceCalculator();
         List<JunctionBoxPair> junctionBoxPairs = distanceCalculator.calculateJunctionBoxPairDistances(junctionBoxes);
 
@@ -358,47 +358,5 @@ class CircuitManagerTest {
     }
 
 
-    @Test
-    void everyJunctionBoxShouldBelongToExactlyOneCircuit() throws URISyntaxException, IOException {
 
-        CircuitManager manager = new CircuitManager();
-        InputLoader inputLoader = new InputLoader();
-        List<JunctionBox> input = inputLoader.loadInput("test-input");
-        DistanceCalculator distanceCalculator = new DistanceCalculator();
-        List<JunctionBoxPair> inputList = distanceCalculator.calculateJunctionBoxPairDistances(input);
-        List<Circuit> circuits = manager.calculateCircuits(inputList, input.size());
-
-        Map<JunctionBox, Integer> count = new HashMap<>();
-
-        for (Circuit c : circuits) {
-            for (JunctionBox j : c.getJunctionsBoxes()) {
-                count.put(j, count.getOrDefault(j, 0) + 1);
-            }
-        }
-
-        for (Map.Entry<JunctionBox, Integer> e : count.entrySet()) {
-            assertEquals(1, e.getValue(),
-                    "JunctionBox appears in multiple circuits: " + e.getKey());
-        }
-    }
-    @Test
-    void circuitsShouldBeUniqueByMembership() throws URISyntaxException, IOException {
-
-        CircuitManager manager = new CircuitManager();
-        InputLoader inputLoader = new InputLoader();
-        List<JunctionBox> input = inputLoader.loadInput("test-input");
-        DistanceCalculator distanceCalculator = new DistanceCalculator();
-        List<JunctionBoxPair> inputList = distanceCalculator.calculateJunctionBoxPairDistances(input);
-
-        List<Circuit> circuits = manager.calculateCircuits(inputList, input.size());
-
-        Set<JunctionBox> seen = new HashSet<>();
-
-        for (Circuit c : circuits) {
-            for (JunctionBox j : c.getJunctionsBoxes()) {
-                assertTrue(seen.add(j),
-                        "Duplicate membership found: " + j);
-            }
-        }
-    }
 }

@@ -15,15 +15,14 @@ public class DistanceCalculator {
     public List<JunctionBoxPair> calculateJunctionBoxPairDistances(List<JunctionBox> junctionBoxes) {
 
         List<JunctionBoxPair> junctionBoxPairs = new ArrayList<>();
-        for (JunctionBox current : junctionBoxes) {
 
-            for (JunctionBox junctionBox : junctionBoxes) {
-                if (junctionBox.equals(current)) {
-                    continue;
-                }
+        for (int i = 0; i < junctionBoxes.size(); i++) {
+            JunctionBox current  = junctionBoxes.get(i);
 
-                double distance = calculateEuclideanDistance(current, junctionBox);
-                junctionBoxPairs.add(new JunctionBoxPair(current, junctionBox, distance));
+            for (int j = i+1; j < junctionBoxes.size(); j++) {
+                JunctionBox toCalculate = junctionBoxes.get(j);
+                double distance = calculateEuclideanDistance(current, toCalculate);
+                junctionBoxPairs.add(new JunctionBoxPair(current, toCalculate, distance));
             }
         }
         return junctionBoxPairs;

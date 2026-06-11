@@ -1,15 +1,17 @@
 package com.example.AdventOfCode;
 
 import java.util.ArrayList;
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
 
 public class Circuit {
 
-    private List<JunctionBox>  junctionsBoxes;
-    private boolean ignore;
+    private Set<JunctionBox> junctionsBoxes;
 
     public Circuit() {
-        junctionsBoxes = new ArrayList<>();
+        junctionsBoxes  = new HashSet<>();
+
     }
 
     public void addJunctionBox(JunctionBox junctionBox) {
@@ -17,7 +19,7 @@ public class Circuit {
         junctionsBoxes.add(junctionBox);
     }
 
-    public List<JunctionBox> getJunctionsBoxes() {
+    public Set<JunctionBox> getJunctionsBoxes() {
         return junctionsBoxes;
     }
 
@@ -28,13 +30,5 @@ public class Circuit {
             }
         }
         return false;
-    }
-
-    public void setIgnore(boolean ignore){
-        this.ignore = ignore;
-    }
-
-    public boolean isIgnore() {
-        return ignore;
     }
 }
