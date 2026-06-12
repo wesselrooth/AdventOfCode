@@ -15,38 +15,34 @@ public class CircuitManager {
                 .sorted(Comparator.comparingDouble(JunctionBoxPair::distance))
                 .toList();
 
+        Set<JunctionBox> allBoxes = new HashSet<>();
+        for (JunctionBoxPair pair : junctionBoxPairs) {
+            allBoxes.add(pair.left());
+            allBoxes.add(pair.right());
+        }
+
+        for (JunctionBox box : allBoxes) {
+            Circuit circuit = new Circuit();
+            circuit.addJunctionBox(box);
+            box.setCircuit(circuit);
+            circuits.add(circuit);
+        }
+
         for (int i = 0; i < amountOfPairs; i++) {
 
             JunctionBoxPair current = sortenList.get(i);
             Circuit leftCircuit = current.left().getCircuit();
             Circuit rightCircuit = current.right().getCircuit();
 
-            if (leftCircuit == null && rightCircuit == null){
-                Circuit circuit = new Circuit();
-                circuit.addJunctionBox(current.left());
-                circuit.addJunctionBox(current.right());
-
-                current.left().setCircuit(circuit);
-                current.right().setCircuit(circuit);
-                circuits.add(circuit);
-            }
-            else if (leftCircuit != null && rightCircuit == null){
-                leftCircuit.addJunctionBox(current.right());
-                current.right().setCircuit(leftCircuit);
-            }
-            else if (leftCircuit == null && rightCircuit != null){
-                rightCircuit.addJunctionBox(current.left());
-                current.left().setCircuit(rightCircuit);
-            } else if (leftCircuit == rightCircuit) {
+            if (leftCircuit == rightCircuit) {
                 continue;
-            } else {
-
-                for (JunctionBox rightBox : rightCircuit.getJunctionsBoxes()) {
-                    leftCircuit.addJunctionBox(rightBox);
-                    rightBox.setCircuit(leftCircuit);
-                }
-                circuits.remove(rightCircuit);
             }
+
+            for (JunctionBox rightBox : rightCircuit.getJunctionsBoxes()) {
+                leftCircuit.addJunctionBox(rightBox);
+                rightBox.setCircuit(leftCircuit);
+            }
+            circuits.remove(rightCircuit);
         }
         return circuits;
     }
