@@ -1,13 +1,11 @@
 package com.example.AdventOfCode;
-
-import java.util.ArrayList;
 import java.util.HashSet;
 
 import java.util.Set;
 
 public class Circuit {
 
-    private Set<JunctionBox> junctionsBoxes;
+    private final Set<JunctionBox> junctionsBoxes;
 
     public Circuit() {
         junctionsBoxes  = new HashSet<>();

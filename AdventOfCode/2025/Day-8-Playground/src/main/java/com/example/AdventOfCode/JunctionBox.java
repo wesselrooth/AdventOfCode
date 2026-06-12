@@ -5,7 +5,7 @@ public class JunctionBox {
     private final long x;
     private final long y;
     private final long z;
-    private Circuit circuit = new Circuit();
+    private Circuit circuit;
 
     public JunctionBox(long x, long y, long z) {
         this.x = x;

@@ -2,6 +2,7 @@ package com.example.AdventOfCode;
 
 import java.io.IOException;
 import java.net.URISyntaxException;
+import java.util.Comparator;
 import java.util.List;
 
 public class StarCollector {
@@ -15,8 +16,10 @@ public class StarCollector {
         CircuitManager circuitManager = new CircuitManager();
         List<Circuit> circuitList = circuitManager.calculateCircuits(junctionBoxPairs,pairs);
 
+        circuitList.sort(Comparator.comparingInt( (Circuit c) -> c.getJunctionsBoxes().size()).reversed());
+
         long result = 0;
-        for (int i =0; i< circuitList.size(); i++) {
+        for (int i =0; i< 3; i++) {
 
             Circuit circuit = circuitList.get(i);
             if (i == 0){
