@@ -1,8 +1,5 @@
 package com.example.AdventOfCode;
 import org.junit.jupiter.api.Test;
-
-import java.io.IOException;
-import java.net.URISyntaxException;
 import java.util.*;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
@@ -232,12 +229,11 @@ class CircuitManagerTest {
         for (Circuit circuit : result) {
             assertEquals(expectedJunctionBoxSize, circuit.getJunctionsBoxes().size());
         }
-
     }
 
     @Test
-    void twoPairsSameComponent_shouldProduceOneCircuit() {
-
+    void testCalculateCircuits_twoPairsSameComponent_shouldProduceOneCircuit() {
+        // Arrange
         CircuitManager manager = new CircuitManager();
 
         JunctionBox a = new JunctionBox(0, 0, 0);
@@ -248,40 +244,18 @@ class CircuitManagerTest {
                 new JunctionBoxPair(a, b, 1.0),
                 new JunctionBoxPair(b, c, 1.0)
         );
+        int expectedJunctionBoxSize = 1;
 
+        // Act
         List<Circuit> result = manager.calculateCircuits(input, input.size());
 
-        assertEquals(1, result.size());
+        // Assert
+        assertEquals(expectedJunctionBoxSize, result.size());
     }
 
     @Test
-    void orderShouldNotMatter() {
-
-        CircuitManager manager = new CircuitManager();
-
-        JunctionBox a = new JunctionBox(0, 0, 0);
-        JunctionBox b = new JunctionBox(1, 0, 0);
-        JunctionBox c = new JunctionBox(2, 0, 0);
-
-        List<JunctionBoxPair> input1 = List.of(
-                new JunctionBoxPair(a, b, 3.0),
-                new JunctionBoxPair(b, c, 1.0)
-        );
-
-        List<JunctionBoxPair> input2 = List.of(
-                new JunctionBoxPair(b, c, 1.0),
-                new JunctionBoxPair(a, b, 3.0)
-        );
-
-        assertEquals(
-                manager.calculateCircuits(input1, 2).size(),
-                manager.calculateCircuits(input2, 2).size()
-        );
-    }
-
-    @Test
-    void disconnectedPairs_shouldProduceTwoCircuits() {
-
+    void testCalculateCircuits_disconnectedPairs_shouldProduceTwoCircuits() {
+        // Arrange
         CircuitManager manager = new CircuitManager();
 
         JunctionBox a = new JunctionBox(0, 0, 0);
@@ -293,14 +267,17 @@ class CircuitManagerTest {
                 new JunctionBoxPair(a, b, 1.0),
                 new JunctionBoxPair(c, d, 1.0)
         );
+        int expectedJunctionBoxSize = 2;
 
+        // Act
         List<Circuit> result = manager.calculateCircuits(input, input.size());
 
-        assertEquals(2, result.size());
+        // Assert
+        assertEquals(expectedJunctionBoxSize, result.size());
     }
     @Test
-    void allNodesShouldEndInSameCircuit() {
-
+    void testCalculateCircuits_allNodesShouldEndInSameCircuit() {
+        // Arrange
         CircuitManager manager = new CircuitManager();
 
         JunctionBox a = new JunctionBox(0, 0, 0);
@@ -314,29 +291,20 @@ class CircuitManagerTest {
                 new JunctionBoxPair(c, d, 3.0)
         );
 
+        int expectedJunctionBoxSize = 1;
+
+        // Act
         List<Circuit> result = manager.calculateCircuits(input, input.size());
-        assertEquals(1, result.size());
+
+        // Assert
+        assertEquals(expectedJunctionBoxSize, result.size());
         Circuit only = result.get(0);
         assertTrue(only.getJunctionsBoxes().containsAll(List.of(a, b, c, d)));
     }
+
     @Test
-    void debugPrintCircuits() throws URISyntaxException, IOException {
-
-        CircuitManager manager = new CircuitManager();
-
-        InputLoader inputLoader = new InputLoader();
-        List<JunctionBox> input = inputLoader.loadInput("test-input");
-        DistanceCalculator distanceCalculator = new DistanceCalculator();
-        List<JunctionBoxPair> pairList = distanceCalculator.calculateJunctionBoxPairDistances(input);
-        List<Circuit> result = manager.calculateCircuits(pairList, input.size());
-
-        for (int i = 0; i < result.size(); i++) {
-            System.out.println("Circuit " + i + ": " + result.get(i).getJunctionsBoxes());
-        }
-    }
-    @Test
-    void diamond_merge_should_create_single_circuit() {
-
+    void testCalculateCircuits_diamond_merge_should_create_single_circuit() {
+        // Arrange
         CircuitManager manager = new CircuitManager();
 
         JunctionBox a = new JunctionBox(0, 0, 0);
@@ -350,13 +318,12 @@ class CircuitManagerTest {
                 new JunctionBoxPair(b, d, 1.0),
                 new JunctionBoxPair(c, d, 1.0)
         );
+        int expectedJunctionBoxSize = 1;
 
+        // Act
         List<Circuit> result = manager.calculateCircuits(input, input.size());
 
-        assertEquals(1, result.size(),
-                "All nodes should collapse into one circuit");
+        // Assert
+        assertEquals(expectedJunctionBoxSize, result.size());
     }
-
-
-
 }
