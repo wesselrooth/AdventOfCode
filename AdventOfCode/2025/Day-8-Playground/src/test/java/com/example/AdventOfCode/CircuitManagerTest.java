@@ -67,7 +67,7 @@ class CircuitManagerTest {
         List<JunctionBoxPair> junctionBoxPairs = distanceCalculator.calculateJunctionBoxPairDistances(junctionBoxes);
 
         // Act
-        List<Circuit> result = circuitManager.calculateCircuits(junctionBoxPairs,4);
+        List<Circuit> result = circuitManager.calculateCircuits(junctionBoxPairs,2);
         Circuit circuit = result.get(0);
         Circuit circuit2 = result.get(1);
 
@@ -95,7 +95,7 @@ class CircuitManagerTest {
         List<JunctionBoxPair> junctionBoxPairs = distanceCalculator.calculateJunctionBoxPairDistances(junctionBoxes);
 
         // Act
-        List<Circuit> result = circuitManager.calculateCircuits(junctionBoxPairs,5);
+        List<Circuit> result = circuitManager.calculateCircuits(junctionBoxPairs,3);
         Circuit circuit2 = result.getFirst();
 
         // Assert
@@ -179,7 +179,7 @@ class CircuitManagerTest {
         List<JunctionBoxPair> junctionBoxPairs = distanceCalculator.calculateJunctionBoxPairDistances(junctionBoxes);
 
         // Act
-        List<Circuit> result = circuitManager.calculateCircuits(junctionBoxPairs,4);
+        List<Circuit> result = circuitManager.calculateCircuits(junctionBoxPairs,3);
 
         // Assert
         Circuit circuit = result.getFirst();
