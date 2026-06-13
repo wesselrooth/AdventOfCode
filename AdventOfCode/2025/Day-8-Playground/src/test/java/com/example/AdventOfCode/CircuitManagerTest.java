@@ -1,9 +1,9 @@
 package com.example.AdventOfCode;
+import com.example.AdventOfCode.exceptions.CircuitException;
 import org.junit.jupiter.api.Test;
 import java.util.*;
 
-import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.junit.jupiter.api.Assertions.assertTrue;
+import static org.junit.jupiter.api.Assertions.*;
 
 class CircuitManagerTest {
 
@@ -119,19 +119,6 @@ class CircuitManagerTest {
 
         // Assert
         assertEquals(expectedLength, circuit2.getJunctionsBoxes().size());
-    }
-
-    @Test
-    void testCalculateCircuits_OneCircuitWithNullJunctionBoxes() {
-        // Arrange
-        CircuitManager circuitManager = new CircuitManager();
-        int expectedLength = 0;
-
-        // Act
-        List<Circuit> result = circuitManager.calculateCircuits(List.of(),0);
-
-        // Assert
-        assertEquals(expectedLength, result.size());
     }
 
     @Test
@@ -326,4 +313,34 @@ class CircuitManagerTest {
         // Assert
         assertEquals(expectedJunctionBoxSize, result.size());
     }
+
+    @Test
+    void testCalculateCircuits_EmptyJunctionBoxPairList(){
+        // Arrange
+        CircuitManager manager = new CircuitManager();
+
+        String expected = "Empty Junction Box Pair List";
+
+        // Act
+        String message = assertThrows(CircuitException.class, () -> manager.calculateCircuits(List.of(), 0)).getMessage();
+
+
+        // Assert
+        assertEquals(expected, message);
+    }
+    @Test
+    void testCalculateCircuits_JunctionBoxPairListIsNull(){
+        // Arrange
+        CircuitManager manager = new CircuitManager();
+
+        String expected = "Empty Junction Box Pair List";
+
+        // Act
+        String message = assertThrows(CircuitException.class, () -> manager.calculateCircuits(null, 0)).getMessage();
+
+
+        // Assert
+        assertEquals(expected, message);
+    }
+
 }

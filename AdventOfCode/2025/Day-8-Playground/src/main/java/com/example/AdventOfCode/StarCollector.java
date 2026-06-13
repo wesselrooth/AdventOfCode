@@ -15,18 +15,17 @@ public class StarCollector {
         List<JunctionBoxPair> junctionBoxPairs = distanceCalculator.calculateJunctionBoxPairDistances(input);
         CircuitManager circuitManager = new CircuitManager();
         List<Circuit> circuitList = circuitManager.calculateCircuits(junctionBoxPairs,pairs);
-
-        circuitList.sort(Comparator.comparingInt( (Circuit c) -> c.getJunctionsBoxes().size()).reversed());
+        circuitManager.sortByCircuitSize(circuitList);
 
         long result = 0;
-        for (int i =0; i< 3; i++) {
+        for (int i =0; i < 3; i++) {
 
             Circuit circuit = circuitList.get(i);
             if (i == 0){
                 result = circuit.getJunctionsBoxes().size();
-                continue;
+            }else {
+                result *= circuit.getJunctionsBoxes().size();
             }
-            result *= circuit.getJunctionsBoxes().size();
         }
         return result;
     }

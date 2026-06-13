@@ -1,5 +1,6 @@
 package com.example.AdventOfCode;
 
+import com.example.AdventOfCode.exceptions.CircuitException;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.CsvSource;
@@ -33,5 +34,33 @@ class DistanceCalculatorTest {
 
         // Assert
         assertEquals(expected, result);
+    }
+
+    @Test
+    void testCalculateCircuits_JunctionBoxPairListIsNull(){
+        // Arrange
+        DistanceCalculator distanceCalculator = new DistanceCalculator();
+
+        String expected = "Junction Box list is empty";
+
+        // Act
+        String message = assertThrows(CircuitException.class, () -> distanceCalculator.calculateJunctionBoxPairDistances(List.of())).getMessage();
+
+        // Assert
+        assertEquals(expected, message);
+    }
+
+    @Test
+    void testCalculateCircuits_JunctionBoxPairListIsEmpty(){
+        // Arrange
+        DistanceCalculator distanceCalculator = new DistanceCalculator();
+
+        String expected = "Junction Box list is empty";
+
+        // Act
+        String message = assertThrows(CircuitException.class, () -> distanceCalculator.calculateJunctionBoxPairDistances(null)).getMessage();
+
+        // Assert
+        assertEquals(expected, message);
     }
 }

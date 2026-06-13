@@ -1,4 +1,6 @@
 package com.example.AdventOfCode;
+import com.example.AdventOfCode.exceptions.CircuitException;
+
 import java.util.ArrayList;
 import java.util.List;
 
@@ -13,6 +15,10 @@ public class DistanceCalculator {
     }
 
     public List<JunctionBoxPair> calculateJunctionBoxPairDistances(List<JunctionBox> junctionBoxes) {
+
+        if (junctionBoxes == null || junctionBoxes.isEmpty()) {
+            throw new CircuitException("Junction Box list is empty");
+        }
 
         List<JunctionBoxPair> junctionBoxPairs = new ArrayList<>();
 

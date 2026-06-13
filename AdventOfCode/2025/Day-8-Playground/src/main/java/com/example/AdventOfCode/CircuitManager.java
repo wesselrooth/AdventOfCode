@@ -1,11 +1,18 @@
 package com.example.AdventOfCode;
+import com.example.AdventOfCode.exceptions.CircuitException;
+
 import java.util.*;
 
 public class CircuitManager {
 
-    private List<Circuit> circuits = new ArrayList<>();
 
     public List<Circuit> calculateCircuits(List<JunctionBoxPair> pairList, int amountOfPairs) {
+
+        if (pairList == null || pairList.isEmpty()) {
+            throw new CircuitException("Empty Junction Box Pair List");
+        }
+
+        final List<Circuit> circuits = new ArrayList<>();
 
         pairList = sortJunctionBoxPairsByDistance(pairList);
 
@@ -45,13 +52,20 @@ public class CircuitManager {
                 circuits.remove(leftCircuit);
             }
         }
+
+
+
         return circuits;
     }
 
-    private List<JunctionBoxPair> sortJunctionBoxPairsByDistance ( List<JunctionBoxPair> junctionBoxPairs) {
+    private List<JunctionBoxPair> sortJunctionBoxPairsByDistance (List<JunctionBoxPair> junctionBoxPairs) {
         return junctionBoxPairs.stream()
                 .sorted(Comparator.comparingDouble(JunctionBoxPair::distance))
                 .toList();
+    }
+
+    public void sortByCircuitSize(List<Circuit> circuits) {
+        circuits.sort(Comparator.comparingInt( (Circuit c) -> c.getJunctionsBoxes().size()).reversed());
     }
 
 }
