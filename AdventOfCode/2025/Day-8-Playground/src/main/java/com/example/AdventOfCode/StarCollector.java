@@ -1,8 +1,9 @@
 package com.example.AdventOfCode;
 
+import com.example.AdventOfCode.resources.InputLoader;
+
 import java.io.IOException;
 import java.net.URISyntaxException;
-import java.util.Comparator;
 import java.util.List;
 
 public class StarCollector {
