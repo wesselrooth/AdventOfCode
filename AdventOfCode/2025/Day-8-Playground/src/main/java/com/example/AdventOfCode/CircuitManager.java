@@ -5,15 +5,13 @@ public class CircuitManager {
 
     private List<Circuit> circuits = new ArrayList<>();
 
-    public List<Circuit> calculateCircuits(List<JunctionBoxPair> junctionBoxPairs, int amountOfPairs) {
+    public List<Circuit> calculateCircuits(List<JunctionBoxPair> pairList, int amountOfPairs) {
 
-        List<JunctionBoxPair> sortenList = junctionBoxPairs.stream()
-                .sorted(Comparator.comparingDouble(JunctionBoxPair::distance))
-                .toList();
+        pairList = sortJunctionBoxPairsByDistance(pairList);
 
         for (int i = 0; i < amountOfPairs; i++) {
 
-            JunctionBoxPair current = sortenList.get(i);
+            JunctionBoxPair current = pairList.get(i);
 
             JunctionBox left = current.left();
             JunctionBox right = current.right();
@@ -48,6 +46,12 @@ public class CircuitManager {
             }
         }
         return circuits;
+    }
+
+    private List<JunctionBoxPair> sortJunctionBoxPairsByDistance ( List<JunctionBoxPair> junctionBoxPairs) {
+        return junctionBoxPairs.stream()
+                .sorted(Comparator.comparingDouble(JunctionBoxPair::distance))
+                .toList();
     }
 
 }
