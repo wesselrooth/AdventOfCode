@@ -52,9 +52,6 @@ public class CircuitManager {
                 circuits.remove(leftCircuit);
             }
         }
-
-
-
         return circuits;
     }
 
