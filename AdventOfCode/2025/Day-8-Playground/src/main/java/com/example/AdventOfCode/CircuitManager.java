@@ -5,7 +5,6 @@ import java.util.*;
 
 public class CircuitManager {
 
-
     public List<Circuit> calculateCircuits(List<JunctionBoxPair> pairList, int amountOfPairs) {
 
         if (pairList == null || pairList.isEmpty()) {
@@ -45,11 +44,11 @@ public class CircuitManager {
                 continue;
             }else {
 
-                for (JunctionBox box : leftCircuit.getJunctionsBoxes()) {
-                    rightCircuit.addJunctionBox(box);
-                    box.setCircuit(rightCircuit);
+                for (JunctionBox box : rightCircuit.getJunctionsBoxes()) {
+                    leftCircuit.addJunctionBox(box);
+                    box.setCircuit(leftCircuit);
                 }
-                circuits.remove(leftCircuit);
+                circuits.remove(rightCircuit);
             }
         }
         return circuits;
