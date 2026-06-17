@@ -16,7 +16,7 @@ target/
 .settings
 .springBeans
 .sts4-cache
-
+.idea/encodings.xml
 ### NetBeans ###
 /nbproject/private/
 /nbbuild/
@@ -29,6 +29,7 @@ build/
 
 ### VS Code ###
 .vscode/
-
 ### Mac OS ###
 .DS_Store
+.idea/encodings.xml
+.idea/*
