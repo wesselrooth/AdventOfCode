@@ -52,7 +52,7 @@ class StarCollectorTest {
     void testPartTwo() throws URISyntaxException, IOException {
         // Arrange
         StarCollector starCollector = new StarCollector();
-        long expected = 0;
+        long expected = 8520040659L;
 
         // Act
         long result = starCollector.partTwo("puzzle-input");

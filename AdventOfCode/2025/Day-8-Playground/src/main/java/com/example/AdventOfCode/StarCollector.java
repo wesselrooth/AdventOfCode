@@ -36,6 +36,6 @@ public class StarCollector {
         List<JunctionBox> input = inputLoader.loadInput(file);
         CircuitManager circuitManager = new CircuitManager();
         List<Circuit> circuitList = circuitManager.calculateCircuits(input);
-        return circuitList.get(0).getLargestJunctionBoxDistance();
+        return circuitList.getFirst().getLargestJunctionBoxDistance();
     }
 }

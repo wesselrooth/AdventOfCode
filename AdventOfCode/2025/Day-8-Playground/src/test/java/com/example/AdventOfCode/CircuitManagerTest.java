@@ -347,7 +347,7 @@ class CircuitManagerTest {
     void testCalculateCircuits_JunctionBoxPairListIsEmpty(){
         // Arrange
         CircuitManager manager = new CircuitManager();
-        String expected = "Empty Junction Box List";
+        String expected = "Junction Box list is empty";
 
         // Act
         String result = assertThrows(CircuitException.class, () -> manager.calculateCircuits(List.of())).getMessage();
@@ -360,7 +360,7 @@ class CircuitManagerTest {
     void testCalculateCircuits_EmptyJunctionBoxList(){
         // Arrange
         CircuitManager manager = new CircuitManager();
-        String expected = "Empty Junction Box List";
+        String expected = "Junction Box list is empty";
 
         // Act
         String result = assertThrows(CircuitException.class, () -> manager.calculateCircuits(null)).getMessage();

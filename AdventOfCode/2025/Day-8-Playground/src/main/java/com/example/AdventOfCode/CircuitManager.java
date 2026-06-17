@@ -1,7 +1,10 @@
 package com.example.AdventOfCode;
 import com.example.AdventOfCode.exceptions.CircuitException;
 
-import java.util.*;
+import java.util.ArrayList;
+import java.util.Comparator;
+import java.util.List;
+
 
 public class CircuitManager {
 
@@ -84,17 +87,10 @@ public class CircuitManager {
             }else if (leftCircuit != null && rightCircuit == null) {
                 leftCircuit.addJunctionBox(right);
                 right.setCircuit(leftCircuit);
-
-                if (leftCircuit.getJunctionsBoxes().size() == junctionBoxList.size()) {
-                    leftCircuit.setLargestJunctionBoxDistance(left.getX() * right.getX());
-                }
             } else if (leftCircuit == null && rightCircuit != null) {
                 rightCircuit.addJunctionBox(left);
                 left.setCircuit(rightCircuit);
 
-                if (rightCircuit.getJunctionsBoxes().size() == junctionBoxList.size()){
-                    rightCircuit.setLargestJunctionBoxDistance(left.getX() * right.getX());
-                }
             }else if (leftCircuit == rightCircuit) {
                 // Left circuit and right are the same, so no merge is needed
             }else {
@@ -103,10 +99,16 @@ public class CircuitManager {
                     box.setCircuit(leftCircuit);
                 }
                 circuits.remove(rightCircuit);
+            }
 
-                if (leftCircuit.getJunctionsBoxes().size() == junctionBoxList.size()) {
-                    leftCircuit.setLargestJunctionBoxDistance(left.getX() * right.getX());
-                }
+            if (leftCircuit != null && leftCircuit.getJunctionsBoxes().size() == junctionBoxList.size()) {
+                leftCircuit.setLargestJunctionBoxDistance(left.getX() * right.getX());
+                break;
+            }
+
+            if (rightCircuit != null &&rightCircuit.getJunctionsBoxes().size() == junctionBoxList.size()) {
+                rightCircuit.setLargestJunctionBoxDistance(right.getX() * left.getX());
+                break;
             }
         }
         return circuits;
