@@ -16,7 +16,7 @@ target/
 .settings
 .springBeans
 .sts4-cache
-
+.idea/encodings.xml
 ### NetBeans ###
 /nbproject/private/
 /nbbuild/
