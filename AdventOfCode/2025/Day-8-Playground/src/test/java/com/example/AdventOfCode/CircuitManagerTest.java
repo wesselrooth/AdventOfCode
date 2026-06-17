@@ -343,4 +343,85 @@ class CircuitManagerTest {
         assertEquals(expected, message);
     }
 
+    @Test
+    void testCalculateCircuits_JunctionBoxPairListIsEmpty(){
+        // Arrange
+        CircuitManager manager = new CircuitManager();
+        String expected = "Empty Junction Box List";
+
+        // Act
+        String result = assertThrows(CircuitException.class, () -> manager.calculateCircuits(List.of())).getMessage();
+
+        // Assert
+        assertEquals(expected, result);
+    }
+
+    @Test
+    void testCalculateCircuits_EmptyJunctionBoxList(){
+        // Arrange
+        CircuitManager manager = new CircuitManager();
+        String expected = "Empty Junction Box List";
+
+        // Act
+        String result = assertThrows(CircuitException.class, () -> manager.calculateCircuits(null)).getMessage();
+
+        // Assert
+        assertEquals(expected, result);
+    }
+
+    @Test
+    void testCalculateCircuits_expectedOneCircuitIsCreatedGivenTwoJunctionBoxes(){
+        // Arrange
+        CircuitManager manager = new CircuitManager();
+        List<JunctionBox> inputList = List.of(
+                new JunctionBox(0,0,0),
+                new JunctionBox(0,0,0)
+        );
+        int expected = 1;
+
+        // Act
+        int result = manager.calculateCircuits(inputList).size();
+
+        // Assert
+        assertEquals(expected, result);
+    }
+
+    @Test
+    void testCalculateCircuits_expectedOneCircuitIsCreatedGivenMultipleJunctionBoxes(){
+        // Arrange
+        CircuitManager manager = new CircuitManager();
+        List<JunctionBox> inputList = List.of(
+            new JunctionBox(0, 0, 0),
+            new JunctionBox(1, 0, 0),
+            new JunctionBox(100, 0, 0),
+            new JunctionBox(101, 0, 0)
+        );
+        int expected = 1;
+
+        // Act
+        int result = manager.calculateCircuits(inputList).size();
+
+        // Assert
+        assertEquals(expected, result);
+    }
+
+    @Test
+    void testCalculateCircuits_CalculateMultiplyingXDifferenceWhenOneCircuitIsCreated(){
+        // Arrange
+        CircuitManager manager = new CircuitManager();
+        List<JunctionBox> inputList = List.of(
+                new JunctionBox(0, 0, 0),
+                new JunctionBox(1, 0, 0),
+                new JunctionBox(100, 0, 0),
+                new JunctionBox(101, 0, 0)
+        );
+        int expected = 100;
+
+        // Act
+        Circuit resultCircuit = manager.calculateCircuits(inputList).get(0);
+
+        // Assert
+        assertEquals(expected, resultCircuit.getLargestJunctionBoxDistance());
+    }
+
 }

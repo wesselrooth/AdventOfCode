@@ -20,6 +20,10 @@ public class DistanceCalculator {
             throw new CircuitException("Junction Box list is empty");
         }
 
+        if (junctionBoxes.size() == 1) {
+            throw new CircuitException("Cannot create pairs of given one Junction Box");
+        }
+
         List<JunctionBoxPair> junctionBoxPairs = new ArrayList<>();
 
         for (int i = 0; i < junctionBoxes.size(); i++) {

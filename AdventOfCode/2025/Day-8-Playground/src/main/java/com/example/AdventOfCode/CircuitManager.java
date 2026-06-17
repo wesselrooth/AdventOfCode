@@ -41,7 +41,7 @@ public class CircuitManager {
                 rightCircuit.addJunctionBox(left);
                 left.setCircuit(rightCircuit);
             }else if (leftCircuit == rightCircuit) {
-                continue;
+                // Left circuit and right are the same, so no merge is needed
             }else {
 
                 for (JunctionBox box : rightCircuit.getJunctionsBoxes()) {
@@ -49,6 +49,64 @@ public class CircuitManager {
                     box.setCircuit(leftCircuit);
                 }
                 circuits.remove(rightCircuit);
+            }
+        }
+        return circuits;
+    }
+
+    public List<Circuit> calculateCircuits(List<JunctionBox> junctionBoxList) {
+
+        DistanceCalculator distanceCalculator = new DistanceCalculator();
+        List<JunctionBoxPair> pairList = distanceCalculator.calculateJunctionBoxPairDistances(junctionBoxList);
+        pairList = sortJunctionBoxPairsByDistance(pairList);
+
+        final List<Circuit> circuits = new ArrayList<>();
+
+        for (int i = 0; i < pairList.size(); i++) {
+
+            JunctionBoxPair current = pairList.get(i);
+
+            JunctionBox left = current.left();
+            JunctionBox right = current.right();
+
+            Circuit leftCircuit = left.getCircuit();
+            Circuit rightCircuit = right.getCircuit();
+
+            if (leftCircuit == null && rightCircuit == null) {
+                Circuit circuit = new Circuit();
+                circuit.addJunctionBox(left);
+                circuit.addJunctionBox(right);
+
+                left.setCircuit(circuit);
+                right.setCircuit(circuit);
+
+                circuits.add(circuit);
+            }else if (leftCircuit != null && rightCircuit == null) {
+                leftCircuit.addJunctionBox(right);
+                right.setCircuit(leftCircuit);
+
+                if (leftCircuit.getJunctionsBoxes().size() == junctionBoxList.size()) {
+                    leftCircuit.setLargestJunctionBoxDistance(left.getX() * right.getX());
+                }
+            } else if (leftCircuit == null && rightCircuit != null) {
+                rightCircuit.addJunctionBox(left);
+                left.setCircuit(rightCircuit);
+
+                if (rightCircuit.getJunctionsBoxes().size() == junctionBoxList.size()){
+                    rightCircuit.setLargestJunctionBoxDistance(left.getX() * right.getX());
+                }
+            }else if (leftCircuit == rightCircuit) {
+                // Left circuit and right are the same, so no merge is needed
+            }else {
+                for (JunctionBox box : rightCircuit.getJunctionsBoxes()) {
+                    leftCircuit.addJunctionBox(box);
+                    box.setCircuit(leftCircuit);
+                }
+                circuits.remove(rightCircuit);
+
+                if (leftCircuit.getJunctionsBoxes().size() == junctionBoxList.size()) {
+                    leftCircuit.setLargestJunctionBoxDistance(left.getX() * right.getX());
+                }
             }
         }
         return circuits;

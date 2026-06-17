@@ -30,4 +30,12 @@ public class StarCollector {
         }
         return result;
     }
+
+    public long partTwo(String file) throws URISyntaxException, IOException  {
+        InputLoader inputLoader = new InputLoader();
+        List<JunctionBox> input = inputLoader.loadInput(file);
+        CircuitManager circuitManager = new CircuitManager();
+        List<Circuit> circuitList = circuitManager.calculateCircuits(input);
+        return circuitList.get(0).getLargestJunctionBoxDistance();
+    }
 }

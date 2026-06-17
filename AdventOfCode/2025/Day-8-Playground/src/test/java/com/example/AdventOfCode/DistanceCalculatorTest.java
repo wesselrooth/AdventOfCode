@@ -63,4 +63,20 @@ class DistanceCalculatorTest {
         // Assert
         assertEquals(expected, message);
     }
+
+    @Test
+    void testCalculateCircuits_JunctionBoxPairListGivenOnNumberOfJunctionBoxes(){
+        // Arrange
+        DistanceCalculator distanceCalculator = new DistanceCalculator();
+        List<JunctionBox> inputList = List.of(
+                new JunctionBox(0,0,0)
+        );
+        String expected = "Cannot create pairs of given one Junction Box";
+
+        // Act
+        String message = assertThrows(CircuitException.class, () -> distanceCalculator.calculateJunctionBoxPairDistances(inputList)).getMessage();
+
+        // Assert
+        assertEquals(expected, message);
+    }
 }

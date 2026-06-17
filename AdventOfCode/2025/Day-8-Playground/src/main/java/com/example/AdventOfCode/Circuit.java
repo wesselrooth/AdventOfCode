@@ -6,6 +6,7 @@ import java.util.Set;
 public class Circuit {
 
     private final Set<JunctionBox> junctionsBoxes;
+    private long largestJunctionBoxDistance;
 
     public Circuit() {
         junctionsBoxes  = new HashSet<>();
@@ -19,4 +20,11 @@ public class Circuit {
         return junctionsBoxes;
     }
 
+    public  long getLargestJunctionBoxDistance() {
+        return largestJunctionBoxDistance;
+    }
+
+    public void setLargestJunctionBoxDistance(long largestJunctionBoxDistance) {
+        this.largestJunctionBoxDistance = largestJunctionBoxDistance;
+    }
 }
