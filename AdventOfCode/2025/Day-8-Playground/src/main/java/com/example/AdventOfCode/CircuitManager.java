@@ -115,9 +115,8 @@ public class CircuitManager {
     }
 
     private List<JunctionBoxPair> sortJunctionBoxPairsByDistance (List<JunctionBoxPair> junctionBoxPairs) {
-        return junctionBoxPairs.stream()
-                .sorted(Comparator.comparingDouble(JunctionBoxPair::distance))
-                .toList();
+        junctionBoxPairs.sort(Comparator.comparingDouble(JunctionBoxPair::distance));
+        return junctionBoxPairs;
     }
 
     public void sortByCircuitSize(List<Circuit> circuits) {

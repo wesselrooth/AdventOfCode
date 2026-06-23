@@ -227,7 +227,7 @@ class CircuitManagerTest {
         JunctionBox b = new JunctionBox(1, 0, 0);
         JunctionBox c = new JunctionBox(2, 0, 0);
 
-        List<JunctionBoxPair> input = List.of(
+        List<JunctionBoxPair> input = Arrays.asList(
                 new JunctionBoxPair(a, b, 1.0),
                 new JunctionBoxPair(b, c, 1.0)
         );
@@ -250,7 +250,7 @@ class CircuitManagerTest {
         JunctionBox c = new JunctionBox(100, 0, 0);
         JunctionBox d = new JunctionBox(101, 0, 0);
 
-        List<JunctionBoxPair> input = List.of(
+        List<JunctionBoxPair> input = Arrays.asList(
                 new JunctionBoxPair(a, b, 1.0),
                 new JunctionBoxPair(c, d, 1.0)
         );
@@ -272,7 +272,7 @@ class CircuitManagerTest {
         JunctionBox c = new JunctionBox(2, 0, 0);
         JunctionBox d = new JunctionBox(3, 0, 0);
 
-        List<JunctionBoxPair> input = List.of(
+        List<JunctionBoxPair> input = Arrays.asList(
                 new JunctionBoxPair(a, b, 1.0),
                 new JunctionBoxPair(b, c, 2.0),
                 new JunctionBoxPair(c, d, 3.0)
@@ -299,7 +299,7 @@ class CircuitManagerTest {
         JunctionBox c = new JunctionBox(2, 0, 0);
         JunctionBox d = new JunctionBox(3, 0, 0);
 
-        List<JunctionBoxPair> input = List.of(
+        List<JunctionBoxPair> input = Arrays.asList(
                 new JunctionBoxPair(a, b, 1.0),
                 new JunctionBoxPair(a, c, 1.0),
                 new JunctionBoxPair(b, d, 1.0),
