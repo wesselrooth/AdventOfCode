@@ -5,7 +5,6 @@ import java.util.ArrayList;
 import java.util.Comparator;
 import java.util.List;
 
-
 public class CircuitManager {
 
     public List<Circuit> calculateCircuits(List<JunctionBoxPair> pairList, int amountOfPairs) {
@@ -115,13 +114,7 @@ public class CircuitManager {
     }
 
     private List<JunctionBoxPair> sortJunctionBoxPairsByDistance (List<JunctionBoxPair> junctionBoxPairs) {
-        return junctionBoxPairs.stream()
-                .sorted(Comparator.comparingDouble(JunctionBoxPair::distance))
-                .toList();
+        junctionBoxPairs.sort(Comparator.comparingDouble(JunctionBoxPair::distance));
+        return junctionBoxPairs;
     }
-
-    public void sortByCircuitSize(List<Circuit> circuits) {
-        circuits.sort(Comparator.comparingInt( (Circuit c) -> c.getJunctionsBoxes().size()).reversed());
-    }
-
 }

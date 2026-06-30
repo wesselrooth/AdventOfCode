@@ -3,7 +3,7 @@ import java.util.HashSet;
 
 import java.util.Set;
 
-public class Circuit {
+public class Circuit implements  Comparable<Circuit>{
 
     private final Set<JunctionBox> junctionsBoxes;
     private long largestJunctionBoxDistance;
@@ -27,4 +27,10 @@ public class Circuit {
     public void setLargestJunctionBoxDistance(long largestJunctionBoxDistance) {
         this.largestJunctionBoxDistance = largestJunctionBoxDistance;
     }
+
+    @Override
+    public int compareTo(Circuit o) {
+        return o.getJunctionsBoxes().size() - getJunctionsBoxes().size();
+    }
+
 }
