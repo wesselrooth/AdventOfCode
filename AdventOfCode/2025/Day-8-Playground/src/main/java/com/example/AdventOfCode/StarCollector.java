@@ -4,6 +4,7 @@ import com.example.AdventOfCode.resources.InputLoader;
 
 import java.io.IOException;
 import java.net.URISyntaxException;
+import java.util.Collections;
 import java.util.List;
 
 public class StarCollector {
@@ -16,8 +17,7 @@ public class StarCollector {
         List<JunctionBoxPair> junctionBoxPairs = distanceCalculator.calculateJunctionBoxPairDistances(input);
         CircuitManager circuitManager = new CircuitManager();
         List<Circuit> circuitList = circuitManager.calculateCircuits(junctionBoxPairs,pairs);
-        circuitManager.sortByCircuitSize(circuitList);
-
+        Collections.sort(circuitList);
         long result = 0;
         for (int i =0; i < 3; i++) {
 
