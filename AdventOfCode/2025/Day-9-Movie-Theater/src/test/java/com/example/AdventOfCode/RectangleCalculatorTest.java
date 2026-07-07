@@ -1,0 +1,30 @@
+package com.example.AdventOfCode;
+
+import org.junit.jupiter.api.Test;
+import org.junit.jupiter.params.ParameterizedTest;
+import org.junit.jupiter.params.provider.CsvSource;
+import org.junit.jupiter.params.provider.MethodSource;
+
+import static org.junit.jupiter.api.Assertions.*;
+
+class RectangleCalculatorTest {
+
+    @ParameterizedTest
+    @CsvSource({
+            "0,0,0,0,1",
+            "0,0,0,1,2",
+            "0,0,1,1,4",
+    })
+    void calculateRectangle(int x1, int y1, int x2, int y2, long expected) {
+        // Arrange
+        RedTile one = new RedTile(x1,y1);
+        RedTile two = new RedTile(x2,y2);
+        RectangleCalculator sut = new RectangleCalculator();
+
+        // Act
+        long result = sut.calculateRectangle(one,two);
+
+        // Assert
+        assertEquals(expected,result);
+    }
+}
