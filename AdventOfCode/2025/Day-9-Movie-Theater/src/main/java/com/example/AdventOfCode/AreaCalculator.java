@@ -2,9 +2,7 @@ package com.example.AdventOfCode;
 
 import com.example.AdventOfCode.exception.InputException;
 
-import java.util.HashSet;
-import java.util.List;
-import java.util.Set;
+import java.util.*;
 
 public class AreaCalculator {
 
@@ -29,7 +27,7 @@ public class AreaCalculator {
         return ++result;
     }
 
-    public Set<OppositesCorner> generateOpositeCornerSet(List<RedTile> redTileList) {
+    public List<OppositesCorner> generateOppositeCornerSet(List<RedTile> redTileList) {
 
         if (redTileList == null || redTileList.isEmpty()) {
             throw new InputException("Input list is empty");
@@ -39,7 +37,7 @@ public class AreaCalculator {
             throw new InputException("Cannot create pairs of given one RedTile");
         }
 
-        Set<OppositesCorner> pairs = new HashSet<>();
+        List<OppositesCorner> pairs = new ArrayList<>();
         for (int i = 0; i < redTileList.size(); i++) {
             RedTile current  = redTileList.get(i);
             for (int j = i + 1; j < redTileList.size(); j++) {

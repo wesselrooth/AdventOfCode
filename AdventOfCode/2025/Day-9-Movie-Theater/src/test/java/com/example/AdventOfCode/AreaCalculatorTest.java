@@ -1,6 +1,5 @@
 package com.example.AdventOfCode;
 
-import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.CsvSource;
 
@@ -60,7 +59,7 @@ class AreaCalculatorTest {
         AreaCalculator sut = new AreaCalculator();
 
         // Act
-        int result = sut.generateOpositeCornerSet(redTileList).size();
+        int result = sut.generateOppositeCornerSet(redTileList).size();
 
         // Assert
         assertEquals(expectedPairs,result);
