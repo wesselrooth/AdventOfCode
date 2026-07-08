@@ -1,10 +1,15 @@
 package com.example.AdventOfCode;
 
+import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.CsvSource;
+
+import java.util.ArrayList;
+import java.util.List;
+
 import static org.junit.jupiter.api.Assertions.*;
 
-class RectangleCalculatorTest {
+class AreaCalculatorTest {
 
     @ParameterizedTest
     @CsvSource({
@@ -25,12 +30,40 @@ class RectangleCalculatorTest {
         // Arrange
         RedTile one = new RedTile(x1,y1);
         RedTile two = new RedTile(x2,y2);
-        RectangleCalculator sut = new RectangleCalculator();
+        AreaCalculator sut = new AreaCalculator();
 
         // Act
         long result = sut.calculateRectangle(one,two);
 
         // Assert
         assertEquals(expected,result);
+    }
+
+    @ParameterizedTest
+    @CsvSource({
+            "2,1",
+            "3,3",
+            "4,6",
+            "5,10",
+            "6,15",
+            "7,21",
+            "8,28",
+            "9,36",
+            "10,45"
+    })
+    void generateOppositeCornerSet(int amountOfRedTiles, int expectedPairs) {
+        // Arrange
+        List<RedTile> redTileList = new ArrayList<>();
+        for (int i = 0; i < amountOfRedTiles; i++) {
+            redTileList.add(new RedTile(i,i));
+        }
+        AreaCalculator sut = new AreaCalculator();
+
+        // Act
+        int result = sut.generateOpositeCornerSet(redTileList).size();
+
+        // Assert
+        assertEquals(expectedPairs,result);
+
     }
 }
