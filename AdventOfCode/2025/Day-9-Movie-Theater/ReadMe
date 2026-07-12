@@ -1,0 +1,19 @@
+Oplossingsrichting:
+
+Verbind de redTiles aan de redTiles waar het mee verbonden kan zijn. Deze zitten op dezelfde x/y as.
+Dit is de GreenTile-lijn
+
+Pak een OppositeCorner Object en bereken de hoeken van het vierkant.
+
+Vanaf iedere hoek:
+
+    Bevind zich op een GreenTile-lijn
+
+    Loopt er een onafgebroken GreenTile-lijn
+        - ja: hoek is elligable
+        - nee sla over
+
+Zijn er 3 hoeken elligable om een area te maken, dan wordt de 4e het ook, en is de area goedgekeurd
+
+Dit gaat door totad het aantal oppositid corner die mogelijk geschikt zijn om een area van te maken glijk blijft. Deze zijn niet geschikt
+
