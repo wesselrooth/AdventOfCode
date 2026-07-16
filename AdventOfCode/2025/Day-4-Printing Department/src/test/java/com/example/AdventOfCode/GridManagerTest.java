@@ -87,7 +87,7 @@ class GridManagerTest {
         String expected = ".X.";
 
         // Act
-        Row resultRow = gridManager.changeRollToCros(row,icon);
+        Row resultRow = gridManager.changeRollToCross(row,icon);
 
         // Assert
         String resultString = "";

@@ -35,7 +35,7 @@ public class GridManager {
 
     public long calculateRollsAccessible(Grid grid) {
         long amountOfRollsAccessible = 0;
-        long totalamount = 0;
+        long totalAmount = 0;
 
         do {
             amountOfRollsAccessible = 0;
@@ -46,7 +46,7 @@ public class GridManager {
                         if (isRollAccessibleForForkLift(grid,icon,4)) {
                             row.getRowContent().get(icon.getX()).setSymbol("X");
                             amountOfRollsAccessible++;
-                            totalamount++;
+                            totalAmount++;
                         }
                     }
                 }
@@ -54,11 +54,11 @@ public class GridManager {
 
         }while (amountOfRollsAccessible != 0);
 
-        return totalamount;
+        return totalAmount;
 
     }
 
-    public Row changeRollToCros(Row row, Icon icon) {
+    public Row changeRollToCross(Row row, Icon icon) {
         row.getRowContent().get(icon.getX()).setSymbol("X");
         return row;
     }

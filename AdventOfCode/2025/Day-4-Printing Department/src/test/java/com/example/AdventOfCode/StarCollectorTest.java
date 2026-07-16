@@ -16,7 +16,7 @@ class StarCollectorTest {
             "test-input,43",
             "puzzle-input, 9024",
     })
-    void partOne(String filename, long expected) throws URISyntaxException, IOException {
+    void partTwo(String filename, long expected) throws URISyntaxException, IOException {
         // Arrange
         StarCollector starCollector = new StarCollector();
 
