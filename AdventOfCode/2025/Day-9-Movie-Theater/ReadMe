@@ -1,19 +1,23 @@
 Oplossingsrichting:
 
-Verbind de redTiles aan de redTiles waar het mee verbonden kan zijn. Deze zitten op dezelfde x/y as.
+Verbind de redTiles die op dezelfde X/Y as zitten met elkaar.
 Dit is de GreenTile-lijn
 
-Pak een OppositeCorner Object en bereken de hoeken van het vierkant.
+Pak een OppositeCorner Object en bereken de hoek coordinaten van het vierkant.
 
-Vanaf iedere hoek:
+Voor ieder viekant,
+    - is een van de coordinaten binnen het vierkant groen, dan valt deze af
 
-    Bevind zich op een GreenTile-lijn
+Vanaf iedere hoek van een vierkant:
 
-    Loopt er een onafgebroken GreenTile-lijn
-        - ja: hoek is elligable
-        - nee sla over
+    Bevindt het hoekpunt zich op een GreenTile-lijn
+    - hoek is mogelijk elligable
 
-Zijn er 3 hoeken elligable om een area te maken, dan wordt de 4e het ook, en is de area goedgekeurd
+    Loopt er een onafgebroken GreenTile-lijn naar zijn naasten hoekpunten
+        - Ja: hoek is elligable om een GreenTile te zijn.
 
-Dit gaat door totad het aantal oppositid corner die mogelijk geschikt zijn om een area van te maken glijk blijft. Deze zijn niet geschikt
+    Zijn er 3 hoeken elligable om een area te maken, dan wordt de 4e het ook, en is de area goedgekeurd
+        - Nee sla over
+
+Dit gaat door tot dat het aantal oppositid corner die mogelijk geschikt zijn om een area van te maken glijk blijft. Deze zijn niet geschikt
 
