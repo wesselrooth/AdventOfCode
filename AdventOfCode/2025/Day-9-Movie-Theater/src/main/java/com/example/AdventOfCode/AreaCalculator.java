@@ -23,7 +23,6 @@ public class AreaCalculator {
 
     private long calculateCoordinateSpan(long one,  long two) {
         long result  = Math.abs(one-two);
-
         return ++result;
     }
 
@@ -46,6 +45,21 @@ public class AreaCalculator {
             }
         }
         return pairs;
+    }
+
+    public List<OppositesCorner> filterElligableRectangles(List<OppositesCorner> inputList, List<RedTile> redTileList) {
+        List<OppositesCorner> resultList = new ArrayList<>();
+
+        for (OppositesCorner rectangle : inputList) {
+
+            if (rectangle.containsRedTile(redTileList)) {
+                continue;
+            }
+            resultList.add(rectangle);
+
+        }
+
+        return  resultList;
     }
 
 }
