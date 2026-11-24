@@ -21,3 +21,14 @@ Vanaf iedere hoek van een vierkant:
 
 Dit gaat door tot dat het aantal oppositid corner die mogelijk geschikt zijn om een area van te maken glijk blijft. Deze zijn niet geschikt
 
+----
+
+2e gedachte
+
+Als je een vierkant van de tegenovergestelde kanten berekend, dan moet ieder hoekpunt op een 'elligable' plek staan.
+Een als een berekend hoekpunt binnen het totale vak valt is het goed, is het niet het geval sla deze over.
+
+todo:
+ - bereken green-tile lijnen tussen connecting red-tiles
+ - bepaal of een punt op de green-tile lin staat
+ - bepaal of een greentile in een vierkant zit
