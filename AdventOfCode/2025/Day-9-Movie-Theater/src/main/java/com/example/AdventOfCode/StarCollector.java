@@ -13,11 +13,10 @@ public class StarCollector {
         List<RedTile> redTileList = loader.loadInputToRedTileList(fileName);
 
         AreaCalculator areaCalculator = new AreaCalculator();
-        List<Rectangle> oppositesCornerList = areaCalculator.generateRectangleList(redTileList);
+        List<Rectangle> rectangleList = areaCalculator.generateRectangleList(redTileList);
 
-        oppositesCornerList.sort(Comparator.comparingDouble((Rectangle area) -> area.calculateRectangleSpan()).reversed());
+        rectangleList.sort(Comparator.comparingDouble((Rectangle area) -> area.calculateRectangleSpan()).reversed());
 
-        return oppositesCornerList.getFirst().calculateRectangleSpan();
+        return rectangleList.getFirst().calculateRectangleSpan();
     }
-
 }

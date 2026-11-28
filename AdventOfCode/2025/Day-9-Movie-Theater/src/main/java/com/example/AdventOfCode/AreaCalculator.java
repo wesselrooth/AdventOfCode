@@ -55,9 +55,6 @@ public class AreaCalculator {
             if (rectangle.containsRedTile(redTileList)) {
                 continue;
             }
-
-
-
             resultList.add(rectangle);
         }
 
