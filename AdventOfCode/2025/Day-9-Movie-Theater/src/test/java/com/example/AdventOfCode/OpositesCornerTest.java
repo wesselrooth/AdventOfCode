@@ -26,10 +26,10 @@ class OpositesCornerTest {
         // Arrange
         RedTile one = new RedTile(x1,y1);
         RedTile two = new RedTile(x2,y2);
-        Rectangle opositesCorner = new Rectangle(one, two,null,null);
+        Rectangle rectangle = new Rectangle(one, two,null,null);
 
         // Act
-        long result = opositesCorner.calculateRectangleSpan();
+        long result = rectangle.calculateRectangleSpan();
 
         // Assert
         assertEquals(expected,result);
