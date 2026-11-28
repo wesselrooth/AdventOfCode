@@ -29,7 +29,7 @@ class OpositesCornerTest {
         OppositesCorner opositesCorner = new OppositesCorner(one, two);
 
         // Act
-        long result = opositesCorner.calculateRectangle();
+        long result = opositesCorner.calculateRectangleSpan();
 
         // Assert
         assertEquals(expected,result);
