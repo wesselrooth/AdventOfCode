@@ -26,10 +26,10 @@ class OppositesCornerTest {
         RedTile leftTop = new RedTile(7,0);
         RedTile rightBottom = new RedTile(11,6);
 
-        Rectangle rectangele = new Rectangle(leftTop,rightBottom,null,null);
+        Rectangle rectangle = new Rectangle(leftTop,rightBottom,null,null);
 
         // Act + Assert
-        assertTrue(rectangele.containsRedTile(redTileList));
+        assertTrue(rectangle.containsRedTile(redTileList));
     }
 
 
