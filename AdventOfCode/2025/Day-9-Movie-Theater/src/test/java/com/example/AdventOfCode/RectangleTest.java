@@ -3,6 +3,7 @@ import com.example.AdventOfCode.helper.InputLoader;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
+import org.junit.jupiter.params.provider.CsvSource;
 import org.junit.jupiter.params.provider.MethodSource;
 
 import java.util.List;
@@ -66,8 +67,13 @@ class RectangleTest {
         );
     }
 
-    @Test
-    void isNotEligible() {
+    @ParameterizedTest
+    @CsvSource({"7,0,11,6",
+                "2,3,11,6",
+                "7,3,11,6",
+                "2,4,11,0",
+    })
+    void containsRedTile(int x,int y,int x2,int y2) {
         // Arrange
         List<String> inputList = List.of(
                 ".......#XXX#..",
@@ -80,12 +86,45 @@ class RectangleTest {
         InputLoader inputLoader = new InputLoader();
         List<RedTile> redTileList= inputLoader.loadInputToRedTileList(inputList);
 
-        RedTile leftTop = new RedTile(7,0);
-        RedTile rightBottom = new RedTile(11,6);
+        RedTile leftTop = new RedTile(x,y);
+        RedTile rightBottom = new RedTile(x2,y2);
 
-        Rectangle rectangle = new Rectangle(leftTop,rightBottom,null,null);
+        Rectangle rectangle = new Rectangle(leftTop,rightBottom);
 
         // Act + Assert
         assertTrue(rectangle.containsRedTile(redTileList));
+    }
+
+    @ParameterizedTest
+    @MethodSource("pointsInsideRectangle")
+    void shouldReturnTrueWhenPointIsInsideRectangle(RedTile point) {
+        assertTrue(rectangle.containsRedTile(point));
+    }
+
+    static Stream<RedTile> pointsInsideRectangle() {
+        return Stream.of(
+                new RedTile(2, 2),
+                new RedTile(3, 3),
+                new RedTile(4, 4),
+                new RedTile(2, 4),
+                new RedTile(4, 2)
+        );
+    }
+
+    @ParameterizedTest
+    @MethodSource("pointsOutsideRectangle")
+    void shouldReturnFalseWhenPointIsOutsideRectangle(RedTile point) {
+        assertFalse(rectangle.containsRedTile(point));
+    }
+
+    static Stream<RedTile> pointsOutsideRectangle() {
+        return Stream.of(
+                new RedTile(0, 3), // Left
+                new RedTile(6, 3), // Right
+                new RedTile(3, 0), // Above
+                new RedTile(3, 6), // Below
+                new RedTile(0, 0), // Top left
+                new RedTile(6, 6)  // Bottom right
+        );
     }
 }

@@ -26,7 +26,7 @@ class OpositesCornerTest {
         // Arrange
         RedTile one = new RedTile(x1,y1);
         RedTile two = new RedTile(x2,y2);
-        Rectangle rectangle = new Rectangle(one, two,null,null);
+        Rectangle rectangle = new Rectangle(one, two);
 
         // Act
         long result = rectangle.calculateRectangleSpan();
