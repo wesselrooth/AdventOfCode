@@ -26,7 +26,7 @@ public class AreaCalculator {
         return ++result;
     }
 
-    public List<OppositesCorner> generateOppositeCornerSet(List<RedTile> redTileList) {
+    public List<Rectangle> generateRectangleList(List<RedTile> redTileList) {
 
         if (redTileList == null || redTileList.isEmpty()) {
             throw new InputException("Input list is empty");
@@ -36,27 +36,26 @@ public class AreaCalculator {
             throw new InputException("Cannot create pairs of given one RedTile");
         }
 
-        List<OppositesCorner> pairs = new ArrayList<>();
+        List<Rectangle> rectangleList = new ArrayList<>();
         for (int i = 0; i < redTileList.size(); i++) {
             RedTile current  = redTileList.get(i);
             for (int j = i + 1; j < redTileList.size(); j++) {
                 RedTile toCalculate = redTileList.get(j);
-                pairs.add(new OppositesCorner(current, toCalculate));
+                rectangleList.add(new Rectangle(current, toCalculate,null,null));
             }
         }
-        return pairs;
+        return rectangleList;
     }
 
-    public List<OppositesCorner> filterElligableRectangles(List<OppositesCorner> inputList, List<RedTile> redTileList) {
-        List<OppositesCorner> resultList = new ArrayList<>();
+    public List<Rectangle> filterElligableRectangles(List<Rectangle> inputList, List<RedTile> redTileList) {
+        List<Rectangle> resultList = new ArrayList<>();
 
-        for (OppositesCorner rectangle : inputList) {
+        for (Rectangle rectangle : inputList) {
 
             if (rectangle.containsRedTile(redTileList)) {
                 continue;
             }
             resultList.add(rectangle);
-
         }
 
         return  resultList;

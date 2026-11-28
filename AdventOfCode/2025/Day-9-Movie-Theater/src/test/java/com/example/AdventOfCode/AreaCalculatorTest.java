@@ -50,7 +50,7 @@ class AreaCalculatorTest {
             "9,36",
             "10,45"
     })
-    void generateOppositeCornerSet(int amountOfRedTiles, int expectedPairs) {
+    void generateRectangleList(int amountOfRedTiles, int expectedPairs) {
         // Arrange
         List<RedTile> redTileList = new ArrayList<>();
         for (int i = 0; i < amountOfRedTiles; i++) {
@@ -59,7 +59,7 @@ class AreaCalculatorTest {
         AreaCalculator sut = new AreaCalculator();
 
         // Act
-        int result = sut.generateOppositeCornerSet(redTileList).size();
+        int result = sut.generateRectangleList(redTileList).size();
 
         // Assert
         assertEquals(expectedPairs,result);
