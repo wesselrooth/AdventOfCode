@@ -55,10 +55,42 @@ public class AreaCalculator {
             if (rectangle.containsRedTile(redTileList)) {
                 continue;
             }
+
+
+
             resultList.add(rectangle);
         }
 
         return  resultList;
     }
 
+    public boolean redTileIsOnGreenTileLine(RedTile point, List<RedTile> redTileList) {
+
+        for(RedTile current : redTileList) {
+            RedTile next = current.getNextRedTile();
+
+            if (onSameHorizontalLine(point,current,next)) {
+                return true;
+            }
+
+            if (onSameVerticalLine(point,current,next)) {
+                return true;
+            }
+        }
+        return false;
+    }
+
+    private boolean onSameHorizontalLine(RedTile point, RedTile current, RedTile next){
+        if (point.getY() != next.getY()){
+            return false;
+        }
+        return (point.getX() >= current.getX() || point.getX() <= next.getX()) || (point.getX() <= current.getX() || point.getX() >= next.getX());
+    }
+
+    private boolean onSameVerticalLine(RedTile point, RedTile current, RedTile next){
+        if (point.getX() != next.getX()){
+            return false;
+        }
+        return ((point.getY() >= current.getY() || point.getY() <= next.getY()) || (point.getY() <= current.getY() || point.getY() >= next.getY()));
+    }
 }
