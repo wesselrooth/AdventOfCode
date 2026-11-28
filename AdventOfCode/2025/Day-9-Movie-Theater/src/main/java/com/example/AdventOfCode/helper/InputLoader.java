@@ -24,13 +24,29 @@ public class InputLoader {
 
         try (Stream<String> lines = Files.lines(inputFile)){
 
-            for(String line: (Iterable<String>) lines::iterator ){
+            List<String> lineList = lines.toList();
 
+            RedTile first = null;
+            RedTile previous = null;
+
+            for (int i = 0; i < lineList.size(); i++) {
+                String line = lineList.get(i);
                 long x = Long.parseLong(line.split(",")[0]);
                 long y = Long.parseLong(line.split(",")[1]);
 
-                RedTile redTile = new RedTile(x,y);
-                redTileList.add(redTile);
+                RedTile current = new RedTile(x,y);
+                redTileList.add(current);
+
+                if (first == null) {
+                    first = current;
+                    previous = current;
+                    continue;
+                }
+                if (i == lineList.size() - 1) {
+                    current.setNextRedTile(first);
+                }
+                previous.setNextRedTile(current);
+                previous = current;
             }
         }
         return redTileList;

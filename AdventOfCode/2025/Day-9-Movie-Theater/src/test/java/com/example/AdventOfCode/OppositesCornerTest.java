@@ -31,4 +31,6 @@ class OppositesCornerTest {
         // Act + Assert
         assertTrue(rectangele.containsRedTile(redTileList));
     }
+
+
 }

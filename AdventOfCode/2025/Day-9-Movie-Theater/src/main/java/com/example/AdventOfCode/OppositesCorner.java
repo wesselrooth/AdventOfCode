@@ -12,25 +12,25 @@ public record OppositesCorner(RedTile one, RedTile two) {
     public boolean containsRedTile(List<RedTile> redTileList) {
         RedTile leftTop = one;
         RedTile rightBottom = two;
-        RedTile leftBottom = new RedTile(leftTop.x(),rightBottom.y());
-        RedTile rightTop = new RedTile(rightBottom.x(),leftTop.y());
+        RedTile leftBottom = new RedTile(leftTop.getX(),rightBottom.getY());
+        RedTile rightTop = new RedTile(rightBottom.getX(),leftTop.getY());
 
         for (RedTile current : redTileList) {
             int insideSquareCount = 0;
 
-            if ( (current.x() > leftTop.x()) & (current.y() > leftTop.y()) ) {
+            if ( (current.getX() > leftTop.getX()) & (current.getY() > leftTop.getY()) ) {
                 insideSquareCount++;
             }
 
-            if ( (current.x() < rightTop.x()) & (current.y() > rightTop.y()) ) {
+            if ( (current.getX() < rightTop.getX()) & (current.getY() > rightTop.getY()) ) {
                 insideSquareCount++;
             }
 
-            if ( (current.x() < rightBottom.x()) & (current.y() < rightBottom.y()) ) {
+            if ( (current.getX() < rightBottom.getX()) & (current.getY() < rightBottom.getY()) ) {
                 insideSquareCount++;
             }
 
-            if ( (current.x() > leftBottom.x()) & (current.y() < rightBottom.y()) ) {
+            if ( (current.getX() > leftBottom.getX()) & (current.getY() < rightBottom.getY()) ) {
                 insideSquareCount++;
             }
             System.out.println(insideSquareCount);

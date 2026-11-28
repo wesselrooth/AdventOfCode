@@ -12,13 +12,13 @@ public class AreaCalculator {
             return 1;
         }
 
-        long xSpan = calculateCoordinateSpan(one.x(), two.x());
-        long ySpan = calculateCoordinateSpan(one.y(), two.y());
+        long xSpan = calculateCoordinateSpan(one.getX(), two.getX());
+        long ySpan = calculateCoordinateSpan(one.getY(), two.getY());
         return xSpan * ySpan;
     }
 
     private boolean shareTheSameSpot(RedTile one, RedTile two) {
-        return one.y() == two.y() && one.x() == two.x();
+        return one.getY() == two.getY() && one.getX() == two.getX();
     }
 
     private long calculateCoordinateSpan(long one,  long two) {
